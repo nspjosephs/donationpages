@@ -601,7 +601,7 @@ var successHtml13206528 = '\u003cscript\u003ewindow.location.replace(\'http://na
                         function() { return Bloomerang.gRecaptchaLoaded; },
                         function() {
                             jQuery('.section.captcha').removeAttr('style');
-                            jQuery('form.donation-form').data('captcha-id', grecaptcha.render('captcha13206528', { 'sitekey' : '6LeeXzIUAAAAAN7UNByoUwzs4K4k53KOp4L2feO4' }));
+                            jQuery('form.donation-form').data('captcha-id', grecaptcha.render('captcha13206528', { 'sitekey' : '6LdZNTYUAAAAAM6j_lU3lRi9Dco561ldipwsOTtI' }));
                         },
                         true,
                         true);
