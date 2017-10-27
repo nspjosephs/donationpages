@@ -2,6 +2,8 @@ var run = () => {
 
   if (window.ActiveXObject) {
     Bloomerang.BROWSER_UNSUPPORTED = true;
+  } else {
+    Bloomerang.BROWSER_UNSUPPORTED = false;
   }
 
   if (!Bloomerang.SpreedlyScriptLoaded) {
@@ -18,6 +20,8 @@ var run = () => {
     });
     Bloomerang.SpreedlyScriptLoaded = true;
   }
+
+  Bloomerang.useKey('pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56');
 
 }
 

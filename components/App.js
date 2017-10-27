@@ -31,7 +31,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <p>H3ll0 W0rld</p>
+        <p>This browser {Bloomerang.BROWSER_UNSUPPORTED ? "is not" : "is"} supported</p>
         <button onClick={this.collectPayment.bind(this)}>Click me!</button>
       </div>
     )

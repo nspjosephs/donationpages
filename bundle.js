@@ -21213,7 +21213,9 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'p',
         null,
-        'H3ll0 W0rld'
+        'This browser ',
+        Bloomerang.BROWSER_UNSUPPORTED ? "is not" : "is",
+        ' supported'
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'button',
@@ -21237,6 +21239,8 @@ var run = () => {
 
   if (window.ActiveXObject) {
     Bloomerang.BROWSER_UNSUPPORTED = true;
+  } else {
+    Bloomerang.BROWSER_UNSUPPORTED = false;
   }
 
   if (!Bloomerang.SpreedlyScriptLoaded) {
@@ -21251,6 +21255,8 @@ var run = () => {
     });
     Bloomerang.SpreedlyScriptLoaded = true;
   }
+
+  Bloomerang.useKey('pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56');
 };
 
 
