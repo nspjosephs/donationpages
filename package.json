@@ -5,7 +5,8 @@
   "main": "bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "publish": "npm run build && git add . && git commit -m'Automated Commit' && git push origin master"
   },
   "repository": {
     "type": "git",

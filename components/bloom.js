@@ -4,7 +4,7 @@ var run = () => {
     Bloomerang.BROWSER_UNSUPPORTED = true;
   }
 
-  if (!Boomerang.SpreedlyScriptLoaded) {
+  if (!Bloomerang.SpreedlyScriptLoaded) {
     Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js',
     () => (SpreedlyExpress != undefined),
     () => {
