@@ -21183,9 +21183,27 @@ Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["b" /* run */])();
 class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   collectPayment() {
+
+    __WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* SpreedlyExpress */].setDisplayOptions({
+      "ammount": accounting.formatMoney(5),
+      "full_name": "Joseph Stewart",
+      "submit_label": "Donate"
+    });
+
+    __WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* SpreedlyExpress */].setPaymentMethodParams({
+      "email": "joseph.s@nationalschoolproject.com",
+      "phone_number": "7025404883",
+      "address1": "2657 Windmill Pkwy",
+      "city": "Henderson",
+      "state": "NV",
+      "zip": "89074"
+    });
+
     __WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* SpreedlyExpress */].onPaymentMethod((token, paymentMethod) => {
       Bloomerang.CreditCard.spreedlyToken(token);
     });
+
+    __WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* SpreedlyExpress */].openView();
   }
 
   render() {
@@ -21199,7 +21217,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'button',
-        { onclick: this.collectPayment.bind(this) },
+        { onClick: this.collectPayment.bind(this) },
         'Click me!'
       )
     );
