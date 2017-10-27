@@ -12,7 +12,7 @@ var run = () => {
         console.log("Spreedly Initilized...");
       });
       Bloomerang.initSpreedly = () => {
-        SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR'. { 'company_name':'National School Project' });
+        SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name':'National School Project' });
       }
       Bloomerang.initSpreedly();
     });

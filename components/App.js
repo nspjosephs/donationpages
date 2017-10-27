@@ -1,5 +1,5 @@
 import React from 'react';
-import {run,SpreedlyExpress} from 'bloom';
+import {run,SpreedlyExpress} from './bloom';
 
 run();
 export default class App extends React.Component {

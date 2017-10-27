@@ -21175,9 +21175,19 @@ module.exports = function() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bloom__ = __webpack_require__(33);
 
 
+
+Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["b" /* run */])();
 class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+
+  collectPayment() {
+    __WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* SpreedlyExpress */].onPaymentMethod((token, paymentMethod) => {
+      Bloomerang.CreditCard.spreedlyToken(token);
+    });
+  }
+
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
@@ -21186,11 +21196,45 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         'p',
         null,
         'H3ll0 W0rld'
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'button',
+        { onclick: this.collectPayment.bind(this) },
+        'Click me!'
       )
     );
   }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = App;
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return run; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpreedlyExpress; });
+var run = () => {
+
+  if (window.ActiveXObject) {
+    Bloomerang.BROWSER_UNSUPPORTED = true;
+  }
+
+  if (!Boomerang.SpreedlyScriptLoaded) {
+    Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js', () => SpreedlyExpress != undefined, () => {
+      SpreedlyExpress.onInit(() => {
+        console.log("Spreedly Initilized...");
+      });
+      Bloomerang.initSpreedly = () => {
+        SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name': 'National School Project' });
+      };
+      Bloomerang.initSpreedly();
+    });
+    Bloomerang.SpreedlyScriptLoaded = true;
+  }
+};
+
 
 
 /***/ })
