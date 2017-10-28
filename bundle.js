@@ -21175,22 +21175,22 @@ module.exports = function() {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__bloom__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__main_bloom__ = __webpack_require__(33);
 
 
 
-Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["b" /* run */])();
+Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["b" /* run */])();
 class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   collectPayment() {
 
-    __WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* SpreedlyExpress */].setDisplayOptions({
+    __WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */].setDisplayOptions({
       "ammount": accounting.formatMoney(5),
       "full_name": "Joseph Stewart",
       "submit_label": "Donate"
     });
 
-    __WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* SpreedlyExpress */].setPaymentMethodParams({
+    __WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */].setPaymentMethodParams({
       "email": "joseph.s@nationalschoolproject.com",
       "phone_number": "7025404883",
       "address1": "2657 Windmill Pkwy",
@@ -21199,11 +21199,11 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       "zip": "89074"
     });
 
-    __WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* SpreedlyExpress */].onPaymentMethod((token, paymentMethod) => {
+    __WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */].onPaymentMethod((token, paymentMethod) => {
       Bloomerang.CreditCard.spreedlyToken(token);
     });
 
-    __WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* SpreedlyExpress */].openView();
+    __WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */].openView();
   }
 
   render() {
@@ -21237,26 +21237,42 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpreedlyExpress; });
 var run = () => {
 
-  if (window.ActiveXObject) {
-    Bloomerang.BROWSER_UNSUPPORTED = true;
-  } else {
-    Bloomerang.BROWSER_UNSUPPORTED = false;
-  }
-
-  if (!Bloomerang.SpreedlyScriptLoaded) {
-    Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js', () => SpreedlyExpress != undefined, () => {
-      SpreedlyExpress.onInit(() => {
-        console.log("Spreedly Initilized...");
-      });
-      Bloomerang.initSpreedly = () => {
-        SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name': 'National School Project' });
-      };
-      Bloomerang.initSpreedly();
-    });
-    Bloomerang.SpreedlyScriptLoaded = true;
+  if (Bloomerang == null) {
+    console.log("Bloomerang is NULL, setting timeout then trying again...");
+    setTimeout(run, 1000);
+    return false;
   }
 
   Bloomerang.useKey('pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56');
+
+  if (Bloomerang.useDonationId("12827659")) {
+    console.log("Hannah's Donation being used...");
+
+    if (window.ActiveXObject) {
+      Bloomerang.BROWSER_UNSUPPORTED = true;
+      console.log("Browser is unsupported, returning false...");
+      return false;
+    } else {
+      Bloomerang.BROWSER_UNSUPPORTED = false;
+      console.log("Browser is supported...");
+    }
+
+    if (!Bloomerang.SpreedlyScriptLoaded) {
+      console.log("Spreedly Script is not loaded, loading now...");
+      Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js', () => SpreedlyExpress != undefined, () => {
+        console.log("SpreedlyExpress is loaded, initializing now...");
+        SpreedlyExpress.onInit(() => {
+          console.log("Spreedly Initilized...");
+        });
+        Bloomerang.initSpreedly = () => {
+          SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name': 'National School Project' });
+        };
+        Bloomerang.initSpreedly();
+      });
+      Bloomerang.SpreedlyScriptLoaded = true;
+      console.log("SpreedlyExpress is loaded and initialized...");
+    }
+  }
 };
 
 
