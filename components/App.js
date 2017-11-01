@@ -1,8 +1,7 @@
 import React from 'react';
-//import {run,SpreedlyExpress} from '../main/bloom';
+import {run,SpreedlyExpress} from '../main/bloom';
 
-//var initialized = run();
-var initialized=false;
+var initialized = run();
 export default class App extends React.Component {
 
   constructor(props) {
