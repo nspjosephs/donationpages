@@ -21202,6 +21202,16 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     };
   }
 
+  getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+
   onAmountChange(event) {
     this.setState({
       amount: event.target.value
@@ -21243,6 +21253,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 
   render() {
+    var name = this.getParameterByName("name");
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       "div",
       null,
@@ -21253,29 +21264,255 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         initialized ? "" : "not",
         " all set up!"
       ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "p",
-        null,
-        "Amount: ",
-        this.state.amount
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        "div",
-        null,
+      name == "" || name == null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "h1",
+        { className: "donation-header" },
+        "Donate to the National School Project"
+      ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "h1",
+        { className: "donation-header" },
+        "Support ",
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          "label",
-          { htmlFor: "amount" },
-          "Amount: "
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", id: "amount", onChange: this.onAmountChange.bind(this), value: this.state.amount })
+          "span",
+          { className: "undl" },
+          name
+        )
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "div",
-        null,
+        { className: "form notform" },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "form-section" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "h2",
+            null,
+            "Donation"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "label",
+            { htmlFor: "amount" },
+            "Amount (USD)"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "number", id: "amount", placeholder: "e.g. 10.00" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "section radio-container" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "checkbox", id: "recurring" }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "label",
+              { htmlFor: "recurring" },
+              "Show my support by making ",
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
+              " this a recurring donation"
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "div",
+              { className: "conditional", id: "recurring-div" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "label",
+                { htmlFor: "frequency" },
+                "Frequency"
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "select",
+                { className: "donation-select", id: "frequency" },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "option",
+                  null,
+                  "Weekly"
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "option",
+                  { selected: true },
+                  "Monthly"
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "option",
+                  null,
+                  "Quarterly"
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  "option",
+                  null,
+                  "Yearly"
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "label",
+                { htmlFor: "start-date" },
+                "Start Date"
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "date", id: "datepicker", value: "mm/dd/yyyy" })
+            )
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "form-section" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "h2",
+            null,
+            "Contact Information"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "label",
+            { htmlFor: "first-name" },
+            "First Name"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", id: "first-name", placeholder: "e.g. Simeon" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "label",
+            { htmlFor: "last-name" },
+            "Last Name"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", id: "last-name", placeholder: "e.g. Peter" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "label",
+            { htmlFor: "email" },
+            "Email"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", id: "email", placeholder: "e.g. you@site.com" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "label",
+            { htmlFor: "phone" },
+            "Phone"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", id: "phone", placeholder: "e.g. (123) 456-7890" })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "form-section" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "h2",
+            null,
+            "Billing Address"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "label",
+            { htmlFor: "country" },
+            "Country"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "select",
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "option",
+              null,
+              "Canada"
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "option",
+              { selected: true },
+              "United States"
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "option",
+              null,
+              "United Kingdom"
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "label",
+            { htmlFor: "address" },
+            "Address"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("textarea", { placeholder: "e.g. 777 Demascus Rd." }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "label",
+            { htmlFor: "city" },
+            "City"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", id: "city", placeholder: "e.g. Los Angeles" }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "label",
+            { htmlFor: "state" },
+            "State"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "select",
+            { id: "state" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "option",
+              null,
+              "California"
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "option",
+              null,
+              "Nevada"
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "label",
+            { htmlFor: "zip" },
+            "Zip Code"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "number", id: "zip", placeholder: "e.g. 90210" })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "form-section" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "h2",
+            null,
+            "Payment Method"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "section radio-container" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "radio", name: "payment", id: "credit", checked: true }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "label",
+              { htmlFor: "credit" },
+              "Credit"
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "radio", name: "payment", id: "checking" }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "label",
+              { htmlFor: "checking" },
+              "Checking"
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "radio", name: "payment", id: "savings" }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "label",
+              { htmlFor: "savings" },
+              "Savings"
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "div",
+            { className: "conditional", id: "bank-info" },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "label",
+              { htmlFor: "routing" },
+              "Routing Number"
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", id: "routing", placeholder: "e.g. 123456789" }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "label",
+              { htmlFor: "account" },
+              "Accounting Number"
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "text", id: "account", placeholder: "e.g. 456789123456" })
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          "div",
+          { className: "form-section" },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            "h2",
+            null,
+            "Comments"
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("textarea", null)
+        ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           "button",
-          { onClick: this.submit.bind(this) },
-          "Click me to submit!"
+          { id: "donate-button" },
+          "Continue"
         )
       )
     );

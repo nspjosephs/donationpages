@@ -1,26 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Anton|Martel+Sans|Roboto|Roboto+Condensed');
+
 html {
-  background-color:#BFD7EA;
+  background-color:#1A2D6B;
   padding-top:20px;
 }
 
-h1,h2 {
-  font-family: 'Martel Sans', sans-serif;
+.donation-header {
+  color:white;
+}
+
+.conditional {
+  display:none;
+  transition: display .3s;
+}
+
+html,body {
+  height:100%;
+}
+
+.undl  {
+  text-decoration:underline;
+}
+
+.form {
+  width:50%;
+  padding:20px;
+  background-color:#E2E2E2;
+  border-radius:20px;
+  margin:auto;
+  margin-bottom:30px;
+  color:#2E2E2E;
+  text-align:center;
+}
+
+.form-section + .form-section {
+  margin-top: 80px;
+}
+
+.form h1, .form h2, .donation-header {
+  font-family: 'Martel Sans', serif;
   text-align:center;
   margin-top:0;
+  margin-bottom:0;
+}
+
+.form .section {
+  margin-top:20px;
+  width:100%;
+}
+
+.form label {
+  font-family:"Roboto";
+  font-size:11pt;
+  text-align:center;
 }
 
 /* clense our input pallete */
-input[type="text"] {
+.form input[type="number"],
+.form input[type="date"],
+.form input[type="text"] {
   display: block;
-  margin: auto;
-  font-family: "Roboto",sans-serif;
-  width:50%;
+  font-family: "Roboto Condensed",sans-serif;
+  color:#090809;
   font-size: 18px;
   appearance: none;
   box-shadow: none;
   border-radius: none;
 }
-input[type="text"]:focus {
+.form input[type="number"]:focus,
+.form input[type="date"]:focus,
+.form input[type="text"]:focus {
   outline: none;
 }
 *::selection {
@@ -28,39 +77,170 @@ input[type="text"]:focus {
   color:white;
 }
 
+.form input[type="number"],
+.form input[type="date"],
+.form input[type="text"] {
+  padding:5px;
+  margin:auto;
+  padding-left:7px;
+  border:none;
+  width:35%;
+  border-left: solid 5px #ABB3CA;
+  transition: border-left .3s, background-color .3s, width .3s;
+  background-color: rgba(255,255,255,.75);
+  color: #4C4B4C;
+  margin-bottom:15px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.form input[type="number"]:focus,
+.form input[type="date"]:focus,
+.form input[type="text"]:focus {
+  border-left: solid 5px #EEA00F;
+  color: inherit;
+  background-color: rgba(255,255,255,.95);
+  width:45%;
+}
 
-input[type="text"].style4 {
-  padding: 10px;
+.form input[type="date"] {
+  display:block;
+  margin:auto;
+  margin-top:0px;
+}
+
+.form .radio-container {
+  display:block;
+  text-align:center;
+  margin:auto;
+  margin-top:10px;
+}
+
+.form input[type="checkbox"],
+.form input[type="radio"] {
+  display:none;
+}
+
+.form input[type="checkbox"] + label,
+.form input[type="radio"] + label {
+  cursor:pointer;
+  display:inline-block;
+  position:relative;
+  width:auto;
+  border: solid 4px rgba(0,0,0,0);
+  border-radius:10px;
+  background-color:rbga(0,0,0,0);
+  vertical-align:top;
+  margin:5px;
+  padding:5px;
+  padding-left:20px;
+  padding-right:20px;
+  font-family: "Roboto Condensed";
+  font-size:14pt;
+  transition: border-color .3s;
+  user-select:none;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  margin-bottom: 15px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.form input[type="checkbox"] + label:hover,
+.form input[type="radio"] + label:hover {
+  border-color: #ABB3CA;
+}
+.form input[type="checkbox"]:checked + label,
+.form input[type="radio"]:checked + label{
+  border-color:#EEA00F;
+}
+
+.form input[type="checkbox"]:checked + label {
+  background-color:rgba(251,237,211,.5);
+}
+
+.form select {
+  display:block;
+  margin:auto;
+  border:solid 4px #EEA00F;
+  border-radius:10px;
+  font-size:16pt;
+  background:none;
+  font-family:"Roboto Condensed";
+  cursor:pointer;
+  margin-bottom:15px;
+  min-width:25%;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.form select:focus {
+  outline:none;
+}
+
+.form textarea {
+  width:35%;
+  margin:auto;
+  height:5em;
+  display:block;
+  border:none;
+  border-left: solid 5px #ABB3CA;
+  transition:border .3s;
+  margin-bottom: 15px;
+  font-family: "Roboto Condensed";
+  font-size:14pt;
+  color: #4C4B4C;
+  background-color: rgba(255,255,255,.75);
+  resize:vertical;
+}
+
+.form textarea:focus {
+  border-left: solid 5px #EEA00F;
+  outline:none;
+  color: inherit;
+  background-color: rgba(255,255,255,.95);
+}
+
+.form button {
+  display:block;
+  margin:auto;
   border: none;
-  border-bottom: solid 3px #c9c9c9;
-  transition: border 0.2s;
+  padding:5px;
+  padding-left:15px;
+  padding-right:15px;
+  border-radius: 10px;
+  background:#EEA00F;
+  cursor:pointer;
+  font-family:"Roboto Condensed";
+  font-size:20pt;
+  margin-top:40px;
+  margin-bottom:20px;
+  box-shadow: 0 7px 0 #98660A;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  user-select:none;
+  -moz-user-select:none;
+  -webkit-user-select:none;
 }
-input[type="text"].style4:focus,
-input[type="text"].style4.focus {
-  border-bottom: solid 3px #1A2D6B;
+.form button:focus {
+  outline:none;
+}
+.form button:active {
+  box-shadow: 0 4px 0 #98660A;
+  transform: translateY(3px);
 }
 
-input[type="text"].style1  {
-  padding: 5px;
-  border: solid 5px #dcdcdc;
-  border-style:outset;
-  transition: box-shadow 0.3s, border 0.3s, background .3s;
-  background-color:#F9F9F9;
-}
-input[type="text"].style1:focus,
-input[type="text"].style1 .focus {
-  border: outset 5px #C8C8C8;
-  box-shadow: 3px 2px 10px 2px #A9A9A9;
-  background-color:#F4F4F4;
-}
+@media screen and (max-width: 900px) {
+    .form{
+      width:90%;
+    }
 
-input[type="text"].style5 {
-  padding: 10px;
-  border: solid 1px #fff;
-  box-shadow: inset 1px 1px 2px 0 #707070;
-  transition: box-shadow 0.3s;
-}
-input[type="text"].style5:focus,
-input[type="text"].style5.focus {
-  box-shadow: inset 1px 1px 2px 0 #c9c9c9;
-}
+    .form input[type="number"],
+    .form input[type="date"],
+    .form input[type="text"] {
+      width:50%;
+    }
+
+    .form input[type="number"]:focus,
+    .form input[type="date"]:focus,
+    .form input[type="text"]:focus {
+      width:75%;
+    }
+
+    .form textarea {
+      width:65%;
+    }
+	}
