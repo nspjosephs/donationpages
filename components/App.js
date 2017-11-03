@@ -9,19 +9,24 @@ export default class App extends React.Component {
 
     this.state = {
       page:0,
-      amount:5,
+      amount:0,
       recurring:false,
-      firstName: "John",
-      lastName: "Doe",
-      email: "someone@website.com",
-      phone:"(123) 456-7890",
+      frequency:"",
+      startDate: "mm/dd/yyyy",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone:"",
       country: "US",
-      address: "1600 Pensylvania Ave.",
+      address: "",
+      zip: "",
+      state: "CA",
+      city: "",
       type: "credit",
-      comments: "Here are some comments",
+      comments: "",
       increaseImpact:false,
-      routingNumber:1234,
-      accountNumber:1234
+      routingNumber: 0,
+      accountNumber: 0
     }
   }
 
@@ -39,40 +44,6 @@ export default class App extends React.Component {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
-  collectPayment() {
-
-    console.log("Way to donate!");
-    SpreedlyExpress.setDisplayOptions({
-      "ammount":accounting.formatMoney(5),
-      "full_name":"Joseph Stewart",
-      "submit_label":"Donate"
-    })
-
-    SpreedlyExpress.setPaymentMethodParams({
-      "email":"joseph.s@nationalschoolproject.com",
-      "phone_number":"7025404883",
-      "address1":"2657 Windmill Pkwy",
-      "city":"Henderson",
-      "state":"NV",
-      "zip":"89074"
-    })
-
-    SpreedlyExpress.onPaymentMethod((token,paymentMethod) => {
-      Bloomerang.CreditCard.spreedlyToken(token);
-    })
-
-    SpreedlyExpress.openView();
-  }
-
-  submit() {
-    if (!window.Bloomerang.formSubmitted) {
-      window.Bloomerang.formSubmitted = true;
-      this.collectPayment();
-    } else {
-      console.log("Woah there cowboy, your form is being processed");
-    }
-  }
-
   /******************
    * EVENT HANDLERS *
    ******************/
@@ -80,12 +51,6 @@ export default class App extends React.Component {
   nextPage() {
     this.setState({
       page:1
-    })
-  }
-
-  previousPage() {
-    this.setState({
-      page:0
     })
   }
 
@@ -101,6 +66,20 @@ export default class App extends React.Component {
     })
   }
 
+  onFrequencyChange(event) {
+    console.log("frequency change: " + event.target.value.toLowerCase());
+    this.setState({
+      frequency:event.target.value.toLowerCase()
+    })
+  }
+
+  onStartDateChange(event) {
+    console.log("start date change: " + event.target.value);
+    this.setState({
+      startDate:event.target.value
+    })
+  }
+
   onFirstNameChange(event) {
     this.setState({
       firstName:event.target.value
@@ -108,6 +87,7 @@ export default class App extends React.Component {
   }
 
   onLastNameChange(event) {
+    console.log("name change: " + event.target.value);
     this.setState({
       lastName:event.target.value
     })
@@ -125,9 +105,66 @@ export default class App extends React.Component {
     })
   }
 
+  onCountryChange(event) {
+    console.log("country change: " + event.target.value);
+    this.setState({
+      country:event.target.value
+    })
+  }
+
+  onAddressChange(event) {
+    console.log("address change: " + event.target.value);
+    this.setState({
+      address: event.target.value
+    })
+  }
+
+  onCityChange(event) {
+    console.log("city change: " + event.target.value);
+    this.setState({
+      city:event.target.value
+    })
+  }
+
+  onStateChange(event) {
+    console.log("state change: " + event.target.value);
+    this.setState({
+      state: event.target.value
+    })
+  }
+
+  onZipChange(event) {
+    console.log("zip change: " + event.target.value);
+    this.setState({
+      zip:event.target.value
+    })
+  }
+
   onRadioChange(event) {
+    console.log("payment method change: " + event.target.id);
     this.setState({
       type:event.target.id
+    })
+  }
+
+  onRoutingChange(event) {
+    console.log("routing change: " + event.target.value)
+    this.setState({
+      routingNumber:event.target.value
+    })
+  }
+
+  onAccountChange(event) {
+    console.log("account change: " + event.target.value);
+    this.setState({
+      accountNumber:event.target.value
+    })
+  }
+
+  onCommentsChange(event) {
+    console.log("on comment change: " + event.target.value);
+    this.setState({
+      comments: event.target.value
     })
   }
 
@@ -153,94 +190,94 @@ export default class App extends React.Component {
                 <label htmlFor="amount">Amount (USD)</label>
                 <input type="number" id="amount" placeholder="e.g. 10.00" onChange={this.onAmountChange.bind(this)}/>
                 <div className="section radio-container">
-                  <input type="checkbox" id="recurring"/>
-                  <label htmlFor="recurring" onChange={this.onRecurringChange.bind(this)}>Make this a recurring donation</label>
+                  <input type="checkbox" id="recurring" onChange={this.onRecurringChange.bind(this)}/>
+                  <label htmlFor="recurring">Make this a recurring donation</label>
                   <br/>
 
                   {this.state.recurring ?
                       <div id="recurring-div">
                         <label htmlFor="frequency">Frequency</label>
-                        <select className="donation-select" id="frequency">
+                        <select className="donation-select" id="frequency" onChange={this.onFrequencyChange.bind(this)}>
                           <option>Weekly</option>
-                          <option selected>Monthly</option>
+                          <option defaultValue>Monthly</option>
                           <option>Quarterly</option>
                           <option>Yearly</option>
                         </select>
                         <br/>
                         <label htmlFor="start-date">Start Date</label>
-                        <input type="date" id="datepicker" value="mm/dd/yyyy"/>
+                        <input type="date" id="datepicker" defaultValue="mm/dd/yyyy" onChange={this.onStartDateChange.bind(this)}/>
                       </div>
                     :
                       ""
                   }
                 </div>
                 <br/>
-                <button id="next" onClick={this.nextPage.bind(this)}/>
+                <button id="next" onClick={this.nextPage.bind(this)}>Next</button>
               </div>
             :
               <div>
                 <div className="form-section">
                   <h2>Contact Information</h2>
-                  <label htmlFor="first-name" onChange={this.onFirstNameChange.bind(this)}>First Name</label>
-                  <input type="text" id="first-name" placeholder="e.g. Simeon"/>
+                  <label htmlFor="first-name">First Name</label>
+                  <input type="text" id="first-name" placeholder="e.g. Simeon" onChange={this.onFirstNameChange.bind(this)}/>
 
-                  <label htmlFor="last-name" onChange={this.onLastNameChange.bind(this)}>Last Name</label>
-                  <input type="text" id="last-name" placeholder="e.g. Peter"/>
+                  <label htmlFor="last-name">Last Name</label>
+                  <input type="text" id="last-name" placeholder="e.g. Peter" onChange={this.onLastNameChange.bind(this)}/>
 
-                  <label htmlFor="email" onChange={this.onEmailChange.bind(this)}>Email</label>
-                  <input type="text" id="email" placeholder="e.g. you@site.com"/>
+                  <label htmlFor="email">Email</label>
+                  <input type="text" id="email" placeholder="e.g. you@site.com" onChange={this.onEmailChange.bind(this)}/>
 
-                  <label htmlFor="phone" onChange={this.onPhoneChange.bind(this)}>Phone</label>
-                  <input type="text" id="phone" placeholder="e.g. (123) 456-7890"/>
+                  <label htmlFor="phone">Phone</label>
+                  <input type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
                 </div>
 
                 <div className="form-section">
                   <h2>Billing Address</h2>
                   <label htmlFor="country">Country</label>
-                  <select>
+                  <select onChange={this.onCountryChange.bind(this)}>
                     <option>Canada</option>
-                    <option selected>United States</option>
+                    <option defaultValue>United States</option>
                     <option>United Kingdom</option>
                   </select>
 
                   <label htmlFor="address">Address</label>
-                  <textarea placeholder="e.g. 777 Demascus Rd."></textarea>
+                  <textarea placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
 
                   <label htmlFor="city">City</label>
-                  <input type="text" id="city" placeholder="e.g. Los Angeles"/>
+                  <input type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
 
                   <label htmlFor="state">State</label>
-                  <select id="state">
+                  <select id="state" onChange={this.onStateChange.bind(this)}>
                     <option>California</option>
                     <option>Nevada</option>
                   </select>
 
                   <label htmlFor="zip">Zip Code</label>
-                  <input type="number" id="zip" placeholder="e.g. 90210"/>
+                  <input type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
                 </div>
 
                 <div className="form-section">
                   <h2>Payment Method</h2>
 
                   <div className="section radio-container">
-                    <input type="radio" name="payment" id="credit" checked/>
+                    <input type="radio" name="payment" id="credit" defaultChecked onChange={this.onRadioChange.bind(this)}/>
                     <label htmlFor="credit">Credit</label>
 
-                    <input type="radio" name="payment" id="checking"/>
+                    <input type="radio" name="payment" id="checking" onChange={this.onRadioChange.bind(this)}/>
                     <label htmlFor="checking">Checking</label>
 
-                    <input type="radio" name="payment" id="savings"/>
+                    <input type="radio" name="payment" id="savings" onChange={this.onRadioChange.bind(this)}/>
                     <label htmlFor="savings">Savings</label>
                   </div>
 
                   {
-                    this.state.type =="credit" ?
+                    this.state.type !="credit" ?
                       <div id = "bank-info">
                         <label htmlFor="routing">Routing Number</label>
-                        <input type="text" id="routing" placeholder="e.g. 123456789"/>
+                        <input type="text" id="routing" placeholder="e.g. 123456789" onChange={this.onRoutingChange.bind(this)}/>
 
-                        <label htmlFor="account">Accounting Number</label>
-                        <input type="text" id="account" placeholder="e.g. 456789123456"/>
+                        <label htmlFor="account">Account Number</label>
+                        <input type="text" id="account" placeholder="e.g. 456789123456" onChange={this.onAccountChange.bind(this)}/>
                       </div>
                     :
                       ""
@@ -249,10 +286,9 @@ export default class App extends React.Component {
 
                 <div className="form-section">
                   <h2>Comments and Prayer Requests</h2>
-                  <textarea></textarea>
+                  <textarea onChange={this.onCommentsChange.bind(this)}></textarea>
                 </div>
 
-                <button id="back-button" onClick={this.previousPage.bind(this)}>Back</button>
                 <button id="donate-button" onClick={this.submit.bind(this)}>{this.state.type=="credit" ? "Enter Payment Info" : "Donate"}</button>
               </div>
           }
