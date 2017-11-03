@@ -6,6 +6,11 @@ var run = () => {
     return false;
   }
 
+  if (Bloomerang.isDebugging) {
+    console.log("Bloomerang is debugging, returning true");
+    return true;
+  }
+
   Bloomerang.useKey('pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56');
 
   if (Bloomerang.useDonationId("12827659")) {
@@ -43,6 +48,8 @@ var run = () => {
       Bloomerang.SpreedlyScriptLoaded = true;
       console.log("SpreedlyExpress is loaded and initialized...");
     }
+
+    return true;
   }
 
   /* === SETTING TRANSACTION FEE CONSTANTS === */
