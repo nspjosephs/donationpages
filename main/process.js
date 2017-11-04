@@ -27,7 +27,6 @@ function collectPayment(SpreedlyExpress,state,onError) {
     SpreedlyExpress.openView();
   } else {
     console.log("Responses not validated...");
-    onError();
   }
 }
 
@@ -36,7 +35,14 @@ function configureBloomerang(state) {
 }
 
 function validateResponses(state) {
-  return false;
+  state.amount = parseInt(state.amount);
+
+  if (amount <= 0) {
+    onError("INVALID_AMOUNT");
+    return false;
+  }
+
+  if 
 }
 
 export default function submit(SpreedlyExpress,state) {

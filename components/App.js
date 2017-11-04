@@ -45,6 +45,10 @@ export default class App extends React.Component {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
   }
 
+  errorCallback() {
+
+  }
+
   /******************
    * EVENT HANDLERS *
    ******************/
@@ -290,7 +294,7 @@ export default class App extends React.Component {
                   <textarea onChange={this.onCommentsChange.bind(this)}></textarea>
                 </div>
 
-                <button id="donate-button" onClick={() => submit(SpreedlyExpress,this.state)}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? "per month" : ""}`}</button>
+                <button id="donate-button" onClick={() => submit(SpreedlyExpress,this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
               </div>
           }
         </div>

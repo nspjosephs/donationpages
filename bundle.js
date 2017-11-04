@@ -21614,7 +21614,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */], this.state) },
-            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? "per month" : ""}`
+            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
       )
@@ -21703,35 +21703,44 @@ var run = () => {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = submit;
-function collectPayment(SpreedlyExpress, state) {
+function collectPayment(SpreedlyExpress, state, onError) {
 
-  console.log("Way to donate!");
+  if (validateResponses(state)) {
+    console.log("Collecting donation...");
 
-  configureBloomerang(state);
+    configureBloomerang(state);
 
-  SpreedlyExpress.setDisplayOptions({
-    "ammount": accounting.formatMoney(state.amount),
-    "full_name": "Joseph Stewart",
-    "submit_label": "Donate"
-  });
+    SpreedlyExpress.setDisplayOptions({
+      "ammount": accounting.formatMoney(state.amount),
+      "full_name": "Joseph Stewart",
+      "submit_label": "Donate"
+    });
 
-  SpreedlyExpress.setPaymentMethodParams({
-    "email": state.email,
-    "phone_number": "7025404883",
-    "address1": "2657 Windmill Pkwy",
-    "city": "Henderson",
-    "state": "NV",
-    "zip": "89074"
-  });
+    SpreedlyExpress.setPaymentMethodParams({
+      "email": state.email,
+      "phone_number": "7025404883",
+      "address1": "2657 Windmill Pkwy",
+      "city": "Henderson",
+      "state": "NV",
+      "zip": "89074"
+    });
 
-  SpreedlyExpress.onPaymentMethod((token, paymentMethod) => {
-    Bloomerang.CreditCard.spreedlyToken(token);
-  });
+    SpreedlyExpress.onPaymentMethod((token, paymentMethod) => {
+      Bloomerang.CreditCard.spreedlyToken(token);
+    });
 
-  SpreedlyExpress.openView();
+    SpreedlyExpress.openView();
+  } else {
+    console.log("Responses not validated...");
+    onError();
+  }
 }
 
 function configureBloomerang(state) {}
+
+function validateResponses(state) {
+  return false;
+}
 
 function submit(SpreedlyExpress, state) {
   console.log("calling submit");
