@@ -21176,6 +21176,8 @@ module.exports = function() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__main_bloom__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__main_process__ = __webpack_require__(34);
+
 
 
 
@@ -21200,7 +21202,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       zip: "",
       state: "CA",
       city: "",
-      type: "",
+      type: "credit",
       comments: "",
       increaseImpact: false,
       routingNumber: 0,
@@ -21220,40 +21222,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
-
-  collectPayment() {
-
-    console.log("Way to donate!");
-    __WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */].setDisplayOptions({
-      "ammount": accounting.formatMoney(5),
-      "full_name": "Joseph Stewart",
-      "submit_label": "Donate"
-    });
-
-    __WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */].setPaymentMethodParams({
-      "email": "joseph.s@nationalschoolproject.com",
-      "phone_number": "7025404883",
-      "address1": "2657 Windmill Pkwy",
-      "city": "Henderson",
-      "state": "NV",
-      "zip": "89074"
-    });
-
-    __WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */].onPaymentMethod((token, paymentMethod) => {
-      Bloomerang.CreditCard.spreedlyToken(token);
-    });
-
-    __WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */].openView();
-  }
-
-  submit() {
-    if (!window.Bloomerang.formSubmitted) {
-      window.Bloomerang.formSubmitted = true;
-      this.collectPayment();
-    } else {
-      console.log("Woah there cowboy, your form is being processed");
-    }
   }
 
   /******************
@@ -21313,7 +21281,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   onPhoneChange(event) {
     this.setState({
-      phone: event.target.value
+      phone: event.target.value.replace(/[^0-9]/g, '')
     });
   }
 
@@ -21645,8 +21613,8 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { id: 'donate-button', onClick: this.submit.bind(this) },
-            this.state.type == "credit" ? "Enter Payment Info" : "Donate"
+            { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */], this.state) },
+            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? "per month" : ""}`
           )
         )
       )
@@ -21663,6 +21631,9 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return run; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpreedlyExpress; });
+var SpreedlyExpress = {
+  DEBUGGING: true
+};
 var run = () => {
 
   if (Bloomerang == null) {
@@ -21675,6 +21646,7 @@ var run = () => {
     console.log("Bloomerang is debugging, returning true");
     return true;
   }
+  SpreedlyExpress = undefined;
 
   Bloomerang.useKey('pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56');
 
@@ -21723,9 +21695,58 @@ var run = () => {
   Bloomerang.formSubmitted = false;
 };
 
-var submit = () => {};
 
 
+/***/ }),
+/* 34 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = submit;
+function collectPayment(SpreedlyExpress, state) {
+
+  console.log("Way to donate!");
+
+  configureBloomerang(state);
+
+  SpreedlyExpress.setDisplayOptions({
+    "ammount": accounting.formatMoney(state.amount),
+    "full_name": "Joseph Stewart",
+    "submit_label": "Donate"
+  });
+
+  SpreedlyExpress.setPaymentMethodParams({
+    "email": state.email,
+    "phone_number": "7025404883",
+    "address1": "2657 Windmill Pkwy",
+    "city": "Henderson",
+    "state": "NV",
+    "zip": "89074"
+  });
+
+  SpreedlyExpress.onPaymentMethod((token, paymentMethod) => {
+    Bloomerang.CreditCard.spreedlyToken(token);
+  });
+
+  SpreedlyExpress.openView();
+}
+
+function configureBloomerang(state) {}
+
+function submit(SpreedlyExpress, state) {
+  console.log("calling submit");
+  if (SpreedlyExpress.DEBUGGING) {
+    console.log("SpreedlyExpress is debugging, returning false...");
+    console.log(state);
+    return false;
+  }
+  if (!window.Bloomerang.formSubmitted) {
+    window.Bloomerang.formSubmitted = true;
+    this.collectPayment(SpreedlyExpress, state);
+  } else {
+    console.log("Woah there cowboy, your form is being processed");
+  }
+}
 
 /***/ })
 /******/ ]);

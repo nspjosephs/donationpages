@@ -1,3 +1,6 @@
+var SpreedlyExpress = {
+  DEBUGGING:true
+}
 var run = () => {
 
   if (Bloomerang == null) {
@@ -10,6 +13,7 @@ var run = () => {
     console.log("Bloomerang is debugging, returning true");
     return true;
   }
+  SpreedlyExpress = undefined;
 
   Bloomerang.useKey('pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56');
 
@@ -58,10 +62,6 @@ var run = () => {
 
   /* === SETTING FORM CONTROL VARIABLE TO PREVENT ACCIDENTAL MULTIPLE SUBMISSIONS === */
   Bloomerang.formSubmitted = false;
-
-}
-
-var submit = () => {
 
 }
 

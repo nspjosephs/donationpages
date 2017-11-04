@@ -1,5 +1,6 @@
 import React from 'react';
 import {run,SpreedlyExpress} from '../main/bloom';
+import submit from '../main/process';
 
 var initialized = run();
 export default class App extends React.Component {
@@ -101,7 +102,7 @@ export default class App extends React.Component {
 
   onPhoneChange(event) {
     this.setState({
-      phone:event.target.value
+      phone:event.target.value.replace(/[^0-9]/g,'')
     })
   }
 
@@ -289,7 +290,7 @@ export default class App extends React.Component {
                   <textarea onChange={this.onCommentsChange.bind(this)}></textarea>
                 </div>
 
-                <button id="donate-button" onClick={this.submit.bind(this)}>{this.state.type=="credit" ? "Enter Payment Info" : "Donate"}</button>
+                <button id="donate-button" onClick={() => submit(SpreedlyExpress,this.state)}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? "per month" : ""}`}</button>
               </div>
           }
         </div>
