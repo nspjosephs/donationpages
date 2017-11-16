@@ -37603,7 +37603,9 @@ var run = () => {
     /* === LOADING AND INITIALIZING SPREEDLY === */
     if (!Bloomerang.SpreedlyScriptLoaded) {
       console.log("Spreedly Script is not loaded, loading now...");
-      Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js', () => SpreedlyExpress != undefined, () => {
+      Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js', () => {
+        console.log(SpreedlyExpress);return true;
+      }, () => {
         console.log("SpreedlyExpress is loaded, initializing now...");
         SpreedlyExpress.onInit(() => {
           console.log("Spreedly Initilized...");
