@@ -12,7 +12,7 @@ export default class App extends React.Component {
       page:0,
       amount:0,
       recurring:false,
-      frequency:"",
+      frequency:"Weekly",
       startDate: "mm/dd/yyyy",
       firstName: "",
       lastName: "",

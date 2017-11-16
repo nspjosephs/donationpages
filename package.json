@@ -19,13 +19,14 @@
   },
   "homepage": "https://github.com/nspjosephs/donationpages#readme",
   "dependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
+    "moment": "^2.19.2",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3"
   }

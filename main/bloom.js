@@ -53,15 +53,16 @@ var run = () => {
       console.log("SpreedlyExpress is loaded and initialized...");
     }
 
+    /* === SETTING TRANSACTION FEE CONSTANTS === */
+    Bloomerang.transactionFee = 0.2;
+    Bloomerang.transactionFeeRate = 0.025;
+
+    /* === SETTING FORM CONTROL VARIABLE TO PREVENT ACCIDENTAL MULTIPLE SUBMISSIONS === */
+    Bloomerang.formSubmitted = false;
+
+    
     return true;
   }
-
-  /* === SETTING TRANSACTION FEE CONSTANTS === */
-  Bloomerang.transactionFee = 0.2;
-  Bloomerang.transactionFeeRate = 0.025;
-
-  /* === SETTING FORM CONTROL VARIABLE TO PREVENT ACCIDENTAL MULTIPLE SUBMISSIONS === */
-  Bloomerang.formSubmitted = false;
 
 }
 

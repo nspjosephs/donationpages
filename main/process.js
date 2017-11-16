@@ -1,3 +1,5 @@
+import moment from "moment";
+
 function collectPayment(SpreedlyExpress,state,onError) {
 
   if (validateResponses(state)) {
@@ -20,18 +22,59 @@ function collectPayment(SpreedlyExpress,state,onError) {
       "zip":"89074"
     })
 
-    SpreedlyExpress.onPaymentMethod((token,paymentMethod) => {
-      Bloomerang.CreditCard.spreedlyToken(token);
-    })
+    if (state.type.toLowerCase() == "credit") {
+      SpreedlyExpress.onPaymentMethod((token,paymentMethod) => {
+        Bloomerang.CreditCard.spreedlyToken(token);
 
-    SpreedlyExpress.openView();
+        if (state.recurring) {
+          Bloomerang.Api.recurringDonate();
+        } else {
+          Bloomerang.Api.donate();
+        }
+
+      })
+      SpreedlyExpress.openView();
+    } else {
+      if (state.recurring) {
+        Bloomerang.Api.recurringDonate();
+      } else {
+        Bloomerang.Api.donate();
+      }
+    }
   } else {
     console.log("Responses not validated...");
   }
 }
 
 function configureBloomerang(state) {
+  let Bloomerang = window.Bloomerang;
 
+  Bloomerang.Account.individual()
+    .firstName(state.firstName)
+    .lastName(state.lastName)
+    .homePhone(state.phone)
+    .homeEmail(state.email)
+    .homeAddress(
+      state.address,
+      state.city,
+      state.state,
+      state.zip,
+      state.country
+    )
+
+  if (state.recurring) {
+    /* DONATION IS RECURRING */
+    Bloomerang.RecurringDonation
+      .amount(state.amount)
+      .frequency(state.frequency)
+      .note(state.comments)
+      .startDate(moment(state.date).format("YYYY-MM-DD"));
+  } else {
+    /* DONATION IS SINGLE TIME */
+    Bloomerang.Donation
+      .amount(state.amount)
+      .note(state.comments)
+  }
 }
 
 function validateResponses(state) {
@@ -41,8 +84,6 @@ function validateResponses(state) {
     onError("INVALID_AMOUNT");
     return false;
   }
-
-  if 
 }
 
 export default function submit(SpreedlyExpress,state) {
