@@ -37114,7 +37114,7 @@ module.exports = function() {
 
 
 
-var initialized = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["b" /* run */])();
+var initialized = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* run */])();
 class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   constructor(props) {
@@ -37546,10 +37546,9 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { onChange: this.onCommentsChange.bind(this) })
           ),
-          'console.log(SpreedlyExpress);',
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */], this.state, this.errorCallback.bind(this)) },
+            { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(this.state, this.errorCallback.bind(this)) },
             this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
@@ -37565,8 +37564,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return run; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpreedlyExpress; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return run; });
 var SpreedlyExpress = {
   DEBUGGING: true
 };
@@ -37611,10 +37609,7 @@ var run = () => {
         SpreedlyExpress.onInit(() => {
           console.log("Spreedly Initilized...");
         });
-        Bloomerang.initSpreedly = () => {
-          SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name': 'National School Project' });
-        };
-        Bloomerang.initSpreedly();
+        SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name': 'National School Project' });
       });
       Bloomerang.SpreedlyScriptLoaded = true;
       console.log("SpreedlyExpress is loaded and initialized...");
@@ -37643,7 +37638,7 @@ var run = () => {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 
 
-function collectPayment(SpreedlyExpress, state, onError) {
+function collectPayment(state, onError) {
 
   if (validateResponses(state)) {
     console.log("Collecting donation...");
@@ -37711,7 +37706,7 @@ function validateResponses(state) {
   }
 }
 
-function submit(SpreedlyExpress, state) {
+function submit(state) {
   console.log("calling submit");
   if (SpreedlyExpress.DEBUGGING) {
     console.log("SpreedlyExpress is debugging, returning false...");

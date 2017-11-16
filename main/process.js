@@ -1,6 +1,6 @@
 import moment from "moment";
 
-function collectPayment(SpreedlyExpress,state,onError) {
+function collectPayment(state,onError) {
 
   if (validateResponses(state)) {
     console.log("Collecting donation...");
@@ -86,7 +86,7 @@ function validateResponses(state) {
   }
 }
 
-export default function submit(SpreedlyExpress,state) {
+export default function submit(state) {
   console.log("calling submit");
   if (SpreedlyExpress.DEBUGGING) {
       console.log("SpreedlyExpress is debugging, returning false...");

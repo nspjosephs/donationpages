@@ -44,10 +44,7 @@ var run = () => {
         SpreedlyExpress.onInit(() => {
           console.log("Spreedly Initilized...");
         });
-        Bloomerang.initSpreedly = () => {
-          SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name':'National School Project' });
-        }
-        Bloomerang.initSpreedly();
+        SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name':'National School Project' });
       });
       Bloomerang.SpreedlyScriptLoaded = true;
       console.log("SpreedlyExpress is loaded and initialized...");
@@ -60,13 +57,12 @@ var run = () => {
     /* === SETTING FORM CONTROL VARIABLE TO PREVENT ACCIDENTAL MULTIPLE SUBMISSIONS === */
     Bloomerang.formSubmitted = false;
 
-    
+
     return true;
   }
 
 }
 
 export {
-  run,
-  SpreedlyExpress
+  run
 }
