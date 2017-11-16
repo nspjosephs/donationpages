@@ -37,7 +37,7 @@ var run = () => {
     if (!Bloomerang.SpreedlyScriptLoaded) {
       console.log("Spreedly Script is not loaded, loading now...");
       Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js',
-      () => (SpreedlyExpress != undefined),
+      () => (SpreedlyExpress != undefined;console.log(SpreedlyExpress)),
       () => {
         console.log("SpreedlyExpress is loaded, initializing now...");
         SpreedlyExpress.onInit(() => {
