@@ -1,6 +1,3 @@
-var SpreedlyExpress = {
-  DEBUGGING:true
-}
 var run = () => {
 
   if (Bloomerang == null) {
@@ -11,9 +8,11 @@ var run = () => {
 
   if (Bloomerang.isDebugging) {
     console.log("Bloomerang is debugging, returning true");
+    var SpreedlyExpress = {
+      DEBUGGING:true
+    }
     return true;
   }
-  SpreedlyExpress = undefined;
 
   Bloomerang.useKey('pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56');
 

@@ -37565,9 +37565,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return run; });
-var SpreedlyExpress = {
-  DEBUGGING: true
-};
 var run = () => {
 
   if (Bloomerang == null) {
@@ -37578,9 +37575,11 @@ var run = () => {
 
   if (Bloomerang.isDebugging) {
     console.log("Bloomerang is debugging, returning true");
+    var SpreedlyExpress = {
+      DEBUGGING: true
+    };
     return true;
   }
-  SpreedlyExpress = undefined;
 
   Bloomerang.useKey('pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56');
 
