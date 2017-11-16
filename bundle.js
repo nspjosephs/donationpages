@@ -37546,6 +37546,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { onChange: this.onCommentsChange.bind(this) })
           ),
+          'console.log(SpreedlyExpress);',
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* SpreedlyExpress */], this.state, this.errorCallback.bind(this)) },
