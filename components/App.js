@@ -1,5 +1,5 @@
 import React from 'react';
-import {run} from '../main/bloom';
+import {run,getParameterByName} from '../main/bloom';
 import submit from '../main/process';
 
 var initialized = run();
@@ -35,15 +35,7 @@ export default class App extends React.Component {
    * PROCESSING METHODS *
    **********************/
 
-  getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
+
 
   errorCallback() {
 
@@ -92,7 +84,6 @@ export default class App extends React.Component {
   }
 
   onLastNameChange(event) {
-    console.log("name change: " + event.target.value);
     this.setState({
       lastName:event.target.value
     })
@@ -111,21 +102,18 @@ export default class App extends React.Component {
   }
 
   onCountryChange(event) {
-    console.log("country change: " + event.target.value);
     this.setState({
       country:event.target.value
     })
   }
 
   onAddressChange(event) {
-    console.log("address change: " + event.target.value);
     this.setState({
       address: event.target.value
     })
   }
 
   onCityChange(event) {
-    console.log("city change: " + event.target.value);
     this.setState({
       city:event.target.value
     })
@@ -139,7 +127,6 @@ export default class App extends React.Component {
   }
 
   onZipChange(event) {
-    console.log("zip change: " + event.target.value);
     this.setState({
       zip:event.target.value
     })
@@ -153,28 +140,25 @@ export default class App extends React.Component {
   }
 
   onRoutingChange(event) {
-    console.log("routing change: " + event.target.value)
     this.setState({
       routingNumber:event.target.value
     })
   }
 
   onAccountChange(event) {
-    console.log("account change: " + event.target.value);
     this.setState({
       accountNumber:event.target.value
     })
   }
 
   onCommentsChange(event) {
-    console.log("on comment change: " + event.target.value);
     this.setState({
       comments: event.target.value
     })
   }
 
   render() {
-    var name = this.getParameterByName("name");
+    var name = getParameterByName("name");
     return (
       <div>
         <p>Bloomerang is {initialized ? "" : "not"} all set up!</p>

@@ -37114,7 +37114,7 @@ module.exports = function() {
 
 
 
-var initialized = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* run */])();
+var initialized = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["b" /* run */])();
 class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   constructor(props) {
@@ -37146,16 +37146,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   /**********************
    * PROCESSING METHODS *
    **********************/
-
-  getParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-  }
 
   errorCallback() {}
 
@@ -37202,7 +37192,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 
   onLastNameChange(event) {
-    console.log("name change: " + event.target.value);
     this.setState({
       lastName: event.target.value
     });
@@ -37221,21 +37210,18 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 
   onCountryChange(event) {
-    console.log("country change: " + event.target.value);
     this.setState({
       country: event.target.value
     });
   }
 
   onAddressChange(event) {
-    console.log("address change: " + event.target.value);
     this.setState({
       address: event.target.value
     });
   }
 
   onCityChange(event) {
-    console.log("city change: " + event.target.value);
     this.setState({
       city: event.target.value
     });
@@ -37249,7 +37235,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 
   onZipChange(event) {
-    console.log("zip change: " + event.target.value);
     this.setState({
       zip: event.target.value
     });
@@ -37263,28 +37248,25 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 
   onRoutingChange(event) {
-    console.log("routing change: " + event.target.value);
     this.setState({
       routingNumber: event.target.value
     });
   }
 
   onAccountChange(event) {
-    console.log("account change: " + event.target.value);
     this.setState({
       accountNumber: event.target.value
     });
   }
 
   onCommentsChange(event) {
-    console.log("on comment change: " + event.target.value);
     this.setState({
       comments: event.target.value
     });
   }
 
   render() {
-    var name = this.getParameterByName("name");
+    var name = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* getParameterByName */])("name");
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
@@ -37564,7 +37546,8 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return run; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return run; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getParameterByName; });
 //This script sets up Bloomerang
 var run = () => {
 
@@ -37629,6 +37612,16 @@ var run = () => {
   }
 };
 
+var getParameterByName = (name, url) => {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+};
+
 
 
 /***/ }),
@@ -37642,6 +37635,10 @@ var run = () => {
 
 
 function collectPayment(state, onError) {
+
+  console.log("---- Collecting Payment For State ----");
+  console.log(state);
+  console.log("--------------------------------------");
 
   if (validateResponses(state)) {
     console.log("Collecting donation...");
@@ -37687,15 +37684,17 @@ function collectPayment(state, onError) {
 }
 
 function configureBloomerang(state) {
-  let Bloomerang = window.Bloomerang;
+  console.log("Configuring bloomerang donation");
 
   Bloomerang.Account.individual().firstName(state.firstName).lastName(state.lastName).homePhone(state.phone).homeEmail(state.email).homeAddress(state.address, state.city, state.state, state.zip, state.country);
 
   if (state.recurring) {
     /* DONATION IS RECURRING */
+    console.log("Donation is reucurring");
     Bloomerang.RecurringDonation.amount(state.amount).frequency(state.frequency).note(state.comments).startDate(__WEBPACK_IMPORTED_MODULE_0_moment___default()(state.date).format("YYYY-MM-DD"));
   } else {
     /* DONATION IS SINGLE TIME */
+    console.log("Donation is non recurring");
     Bloomerang.Donation.amount(state.amount).note(state.comments);
   }
 }

@@ -2,6 +2,10 @@ import moment from "moment";
 
 function collectPayment(state,onError) {
 
+  console.log("---- Collecting Payment For State ----");
+  console.log(state);
+  console.log("--------------------------------------");
+
   if (validateResponses(state)) {
     console.log("Collecting donation...");
 
@@ -47,7 +51,7 @@ function collectPayment(state,onError) {
 }
 
 function configureBloomerang(state) {
-  let Bloomerang = window.Bloomerang;
+  console.log("Configuring bloomerang donation");
 
   Bloomerang.Account.individual()
     .firstName(state.firstName)
@@ -64,6 +68,7 @@ function configureBloomerang(state) {
 
   if (state.recurring) {
     /* DONATION IS RECURRING */
+    console.log("Donation is reucurring");
     Bloomerang.RecurringDonation
       .amount(state.amount)
       .frequency(state.frequency)
@@ -71,6 +76,7 @@ function configureBloomerang(state) {
       .startDate(moment(state.date).format("YYYY-MM-DD"));
   } else {
     /* DONATION IS SINGLE TIME */
+    console.log("Donation is non recurring");
     Bloomerang.Donation
       .amount(state.amount)
       .note(state.comments)
