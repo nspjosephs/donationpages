@@ -37654,6 +37654,10 @@ function collectPayment(state, onError) {
 
     Bloomerang.Widget.Donation.OnSubmit = () => configureBloomerang(state);
     Bloomerang.Api.OnSubmit = Bloomerang.Widget.Donation.OnSubmit;
+    Bloomerang.Widget.Donation.OnSuccess = () => console.log("Donation was successfull!");
+    Bloomerang.Api.OnSuccess = Bloomerang.Widget.Donation.OnSuccess;
+    Bloomerang.Widget.Donation.OnError = error => console.log(error);
+    Bloomerang.Api.OnError = Bloomerang.Widget.Donation.OnError;
 
     SpreedlyExpress.setDisplayOptions({
       "amount": accounting.formatMoney(state.amount),
