@@ -38594,11 +38594,17 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               null,
               'Comments and Prayer Requests'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { onChange: this.onCommentsChange.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { onChange: this.onCommentsChange.bind(this) })
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'form-section' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_google_recaptcha___default.a, {
               ref: 'recaptcha',
               sitekey: '6LdZNTYUAAAAAM6j_lU3lRi9Dco561ldipwsOTtI',
-              onChange: value => console.log("Captcha has changed to " + value)
+              onChange: value => {
+                console.log("Captcha has changed to " + value);Bloomerang.captchaResponse(value);
+              }
             })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

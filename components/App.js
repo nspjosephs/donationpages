@@ -275,10 +275,13 @@ export default class App extends React.Component {
                   <div className="form-section">
                     <h2>Comments and Prayer Requests</h2>
                     <textarea onChange={this.onCommentsChange.bind(this)}></textarea>
+                  </div>
+
+                  <div className="form-section">
                     <ReCAPTCHA
                       ref="recaptcha"
                       sitekey="6LdZNTYUAAAAAM6j_lU3lRi9Dco561ldipwsOTtI"
-                      onChange={(value) => console.log("Captcha has changed to " + value)}
+                      onChange={(value) => {console.log("Captcha has changed to " + value); Bloomerang.captchaResponse(value)}}
                     />
                   </div>
 
