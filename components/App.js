@@ -1,6 +1,7 @@
 import React from 'react';
 import {run,getParameterByName} from '../main/bloom';
 import submit from '../main/process';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 var initialized = run();
 export default class App extends React.Component {
@@ -274,6 +275,11 @@ export default class App extends React.Component {
                   <div className="form-section">
                     <h2>Comments and Prayer Requests</h2>
                     <textarea onChange={this.onCommentsChange.bind(this)}></textarea>
+                    <ReCAPTCHA
+                      ref="recaptcha"
+                      sitekey="6LdZNTYUAAAAAM6j_lU3lRi9Dco561ldipwsOTtI"
+                      onChange={(value) => console.log("Captcha has changed to " + value)}
+                    />
                   </div>
 
                   <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
