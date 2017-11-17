@@ -18,6 +18,11 @@ html,body {
   text-decoration:underline;
 }
 
+.captcha-div, .captcha-div div {
+  width:auto;
+  margin:auto;
+}
+
 .form {
   width:100%;
   padding:20px;
