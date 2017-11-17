@@ -70,6 +70,8 @@ var run = () => {
 
 
     return true;
+  } else {
+    return false;
   }
 
 }

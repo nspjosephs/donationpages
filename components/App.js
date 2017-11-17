@@ -308,7 +308,7 @@ export default class App extends React.Component {
       </div>)
     else
       return (<div>
-        <h1 className="donation-header">It looks like you{"'"}ve got a bad url there! We{"'"}re sorry about that!</h1>
+        <h1 className="donation-header">It looks like you{"'"}ve got a bad url there! We{"'"}re sorry about that! Find a better one <a href="http://www.nationalschoolproject.com/give">here</a>!</h1>
       </div>)
   }
 }

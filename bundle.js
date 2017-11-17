@@ -38659,7 +38659,13 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         "'",
         've got a bad url there! We',
         "'",
-        're sorry about that!'
+        're sorry about that! Find a better one ',
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { href: 'http://www.nationalschoolproject.com/give' },
+          'here'
+        ),
+        '!'
       )
     );
   }
@@ -38745,6 +38751,8 @@ var run = () => {
     Bloomerang.gRecaptchaLoaded = true;
 
     return true;
+  } else {
+    return false;
   }
 };
 
