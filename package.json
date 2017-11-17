@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "publish": "npm run build && git add . && git commit -m'Automated Commit' && git push origin master"
+    "publish": "npm run build && git add . && git commit -m'Automated' && git push"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
+    "express": "^4.16.2",
     "moment": "^2.19.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",

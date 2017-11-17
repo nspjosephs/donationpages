@@ -37716,7 +37716,7 @@ function submit(state) {
   }
   if (!window.Bloomerang.formSubmitted) {
     window.Bloomerang.formSubmitted = true;
-    collectPayment(state);
+    this.collectPayment(SpreedlyExpress, state);
   } else {
     console.log("Woah there cowboy, your form is being processed");
   }

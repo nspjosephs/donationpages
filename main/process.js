@@ -95,7 +95,7 @@ export default function submit(state) {
   }
   if (!window.Bloomerang.formSubmitted) {
     window.Bloomerang.formSubmitted = true;
-    this.collectPayment(SpreedlyExpress,state);
+    collectPayment(state);
   } else {
     console.log("Woah there cowboy, your form is being processed");
   }
