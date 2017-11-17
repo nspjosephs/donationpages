@@ -36,7 +36,12 @@ function collectPayment(state,onError) {
           Bloomerang.Api.donate();
         }
 
+      });
+
+      SpreedlyExpress.onViewClose(() => {
+        Bloomerang.formSubmitted = false;
       })
+
       SpreedlyExpress.openView();
     } else {
       if (state.recurring) {
