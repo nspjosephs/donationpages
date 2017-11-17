@@ -37269,16 +37269,9 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   render() {
     var name = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* getParameterByName */])("name");
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    if (initialized) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'p',
-        null,
-        'Bloomerang is ',
-        initialized ? "" : "not",
-        ' all set up!'
-      ),
       name == "" || name == null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'h1',
         { className: 'donation-header' },
@@ -37536,6 +37529,20 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
+      )
+    );else return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'h1',
+        { className: 'donation-header' },
+        'Were sorry, there was a problem loading the page! You can use ',
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { href: 'https://crm.bloomerang.co/HostedDonation?ApiKey=pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56&WidgetId=12827659' },
+          'this page'
+        ),
+        ' to show your support!'
       )
     );
   }
