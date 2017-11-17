@@ -37415,17 +37415,17 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'option',
                 null,
-                'Canada'
+                'CA'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'option',
                 { defaultValue: true },
-                'United States'
+                'US'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'option',
                 null,
-                'United Kingdom'
+                'UK'
               )
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -37451,12 +37451,12 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'option',
                 null,
-                'California'
+                'CA'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'option',
                 null,
-                'Nevada'
+                'NV'
               )
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -37652,12 +37652,15 @@ function collectPayment(state, onError) {
   if (validateResponses(state)) {
     console.log("Collecting donation...");
 
-    configureBloomerang(state);
+    Bloomerang.Widget.Donation.OnSubmit = () => configureBloomerang(state);
+    Bloomerang.Api.OnSubmit = Bloomerang.Widget.Donation.OnSubmit;
 
     SpreedlyExpress.setDisplayOptions({
       "amount": accounting.formatMoney(state.amount),
       "full_name": "Joseph Stewart",
-      "submit_label": "Donate"
+      "submit_label": "Donate",
+      "name_label": "Your Name",
+      "sidebar_bottom_description": "Support Hannah McLaughlin"
     });
 
     SpreedlyExpress.setPaymentMethodParams({

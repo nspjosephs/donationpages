@@ -9,12 +9,15 @@ function collectPayment(state,onError) {
   if (validateResponses(state)) {
     console.log("Collecting donation...");
 
-    configureBloomerang(state);
+    Bloomerang.Widget.Donation.OnSubmit = () => configureBloomerang(state);
+    Bloomerang.Api.OnSubmit = Bloomerang.Widget.Donation.OnSubmit;
 
     SpreedlyExpress.setDisplayOptions({
       "amount":accounting.formatMoney(state.amount),
       "full_name":"Joseph Stewart",
-      "submit_label":"Donate"
+      "submit_label":"Donate",
+      "name_label":"Your Name",
+      "sidebar_bottom_description":"Support Hannah McLaughlin"
     })
 
     SpreedlyExpress.setPaymentMethodParams({

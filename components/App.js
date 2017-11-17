@@ -222,9 +222,9 @@ export default class App extends React.Component {
                     <h2>Billing Address</h2>
                     <label htmlFor="country">Country</label>
                     <select onChange={this.onCountryChange.bind(this)}>
-                      <option>Canada</option>
-                      <option defaultValue>United States</option>
-                      <option>United Kingdom</option>
+                      <option>CA</option>
+                      <option defaultValue>US</option>
+                      <option>UK</option>
                     </select>
 
                     <label htmlFor="address">Address</label>
@@ -235,8 +235,8 @@ export default class App extends React.Component {
 
                     <label htmlFor="state">State</label>
                     <select id="state" onChange={this.onStateChange.bind(this)}>
-                      <option>California</option>
-                      <option>Nevada</option>
+                      <option>CA</option>
+                      <option>NV</option>
                     </select>
 
                     <label htmlFor="zip">Zip Code</label>
