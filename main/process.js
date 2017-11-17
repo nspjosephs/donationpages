@@ -78,7 +78,7 @@ function configureBloomerang(state) {
 }
 
 function validateResponses(state) {
-  amount = parseInt(state.amount);
+  let amount = parseInt(state.amount);
 
   if (amount <= 0) {
     onError("INVALID_AMOUNT");
