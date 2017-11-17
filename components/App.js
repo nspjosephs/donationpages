@@ -4,7 +4,7 @@ import submit from '../main/process';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 var initialized = run();
-const pageMax = 1;
+const pageMax = 3;
 export default class App extends React.Component {
 
   constructor(props) {
@@ -210,7 +210,7 @@ export default class App extends React.Component {
                   <br/>
                   <button id="next" onClick={this.nextPage.bind(this)}>Next</button>
                 </div>
-              :
+              : this.state.page == 1 ?
                 <div>
                   <div className="form-section">
                     <h2>Contact Information</h2>
@@ -227,6 +227,12 @@ export default class App extends React.Component {
                     <input defaultValue={this.state.phone} type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
                   </div>
 
+                  <button onClick={this.nextPage.bind(this)}>Next</button>
+                  <button onClick={this.previousPage.bind(this)}>Back</button>
+
+                </div>
+              : this.state.page == 2 ?
+                <div>
                   <div className="form-section">
                     <h2>Billing Address</h2>
                     <label htmlFor="country">Country</label>
@@ -250,7 +256,13 @@ export default class App extends React.Component {
 
                     <label htmlFor="zip">Zip Code</label>
                     <input defaultValue={this.state.zip} type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
+
+                    <button onClick={this.nextPage.bind(this)}>Next</button>
+                    <button onClick={this.previousPage.bind(this)}>Back</button>
                   </div>
+                </div>
+              :
+                <div>
 
                   <div className="form-section">
                     <h2>Payment Method</h2>

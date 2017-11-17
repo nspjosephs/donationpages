@@ -38188,7 +38188,7 @@ module.exports = function() {
 
 
 var initialized = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["b" /* run */])();
-const pageMax = 1;
+const pageMax = 3;
 class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   constructor(props) {
@@ -38443,7 +38443,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             { id: 'next', onClick: this.nextPage.bind(this) },
             'Next'
           )
-        ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        ) : this.state.page == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -38479,6 +38479,19 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { defaultValue: this.state.phone, type: 'text', id: 'phone', placeholder: 'e.g. (123) 456-7890', onChange: this.onPhoneChange.bind(this) })
           ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { onClick: this.nextPage.bind(this) },
+            'Next'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { onClick: this.previousPage.bind(this) },
+            'Back'
+          )
+        ) : this.state.page == 2 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'form-section' },
@@ -38547,8 +38560,21 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               { htmlFor: 'zip' },
               'Zip Code'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { defaultValue: this.state.zip, type: 'number', id: 'zip', placeholder: 'e.g. 90210', onChange: this.onZipChange.bind(this) })
-          ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { defaultValue: this.state.zip, type: 'number', id: 'zip', placeholder: 'e.g. 90210', onChange: this.onZipChange.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'button',
+              { onClick: this.nextPage.bind(this) },
+              'Next'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'button',
+              { onClick: this.previousPage.bind(this) },
+              'Back'
+            )
+          )
+        ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'form-section' },
