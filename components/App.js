@@ -28,8 +28,8 @@ export default class App extends React.Component {
       type: "credit",
       comments: "",
       increaseImpact:false,
-      routingNumber: 0,
-      accountNumber: 0
+      routingNumber: "",
+      accountNumber: ""
     }
   }
 
@@ -215,7 +215,7 @@ export default class App extends React.Component {
                   <div className="form-section">
                     <h2>Contact Information</h2>
                     <label htmlFor="first-name">First Name</label>
-                    <input type="text" id="first-name" placeholder="e.g. Simeon" onChange={this.onFirstNameChange.bind(this)}/>
+                    <input type="text" defaultValue={this.state.firstName} id="first-name" placeholder="e.g. Simeon" onChange={this.onFirstNameChange.bind(this)}/>
 
                     <label htmlFor="last-name">Last Name</label>
                     <input type="text" id="last-name" placeholder="e.g. Peter" onChange={this.onLastNameChange.bind(this)}/>

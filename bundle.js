@@ -38212,8 +38212,8 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       type: "credit",
       comments: "",
       increaseImpact: false,
-      routingNumber: 0,
-      accountNumber: 0
+      routingNumber: "",
+      accountNumber: ""
     };
   }
 
@@ -38459,7 +38459,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               { htmlFor: 'first-name' },
               'First Name'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', id: 'first-name', placeholder: 'e.g. Simeon', onChange: this.onFirstNameChange.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', defaultValue: this.state.firstName, id: 'first-name', placeholder: 'e.g. Simeon', onChange: this.onFirstNameChange.bind(this) }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
               { htmlFor: 'last-name' },
