@@ -44,6 +44,7 @@ var run = () => {
           console.log("Spreedly Initilized...");
         });
         SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name':'National School Project' });
+        Bloomerang.SpreedlyScriptInitialized = true;
       });
       Bloomerang.SpreedlyScriptLoaded = true;
       console.log("SpreedlyExpress is loaded and initialized...");

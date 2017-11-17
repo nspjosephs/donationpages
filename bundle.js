@@ -37611,6 +37611,7 @@ var run = () => {
           console.log("Spreedly Initilized...");
         });
         SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name': 'National School Project' });
+        Bloomerang.SpreedlyScriptInitialized = true;
       });
       Bloomerang.SpreedlyScriptLoaded = true;
       console.log("SpreedlyExpress is loaded and initialized...");
@@ -37699,7 +37700,7 @@ function configureBloomerang(state) {
 }
 
 function validateResponses(state) {
-  state.amount = parseInt(state.amount);
+  amount = parseInt(state.amount);
 
   if (amount <= 0) {
     onError("INVALID_AMOUNT");
@@ -37709,6 +37710,14 @@ function validateResponses(state) {
 
 function submit(state) {
   console.log("calling submit");
+  if (!Bloomerang.SpreedlyScriptInitialized) {
+    console.log("SpreedlyExpress is not initialized, initializing now");
+    SpreedlyExpress.onInit(() => {
+      console.log("Spreedly Initilized...");
+    });
+    SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name': 'National School Project' });
+    Bloomerang.SpreedlyScriptInitialized = true;
+  }
   if (SpreedlyExpress.DEBUGGING) {
     console.log("SpreedlyExpress is debugging, returning false...");
     console.log(state);
