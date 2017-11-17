@@ -37147,7 +37147,9 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
    * PROCESSING METHODS *
    **********************/
 
-  errorCallback() {}
+  errorCallback(code) {
+    console.log("Error processing: " + code);
+  }
 
   /******************
    * EVENT HANDLERS *
@@ -37706,6 +37708,8 @@ function validateResponses(state) {
     onError("INVALID_AMOUNT");
     return false;
   }
+
+  return true;
 }
 
 function submit(state) {

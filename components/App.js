@@ -37,8 +37,8 @@ export default class App extends React.Component {
 
 
 
-  errorCallback() {
-
+  errorCallback(code) {
+    console.log("Error processing: " + code);
   }
 
   /******************

@@ -90,6 +90,8 @@ function validateResponses(state) {
     onError("INVALID_AMOUNT");
     return false;
   }
+
+  return true;
 }
 
 export default function submit(state) {
