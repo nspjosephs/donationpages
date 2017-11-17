@@ -37565,6 +37565,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return run; });
+//This script sets up Bloomerang
 var run = () => {
 
   if (Bloomerang == null) {

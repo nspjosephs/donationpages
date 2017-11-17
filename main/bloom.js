@@ -1,3 +1,4 @@
+//This script sets up Bloomerang
 var run = () => {
 
   if (Bloomerang == null) {
