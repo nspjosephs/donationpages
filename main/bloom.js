@@ -19,6 +19,11 @@ var run = () => {
 
   let donationId = getParameterByName("dID");
 
+  if (donationID == null || donationID == "") {
+    console.log("Donation ID is null, returning false");
+    return false;
+  }
+
   if (Bloomerang.useDonationId(donationId)) {
     console.log(getParameterByName("name") + "'s form being used...");
 
