@@ -576,7 +576,7 @@ var successHtml13206528 = '\u003cscript\u003ewindow.location.replace(\'http://na
                     html13206528 = '<p style="color: red">​Your browser does not support the minimum security requirements for keeping your Credit Card information safe when processing payments. Please upgrade ​your browser or download the latest version of' +
                     ' <a target=\'_blank\' href=\'https://www.google.com/chrome/browser/desktop/\'>Chrome</a> or <a target=\'_blank\' href=\'https://www.mozilla.org/en-US/firefox/new/\'>Firefox</a>.</p>';
                 }
-                    jQuery('#bloomerangForm13206528').after(html13206528);
+                    jQuery('#donation-page-content-wrapper').after(html13206528);
                      if (!Bloomerang.SpreedlyScriptLoaded) {
                                         Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js',
                                             function() { return SpreedlyExpress != undefined; },
@@ -1015,7 +1015,7 @@ var successHtml13206528 = '\u003cscript\u003ewindow.location.replace(\'http://na
                     var script = document.createElement('script');
                     script.type = 'text/javascript';
                     script.src = 'https://crm.bloomerang.co/Content/Scripts/Api/Bloomerang-v2.js';
-                    document.getElementById('donation-page-content-wrapper').appendChild(script);
+                    document.getElementsByTagName('head')[0].appendChild(script);
                     waitForBloomerangLoad(function() { Bloomerang.Util.requireJQueryValidation(function() { insertForm13206528(); })});
                 }
                 else {
