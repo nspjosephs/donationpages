@@ -570,7 +570,7 @@ var successHtml13206528 = '\u003cscript\u003ewindow.location.replace(\'http://na
                                 Bloomerang.useProcessor('116736', 'BluePay', '100183179437', false, '46CED60BAB24A54120C67A1BB10C95D3', true);
                             } else {
                                 html13206528 = '<p style="color: red">???Widget.Error.Multiple???</p>';
-                            }if (jQuery('#bloomerangForm13206528').length) {
+                            }if (jQuery('#donation-page-content-wrapper').length) {
 
                 if (window.ActiveXObject) { // they are using IE < 11, which doesn't support TLS 1.1
                     html13206528 = '<p style="color: red">​Your browser does not support the minimum security requirements for keeping your Credit Card information safe when processing payments. Please upgrade ​your browser or download the latest version of' +

@@ -38188,6 +38188,7 @@ module.exports = function() {
 
 
 var initialized = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["b" /* run */])();
+const pageMax = 1;
 class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   constructor(props) {
@@ -38229,9 +38230,19 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
    ******************/
 
   nextPage() {
-    this.setState({
-      page: 1
-    });
+    if (this.state.page < pageMax) {
+      this.setState({
+        page: this.state.page + 1
+      });
+    }
+  }
+
+  previousPage() {
+    if (this.state.page > 0) {
+      this.setState({
+        page: this.state.page - 1
+      });
+    }
   }
 
   onAmountChange(event) {
@@ -38418,7 +38429,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
                   'Yearly'
                 )
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'label',
                 { htmlFor: 'start-date' },
@@ -38608,9 +38618,18 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'button',
-            { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(this.state, this.errorCallback.bind(this)) },
-            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
+            'span',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'button',
+              { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(this.state, this.errorCallback.bind(this)) },
+              this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'button',
+              { onClick: this.previousPage.bind(this) },
+              'Back'
+            )
           )
         )
       )
@@ -38820,6 +38839,11 @@ function validateResponses(state) {
 
 function submit(state) {
   console.log("calling submit");
+  if (Bloomerang.isDebugging || SpreedlyExpress.DEBUGGING) {
+    console.log("SpreedlyExpress is debugging, returning false...");
+    console.log(state);
+    return false;
+  }
   if (!Bloomerang.SpreedlyScriptInitialized) {
     console.log("SpreedlyExpress is not initialized, initializing now");
     SpreedlyExpress.onInit(() => {
@@ -38827,11 +38851,6 @@ function submit(state) {
     });
     SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name': 'National School Project' });
     Bloomerang.SpreedlyScriptInitialized = true;
-  }
-  if (SpreedlyExpress.DEBUGGING) {
-    console.log("SpreedlyExpress is debugging, returning false...");
-    console.log(state);
-    return false;
   }
   if (!window.Bloomerang.formSubmitted) {
     window.Bloomerang.formSubmitted = true;

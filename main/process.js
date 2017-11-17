@@ -108,6 +108,11 @@ function validateResponses(state) {
 
 export default function submit(state) {
   console.log("calling submit");
+  if (Bloomerang.isDebugging || SpreedlyExpress.DEBUGGING) {
+      console.log("SpreedlyExpress is debugging, returning false...");
+      console.log(state);
+      return false;
+  }
   if (!Bloomerang.SpreedlyScriptInitialized) {
     console.log("SpreedlyExpress is not initialized, initializing now");
     SpreedlyExpress.onInit(() => {
@@ -115,11 +120,6 @@ export default function submit(state) {
     });
     SpreedlyExpress.init('OqOMv1ksjPtXEYHtCYsVXzEpCbR', { 'company_name':'National School Project' });
     Bloomerang.SpreedlyScriptInitialized = true;
-  }
-  if (SpreedlyExpress.DEBUGGING) {
-      console.log("SpreedlyExpress is debugging, returning false...");
-      console.log(state);
-      return false;
   }
   if (!window.Bloomerang.formSubmitted) {
     window.Bloomerang.formSubmitted = true;

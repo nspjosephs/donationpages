@@ -4,6 +4,7 @@ import submit from '../main/process';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 var initialized = run();
+const pageMax = 1;
 export default class App extends React.Component {
 
   constructor(props) {
@@ -36,8 +37,6 @@ export default class App extends React.Component {
    * PROCESSING METHODS *
    **********************/
 
-
-
   errorCallback(code) {
     console.log("Error processing: " + code);
   }
@@ -47,9 +46,19 @@ export default class App extends React.Component {
    ******************/
 
   nextPage() {
-    this.setState({
-      page:1
-    })
+    if (this.state.page < pageMax) {
+      this.setState({
+        page:this.state.page+1
+      })
+    }
+  }
+
+  previousPage() {
+    if (this.state.page > 0) {
+      this.setState({
+        page:this.state.page-1
+      })
+    }
   }
 
   onAmountChange(event) {
@@ -191,7 +200,6 @@ export default class App extends React.Component {
                             <option>Quarterly</option>
                             <option>Yearly</option>
                           </select>
-                          <br/>
                           <label htmlFor="start-date">Start Date</label>
                           <input type="date" id="datepicker" defaultValue="mm/dd/yyyy" onChange={this.onStartDateChange.bind(this)}/>
                         </div>
@@ -285,7 +293,10 @@ export default class App extends React.Component {
                     />
                   </div>
 
-                  <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
+                  <span>
+                    <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
+                    <button onClick={this.previousPage.bind(this)}>Back</button>
+                  </span>
                 </div>
             }
           </div>
