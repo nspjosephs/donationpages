@@ -38681,7 +38681,7 @@ var run = () => {
 
   let donationId = getParameterByName("dID");
 
-  if (donationID == null || donationID == "") {
+  if (donationId == undefined || donationId == null || donationId == "") {
     console.log("Donation ID is null, returning false");
     return false;
   }
