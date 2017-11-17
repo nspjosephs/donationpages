@@ -38198,7 +38198,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       page: 0,
       amount: "",
       recurring: false,
-      frequency: "Weekly",
+      frequency: "monthly",
       startDate: "yyyy-mm-dd",
       firstName: "",
       lastName: "",
@@ -38465,19 +38465,19 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               { htmlFor: 'last-name' },
               'Last Name'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', id: 'last-name', placeholder: 'e.g. Peter', onChange: this.onLastNameChange.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { defaultValue: this.state.lastName, type: 'text', id: 'last-name', placeholder: 'e.g. Peter', onChange: this.onLastNameChange.bind(this) }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
               { htmlFor: 'email' },
               'Email'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', id: 'email', placeholder: 'e.g. you@site.com', onChange: this.onEmailChange.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { defaultValue: this.state.email, type: 'text', id: 'email', placeholder: 'e.g. you@site.com', onChange: this.onEmailChange.bind(this) }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
               { htmlFor: 'phone' },
               'Phone'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', id: 'phone', placeholder: 'e.g. (123) 456-7890', onChange: this.onPhoneChange.bind(this) })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { defaultValue: this.state.phone, type: 'text', id: 'phone', placeholder: 'e.g. (123) 456-7890', onChange: this.onPhoneChange.bind(this) })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -38494,7 +38494,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'select',
-              { onChange: this.onCountryChange.bind(this) },
+              { defaultValue: this.state.country, onChange: this.onCountryChange.bind(this) },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'option',
                 null,
@@ -38516,13 +38516,13 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               { htmlFor: 'address' },
               'Address'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { placeholder: 'e.g. 777 Demascus Rd.', onChange: this.onAddressChange.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { defaultValue: this.state.address, placeholder: 'e.g. 777 Demascus Rd.', onChange: this.onAddressChange.bind(this) }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
               { htmlFor: 'city' },
               'City'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', id: 'city', placeholder: 'e.g. Los Angeles', onChange: this.onCityChange.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { defaultValue: this.state.city, type: 'text', id: 'city', placeholder: 'e.g. Los Angeles', onChange: this.onCityChange.bind(this) }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
               { htmlFor: 'state' },
@@ -38530,7 +38530,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'select',
-              { id: 'state', onChange: this.onStateChange.bind(this) },
+              { defaultValue: this.state.state, id: 'state', onChange: this.onStateChange.bind(this) },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'option',
                 null,
@@ -38547,7 +38547,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               { htmlFor: 'zip' },
               'Zip Code'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'number', id: 'zip', placeholder: 'e.g. 90210', onChange: this.onZipChange.bind(this) })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { defaultValue: this.state.zip, type: 'number', id: 'zip', placeholder: 'e.g. 90210', onChange: this.onZipChange.bind(this) })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -38560,19 +38560,19 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
               { className: 'section radio-container' },
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'radio', name: 'payment', id: 'credit', defaultChecked: true, onChange: this.onRadioChange.bind(this) }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'radio', name: 'payment', id: 'credit', defaultChecked: this.state.type == "credit", onChange: this.onRadioChange.bind(this) }),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'label',
                 { htmlFor: 'credit' },
                 'Credit'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'radio', name: 'payment', id: 'checking', onChange: this.onRadioChange.bind(this) }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'radio', name: 'payment', id: 'checking', defaultChecked: this.state.type == "checking", onChange: this.onRadioChange.bind(this) }),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'label',
                 { htmlFor: 'checking' },
                 'Checking'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'radio', name: 'payment', id: 'savings', onChange: this.onRadioChange.bind(this) }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'radio', name: 'payment', id: 'savings', defaultChecked: this.state.type == "savings", onChange: this.onRadioChange.bind(this) }),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'label',
                 { htmlFor: 'savings' },
@@ -38587,13 +38587,13 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
                 { htmlFor: 'routing' },
                 'Routing Number'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', id: 'routing', placeholder: 'e.g. 123456789', onChange: this.onRoutingChange.bind(this) }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { defaultValue: this.state.routingNumber, type: 'text', id: 'routing', placeholder: 'e.g. 123456789', onChange: this.onRoutingChange.bind(this) }),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'label',
                 { htmlFor: 'account' },
                 'Account Number'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', id: 'account', placeholder: 'e.g. 456789123456', onChange: this.onAccountChange.bind(this) })
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { defaultValue: this.state.accountNumber, type: 'text', id: 'account', placeholder: 'e.g. 456789123456', onChange: this.onAccountChange.bind(this) })
             ) : ""
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -38604,12 +38604,13 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               null,
               'Comments and Prayer Requests'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { onChange: this.onCommentsChange.bind(this) })
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { defaultValue: this.state.comments, onChange: this.onCommentsChange.bind(this) })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'form-section' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_google_recaptcha___default.a, {
+              className: 'captcha-div',
               ref: 'recaptcha',
               sitekey: '6LdZNTYUAAAAAM6j_lU3lRi9Dco561ldipwsOTtI',
               onChange: value => {

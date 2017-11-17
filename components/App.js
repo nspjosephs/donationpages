@@ -14,7 +14,7 @@ export default class App extends React.Component {
       page:0,
       amount:"",
       recurring:false,
-      frequency:"Weekly",
+      frequency:"monthly",
       startDate: "yyyy-mm-dd",
       firstName: "",
       lastName: "",
@@ -218,51 +218,51 @@ export default class App extends React.Component {
                     <input type="text" defaultValue={this.state.firstName} id="first-name" placeholder="e.g. Simeon" onChange={this.onFirstNameChange.bind(this)}/>
 
                     <label htmlFor="last-name">Last Name</label>
-                    <input type="text" id="last-name" placeholder="e.g. Peter" onChange={this.onLastNameChange.bind(this)}/>
+                    <input defaultValue={this.state.lastName} type="text" id="last-name" placeholder="e.g. Peter" onChange={this.onLastNameChange.bind(this)}/>
 
                     <label htmlFor="email">Email</label>
-                    <input type="text" id="email" placeholder="e.g. you@site.com" onChange={this.onEmailChange.bind(this)}/>
+                    <input defaultValue={this.state.email} type="text" id="email" placeholder="e.g. you@site.com" onChange={this.onEmailChange.bind(this)}/>
 
                     <label htmlFor="phone">Phone</label>
-                    <input type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
+                    <input defaultValue={this.state.phone} type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
                   </div>
 
                   <div className="form-section">
                     <h2>Billing Address</h2>
                     <label htmlFor="country">Country</label>
-                    <select onChange={this.onCountryChange.bind(this)}>
+                    <select defaultValue={this.state.country} onChange={this.onCountryChange.bind(this)}>
                       <option>CA</option>
                       <option defaultValue>US</option>
                       <option>UK</option>
                     </select>
 
                     <label htmlFor="address">Address</label>
-                    <textarea placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
+                    <textarea defaultValue={this.state.address} placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
 
                     <label htmlFor="city">City</label>
-                    <input type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
+                    <input defaultValue={this.state.city} type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
 
                     <label htmlFor="state">State</label>
-                    <select id="state" onChange={this.onStateChange.bind(this)}>
+                    <select defaultValue={this.state.state} id="state" onChange={this.onStateChange.bind(this)}>
                       <option>CA</option>
                       <option>NV</option>
                     </select>
 
                     <label htmlFor="zip">Zip Code</label>
-                    <input type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
+                    <input defaultValue={this.state.zip} type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
                   </div>
 
                   <div className="form-section">
                     <h2>Payment Method</h2>
 
                     <div className="section radio-container">
-                      <input type="radio" name="payment" id="credit" defaultChecked onChange={this.onRadioChange.bind(this)}/>
+                      <input type="radio" name="payment" id="credit" defaultChecked={this.state.type=="credit"} onChange={this.onRadioChange.bind(this)}/>
                       <label htmlFor="credit">Credit</label>
 
-                      <input type="radio" name="payment" id="checking" onChange={this.onRadioChange.bind(this)}/>
+                      <input type="radio" name="payment" id="checking" defaultChecked={this.state.type=="checking"} onChange={this.onRadioChange.bind(this)}/>
                       <label htmlFor="checking">Checking</label>
 
-                      <input type="radio" name="payment" id="savings" onChange={this.onRadioChange.bind(this)}/>
+                      <input type="radio" name="payment" id="savings" defaultChecked={this.state.type=="savings"} onChange={this.onRadioChange.bind(this)}/>
                       <label htmlFor="savings">Savings</label>
                     </div>
 
@@ -270,10 +270,10 @@ export default class App extends React.Component {
                       this.state.type !="credit" ?
                         <div id = "bank-info">
                           <label htmlFor="routing">Routing Number</label>
-                          <input type="text" id="routing" placeholder="e.g. 123456789" onChange={this.onRoutingChange.bind(this)}/>
+                          <input defaultValue={this.state.routingNumber} type="text" id="routing" placeholder="e.g. 123456789" onChange={this.onRoutingChange.bind(this)}/>
 
                           <label htmlFor="account">Account Number</label>
-                          <input type="text" id="account" placeholder="e.g. 456789123456" onChange={this.onAccountChange.bind(this)}/>
+                          <input defaultValue={this.state.accountNumber} type="text" id="account" placeholder="e.g. 456789123456" onChange={this.onAccountChange.bind(this)}/>
                         </div>
                       :
                         ""
@@ -282,11 +282,12 @@ export default class App extends React.Component {
 
                   <div className="form-section">
                     <h2>Comments and Prayer Requests</h2>
-                    <textarea onChange={this.onCommentsChange.bind(this)}></textarea>
+                    <textarea defaultValue={this.state.comments} onChange={this.onCommentsChange.bind(this)}></textarea>
                   </div>
 
                   <div className="form-section">
                     <ReCAPTCHA
+                      className="captcha-div"
                       ref="recaptcha"
                       sitekey="6LdZNTYUAAAAAM6j_lU3lRi9Dco561ldipwsOTtI"
                       onChange={(value) => {console.log("Captcha has changed to " + value); Bloomerang.captchaResponse(value)}}
