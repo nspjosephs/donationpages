@@ -12,7 +12,7 @@ function collectPayment(state,onError) {
     configureBloomerang(state);
 
     SpreedlyExpress.setDisplayOptions({
-      "ammount":accounting.formatMoney(state.amount),
+      "amount":accounting.formatMoney(state.amount),
       "full_name":"Joseph Stewart",
       "submit_label":"Donate"
     })
