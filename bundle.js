@@ -38633,19 +38633,33 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           )
         )
       )
+    );else if (Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* getParameterByName */])("dID") != null) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'h1',
+        { className: 'donation-header' },
+        'We',
+        "'",
+        're sorry, there was a problem loading the page! You can use ',
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { href: "https://crm.bloomerang.co/HostedDonation?ApiKey=pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56&WidgetId=" + Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* getParameterByName */])("dID") },
+          'this page'
+        ),
+        ' to show your support!'
+      )
     );else return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'h1',
         { className: 'donation-header' },
-        'Were sorry, there was a problem loading the page! You can use ',
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'a',
-          { href: "https://crm.bloomerang.co/HostedDonation?ApiKey=pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56&WidgetId=" + Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* getParameterByName */])(dID) },
-          'this page'
-        ),
-        ' to show your support!'
+        'It looks like you',
+        "'",
+        've got a bad url there! We',
+        "'",
+        're sorry about that!'
       )
     );
   }
