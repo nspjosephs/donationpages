@@ -17,8 +17,10 @@ var run = () => {
 
   Bloomerang.useKey('pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56');
 
-  if (Bloomerang.useDonationId("12827659")) {
-    console.log("Hannah's Donation being used...");
+  let donationId = getParameterByName("dID");
+
+  if (Bloomerang.useDonationId(donationId)) {
+    console.log(getParameterByName("name") + "'s form being used...");
 
     /* === SETTING PAYMENT PROCESSOR === */
     Bloomerang.useProcessor('116736', 'BluePay', '100183179437', false, '46CED60BAB24A54120C67A1BB10C95D3', true);

@@ -38642,7 +38642,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         'Were sorry, there was a problem loading the page! You can use ',
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'a',
-          { href: 'https://crm.bloomerang.co/HostedDonation?ApiKey=pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56&WidgetId=12827659' },
+          { href: "https://crm.bloomerang.co/HostedDonation?ApiKey=pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56&WidgetId=" + Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* getParameterByName */])(dID) },
           'this page'
         ),
         ' to show your support!'
@@ -38679,8 +38679,10 @@ var run = () => {
 
   Bloomerang.useKey('pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56');
 
-  if (Bloomerang.useDonationId("12827659")) {
-    console.log("Hannah's Donation being used...");
+  let donationId = getParameterByName("dID");
+
+  if (Bloomerang.useDonationId(donationId)) {
+    console.log(getParameterByName("name") + "'s form being used...");
 
     /* === SETTING PAYMENT PROCESSOR === */
     Bloomerang.useProcessor('116736', 'BluePay', '100183179437', false, '46CED60BAB24A54120C67A1BB10C95D3', true);

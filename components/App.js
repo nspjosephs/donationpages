@@ -304,7 +304,7 @@ export default class App extends React.Component {
       )
     else
       return (<div>
-        <h1 className="donation-header">Were sorry, there was a problem loading the page! You can use <a href="https://crm.bloomerang.co/HostedDonation?ApiKey=pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56&WidgetId=12827659">this page</a> to show your support!</h1>
+        <h1 className="donation-header">Were sorry, there was a problem loading the page! You can use <a href={"https://crm.bloomerang.co/HostedDonation?ApiKey=pub_eaf5f8aa-fc8f-11e3-a756-02a718d18e56&WidgetId=" + getParameterByName(dID)}>this page</a> to show your support!</h1>
       </div>)
   }
 }
