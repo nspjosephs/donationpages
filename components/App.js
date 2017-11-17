@@ -12,10 +12,10 @@ export default class App extends React.Component {
 
     this.state = {
       page:0,
-      amount:0,
+      amount:"",
       recurring:false,
       frequency:"Weekly",
-      startDate: "mm/dd/yyyy",
+      startDate: "yyyy-mm-dd",
       firstName: "",
       lastName: "",
       email: "",
@@ -185,7 +185,7 @@ export default class App extends React.Component {
                 <div className="form-section">
                   <h2>Donation</h2>
                   <label htmlFor="amount">Amount (USD)</label>
-                  <input type="number" id="amount" placeholder="e.g. 10.00" onChange={this.onAmountChange.bind(this)}/>
+                  <input type="number" id="amount" placeholder="e.g. 10.00" defaultValue={this.state.amount != null ? this.state.amount : null} onChange={this.onAmountChange.bind(this)}/>
                   <div className="section radio-container">
                     <input type="checkbox" id="recurring" onChange={this.onRecurringChange.bind(this)}/>
                     <label htmlFor="recurring">Make this a recurring donation</label>

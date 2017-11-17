@@ -38196,10 +38196,10 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
     this.state = {
       page: 0,
-      amount: 0,
+      amount: "",
       recurring: false,
       frequency: "Weekly",
-      startDate: "mm/dd/yyyy",
+      startDate: "yyyy-mm-dd",
       firstName: "",
       lastName: "",
       email: "",
@@ -38386,7 +38386,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             { htmlFor: 'amount' },
             'Amount (USD)'
           ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'number', id: 'amount', placeholder: 'e.g. 10.00', onChange: this.onAmountChange.bind(this) }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'number', id: 'amount', placeholder: 'e.g. 10.00', defaultValue: this.state.amount != null ? this.state.amount : null, onChange: this.onAmountChange.bind(this) }),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'section radio-container' },
