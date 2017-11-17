@@ -38390,7 +38390,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'section radio-container' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', id: 'recurring', onChange: this.onRecurringChange.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', id: 'recurring', defaultChecked: this.state.recurring, onChange: this.onRecurringChange.bind(this) }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
               { htmlFor: 'recurring' },
@@ -38407,25 +38407,25 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'select',
-                { className: 'donation-select', id: 'frequency', onChange: this.onFrequencyChange.bind(this) },
+                { defaultValue: this.state.frequency, className: 'donation-select', id: 'frequency', onChange: this.onFrequencyChange.bind(this) },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'option',
-                  null,
+                  { value: 'weekly' },
                   'Weekly'
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'option',
-                  { defaultValue: true },
+                  { value: 'monthly' },
                   'Monthly'
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'option',
-                  null,
+                  { value: 'quarterly' },
                   'Quarterly'
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'option',
-                  null,
+                  { value: 'yearly' },
                   'Yearly'
                 )
               ),
@@ -38434,7 +38434,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
                 { htmlFor: 'start-date' },
                 'Start Date'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'date', id: 'datepicker', defaultValue: 'mm/dd/yyyy', onChange: this.onStartDateChange.bind(this) })
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'date', id: 'datepicker', defaultValue: this.state.startDate, onChange: this.onStartDateChange.bind(this) })
             ) : ""
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),

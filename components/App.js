@@ -187,21 +187,21 @@ export default class App extends React.Component {
                   <label htmlFor="amount">Amount (USD)</label>
                   <input type="number" id="amount" placeholder="e.g. 10.00" defaultValue={this.state.amount != null ? this.state.amount : null} onChange={this.onAmountChange.bind(this)}/>
                   <div className="section radio-container">
-                    <input type="checkbox" id="recurring" onChange={this.onRecurringChange.bind(this)}/>
+                    <input type="checkbox" id="recurring" defaultChecked={this.state.recurring} onChange={this.onRecurringChange.bind(this)}/>
                     <label htmlFor="recurring">Make this a recurring donation</label>
                     <br/>
 
                     {this.state.recurring ?
                         <div id="recurring-div">
                           <label htmlFor="frequency">Frequency</label>
-                          <select className="donation-select" id="frequency" onChange={this.onFrequencyChange.bind(this)}>
-                            <option>Weekly</option>
-                            <option defaultValue>Monthly</option>
-                            <option>Quarterly</option>
-                            <option>Yearly</option>
+                          <select defaultValue={this.state.frequency} className="donation-select" id="frequency" onChange={this.onFrequencyChange.bind(this)}>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                            <option value="yearly">Yearly</option>
                           </select>
                           <label htmlFor="start-date">Start Date</label>
-                          <input type="date" id="datepicker" defaultValue="mm/dd/yyyy" onChange={this.onStartDateChange.bind(this)}/>
+                          <input type="date" id="datepicker" defaultValue={this.state.startDate} onChange={this.onStartDateChange.bind(this)}/>
                         </div>
                       :
                         ""
