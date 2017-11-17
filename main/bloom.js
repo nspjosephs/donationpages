@@ -58,6 +58,9 @@ var run = () => {
     /* === SETTING FORM CONTROL VARIABLE TO PREVENT ACCIDENTAL MULTIPLE SUBMISSIONS === */
     Bloomerang.formSubmitted = false;
 
+    /* === TELL BLOOMERANG WE'RE USING RECAPTCHA === */
+    Bloomerang.gRecaptchaLoaded = true;
+
 
     return true;
   }

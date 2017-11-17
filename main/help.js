@@ -1015,7 +1015,7 @@ var successHtml13206528 = '\u003cscript\u003ewindow.location.replace(\'http://na
                     var script = document.createElement('script');
                     script.type = 'text/javascript';
                     script.src = 'https://crm.bloomerang.co/Content/Scripts/Api/Bloomerang-v2.js';
-                    document.getElementsByTagName('head')[0].appendChild(script);
+                    document.getElementById('donation-page-content-wrapper').appendChild(script);
                     waitForBloomerangLoad(function() { Bloomerang.Util.requireJQueryValidation(function() { insertForm13206528(); })});
                 }
                 else {
