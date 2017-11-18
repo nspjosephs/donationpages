@@ -6235,6 +6235,10 @@ module.exports = getActiveElement;
 //This script sets up Bloomerang
 var run = () => {
 
+  console.log("---- Bloomerang Object Pre Run ----");
+  console.log(Bloomerang);
+  console.log("-----------------------------------");
+
   if (Bloomerang == null || Bloomerang == undefined || Bloomerang == {}) {
     console.log("Bloomerang is NULL, setting timeout then trying again...");
     setTimeout(run, 1000);
@@ -6304,6 +6308,9 @@ var run = () => {
     /* === TELL BLOOMERANG WE'RE USING RECAPTCHA === */
     Bloomerang.gRecaptchaLoaded = true;
 
+    console.log("---- Bloomerang Object Pre Run ----");
+    console.log(Bloomerang);
+    console.log("-----------------------------------");
     return true;
   } else {
     return false;
