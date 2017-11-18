@@ -72,6 +72,19 @@ html,body {
   text-transform:none;
 }
 
+.form .required::before {
+  content: "*";
+  color:#DB4C40;
+}
+
+.form .required-error {
+  color:#DB4C40;
+}
+
+.form .required-hidden {
+  display:none;
+}
+
 /* clense our input pallete */
 .form input[type="number"],
 .form input[type="date"],

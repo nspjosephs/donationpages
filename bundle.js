@@ -38330,7 +38330,16 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       increaseImpact: false,
       routingNumber: "",
       accountNumber: "",
-      captcha: false
+      captcha: false,
+
+      invalidAmount: false,
+      invalidDate: false,
+      invalidFirstName: false,
+      invalidLastName: false,
+      invalidEmail: false,
+      invalidPhone: false,
+      invalidAddress: false,
+      invalidCaptcha: false
     };
   }
 

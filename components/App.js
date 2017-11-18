@@ -31,6 +31,15 @@ export default class App extends React.Component {
       routingNumber: "",
       accountNumber: "",
       captcha: false,
+
+      invalidAmount:false,
+      invalidDate:false,
+      invalidFirstName:false,
+      invalidLastName:false,
+      invalidEmail:false,
+      invalidPhone:false,
+      invalidAddress:false,
+      invalidCaptcha:false
     }
   }
 
