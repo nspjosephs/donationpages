@@ -38792,9 +38792,11 @@ var run = () => {
     /* === SETTING TRANSACTION FEE CONSTANTS === */
     Bloomerang.transactionFee = 0.2;
     Bloomerang.transactionFeeRate = 0.025;
+    console.log("Bloomerang transaction fee constants set");
 
     /* === SETTING FORM CONTROL VARIABLE TO PREVENT ACCIDENTAL MULTIPLE SUBMISSIONS === */
     Bloomerang.formSubmitted = false;
+    console.log("Bloomerang form submitted set");
 
     /* === TELL BLOOMERANG WE'RE USING RECAPTCHA === */
     Bloomerang.gRecaptchaLoaded = true;
