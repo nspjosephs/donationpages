@@ -1,4 +1,5 @@
 import moment from "moment";
+import {calcImpact} from './bloom';
 
 function collectPayment(state,onError) {
 
@@ -140,6 +141,5 @@ function submit(state, onError) {
 }
 
 export {
-  submit,
-  calcImpact
+  submit
 }
