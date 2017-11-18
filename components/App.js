@@ -3,6 +3,9 @@ import {run,getParameterByName,calcImpact} from '../main/bloom';
 import {submit} from '../main/process';
 import ReCAPTCHA from 'react-google-recaptcha';
 
+import CountryCodes from './CountryCodes';
+import StateCodes from './StateCodes';
+
 var initialized = run();
 const pageMax = 3;
 export default class App extends React.Component {
@@ -240,7 +243,7 @@ export default class App extends React.Component {
                     <label className={`required ${this.state.invalidLastName ? "required-error" : ""}`} htmlFor="last-name">Last Name</label>
                     <input value={this.state.lastName} type="text" id="last-name" placeholder="e.g. Peter" onChange={this.onLastNameChange.bind(this)}/>
 
-                    <label className={`required ${this.state.invalidEmail ? "required-error" : ""}`} htmlFor="email">{!this.state.invalidEmail ? <span>Email</span> : <span>Please Enter a Valid Email</span>}</label>
+                    <label className={`required ${this.state.invalidEmail ? "required-error" : ""}`} htmlFor="email">Email</label>
                     <input value={this.state.email} type="text" id="email" placeholder="e.g. you@site.com" onChange={this.onEmailChange.bind(this)}/>
 
                     <label className={`required ${this.state.invalidPhone ? "required-error" : ""}`} htmlFor="phone">Phone</label>
@@ -256,11 +259,7 @@ export default class App extends React.Component {
                   <div className="form-section">
                     <h2>Billing Address</h2>
                     <label htmlFor="country">Country</label>
-                    <select value={this.state.country} onChange={this.onCountryChange.bind(this)}>
-                      <option>CA</option>
-                      <option value>US</option>
-                      <option>UK</option>
-                    </select>
+                    <CountryCodes id="country" value={this.state.country} onChange={this.onCountryChange.bind(this)}/>
 
                     <label className={`required ${this.state.invalidAddress ? "required-error" : ""}`} htmlFor="address">Address</label>
                     <textarea value={this.state.address} placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
@@ -269,10 +268,7 @@ export default class App extends React.Component {
                     <input value={this.state.city} type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
 
                     <label htmlFor="state">State</label>
-                    <select value={this.state.state} id="state" onChange={this.onStateChange.bind(this)}>
-                      <option>CA</option>
-                      <option>NV</option>
-                    </select>
+                    <StateCodes value={this.state.state} id="state" onChange={this.onStateChange.bind(this)}/>
 
                     <label htmlFor="zip">Zip Code</label>
                     <input value={this.state.zip} type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
