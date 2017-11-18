@@ -38358,10 +38358,16 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 
   calcImpact() {
-    let amount = this.state.amount;
+    console.log("---- Calculating True Impact ----");
+    let amount = parseInt(this.state.amount);
+    console.log("Amount: " + amount);
     let feeRate = Bloomerang.transactionFeeRate;
+    console.log("Fee rate: " + feeRate);
     let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
+    console.log("New total: " + newTotal);
     let impactAmount = Number((newTotal - amount).toFixed(2));
+    console.log("Impact amount: " + impactAmount);
+    console.log("---------------------------------");
     return accounting.formatMoney(impactAmount);
   }
 

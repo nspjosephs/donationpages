@@ -47,6 +47,14 @@ html,body {
   font-size:24pt;
 }
 
+.form p {
+  font-family:"Roboto";
+  font-size:12pt;
+  text-transform:none;
+  width:75%;
+  margin:auto;
+}
+
 .donation-header {
   color:white;
   font-size: 36pt;
@@ -159,6 +167,10 @@ html,body {
 .form input[type="checkbox"]:checked + label,
 .form input[type="radio"]:checked + label{
   border-color:#EEA00F;
+}
+
+.form input[type="checkbox"] + label {
+  text-decoration:underline;
 }
 
 .form input[type="checkbox"]:checked + label {
