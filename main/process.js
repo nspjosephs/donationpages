@@ -120,7 +120,7 @@ function validateResponses(state, onError) {
   let amount = parseInt(state.amount);
   let errors = {};
 
-  if (amount <= 0) {
+  if (amount <= 0 || Number.isNaN(amount)) {
     errors.invalidAmount = true;
   }
 

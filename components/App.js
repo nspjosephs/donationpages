@@ -262,7 +262,7 @@ export default class App extends React.Component {
                       <option>UK</option>
                     </select>
 
-                    <label className={`required ${this.state.invalidAmount ? "required-error" : ""}`} htmlFor="address">Address</label>
+                    <label className={`required ${this.state.invalidAddress ? "required-error" : ""}`} htmlFor="address">Address</label>
                     <textarea value={this.state.address} placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
 
                     <label htmlFor="city">City</label>

@@ -38672,7 +38672,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { className: `required ${this.state.invalidAmount ? "required-error" : ""}`, htmlFor: 'address' },
+              { className: `required ${this.state.invalidAddress ? "required-error" : ""}`, htmlFor: 'address' },
               'Address'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { value: this.state.address, placeholder: 'e.g. 777 Demascus Rd.', onChange: this.onAddressChange.bind(this) }),
@@ -38978,7 +38978,7 @@ function validateResponses(state, onError) {
   let amount = parseInt(state.amount);
   let errors = {};
 
-  if (amount <= 0) {
+  if (amount <= 0 || Number.isNaN(amount)) {
     errors.invalidAmount = true;
   }
 
