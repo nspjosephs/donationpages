@@ -268,7 +268,7 @@ export default class App extends React.Component {
                     <input value={this.state.city} type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
 
                     <label htmlFor="state">State</label>
-                    <StateCodes value={this.state.state} id="state" onChange={this.onStateChange.bind(this)}/>
+                    <StateCodes country={this.state.country} value={this.state.state} id="state" onChange={this.onStateChange.bind(this)}/>
 
                     <label htmlFor="zip">Zip Code</label>
                     <input value={this.state.zip} type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
