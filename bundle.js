@@ -6235,10 +6235,6 @@ module.exports = getActiveElement;
 //This script sets up Bloomerang
 var run = () => {
 
-  console.log("---- Bloomerang Object Pre Run ----");
-  console.log(Bloomerang);
-  console.log("-----------------------------------");
-
   if (Bloomerang == null || Bloomerang == undefined || Bloomerang == {}) {
     console.log("Bloomerang is NULL, setting timeout then trying again...");
     setTimeout(run, 1000);
@@ -6308,9 +6304,6 @@ var run = () => {
     /* === TELL BLOOMERANG WE'RE USING RECAPTCHA === */
     Bloomerang.gRecaptchaLoaded = true;
 
-    console.log("---- Bloomerang Object Pre Run ----");
-    console.log(Bloomerang);
-    console.log("-----------------------------------");
     return true;
   } else {
     return false;
@@ -6324,13 +6317,13 @@ function calcImpact(amount) {
     Bloomerang.transactionFeeRate = .025;
   }
   console.log("---- Calculating True Impact ----");
-  console.log("Amount: " + amount);
+  console.log("- Amount: " + amount);
   let feeRate = Bloomerang.transactionFeeRate;
-  console.log("Fee rate: " + feeRate);
+  console.log("- Fee rate: " + feeRate);
   let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
-  console.log("New total: " + newTotal);
+  console.log("- New total: " + newTotal);
   let impactAmount = Number((newTotal - amount).toFixed(2));
-  console.log("Impact amount: " + impactAmount);
+  console.log("- Impact amount: " + impactAmount);
   console.log("---------------------------------");
   return impactAmount;
 }
@@ -38336,7 +38329,8 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       comments: "",
       increaseImpact: false,
       routingNumber: "",
-      accountNumber: ""
+      accountNumber: "",
+      captcha: false
     };
   }
 
@@ -38344,8 +38338,10 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
    * PROCESSING METHODS *
    **********************/
 
-  errorCallback(code) {
-    console.log("Error processing: " + code);
+  errorCallback(errorObj) {
+    console.log("Form is invalid");
+    console.log(errorObj);
+    this.setState(errorObj);
   }
 
   /******************
@@ -38414,7 +38410,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   onPhoneChange(event) {
     this.setState({
-      phone: event.target.value.replace(/[^0-9]/g, '')
+      phone: event.target.value
     });
   }
 
@@ -38515,7 +38511,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { htmlFor: 'amount' },
+              { className: `required ${this.state.invalidAmount ? "required-error" : ""}`, htmlFor: 'amount' },
               'Amount (USD)'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'number', id: 'amount', placeholder: 'e.g. 10.00', value: this.state.amount != null ? this.state.amount : null, onChange: this.onAmountChange.bind(this) }),
@@ -38563,7 +38559,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                   'label',
-                  { htmlFor: 'start-date' },
+                  { className: `required ${this.state.invalidDate ? "required-error" : ""}`, htmlFor: 'start-date' },
                   'Start Date'
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'date', id: 'datepicker', value: this.state.startDate, onChange: this.onStartDateChange.bind(this) })
@@ -38589,25 +38585,33 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { htmlFor: 'first-name' },
+              { className: `required ${this.state.invalidFirstName ? "required-error" : ""}`, htmlFor: 'first-name' },
               'First Name'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', value: this.state.firstName, id: 'first-name', placeholder: 'e.g. Simeon', onChange: this.onFirstNameChange.bind(this) }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { htmlFor: 'last-name' },
+              { className: `required ${this.state.invalidLastName ? "required-error" : ""}`, htmlFor: 'last-name' },
               'Last Name'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.lastName, type: 'text', id: 'last-name', placeholder: 'e.g. Peter', onChange: this.onLastNameChange.bind(this) }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { htmlFor: 'email' },
-              'Email'
+              { className: `required ${this.state.invalidEmail ? "required-error" : ""}`, htmlFor: 'email' },
+              !this.state.invalidEmail ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'span',
+                null,
+                'Email'
+              ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'span',
+                null,
+                'Please Enter a Valid Email'
+              )
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.email, type: 'text', id: 'email', placeholder: 'e.g. you@site.com', onChange: this.onEmailChange.bind(this) }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { htmlFor: 'phone' },
+              { className: `required ${this.state.invalidAmount ? "required-error" : ""}`, htmlFor: 'phone' },
               'Phone'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.phone, type: 'text', id: 'phone', placeholder: 'e.g. (123) 456-7890', onChange: this.onPhoneChange.bind(this) })
@@ -38659,7 +38663,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { htmlFor: 'address' },
+              { className: `required ${this.state.invalidAmount ? "required-error" : ""}`, htmlFor: 'address' },
               'Address'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { value: this.state.address, placeholder: 'e.g. 777 Demascus Rd.', onChange: this.onAddressChange.bind(this) }),
@@ -38784,12 +38788,22 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'form-section' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'label',
+              { className: `required ${this.state.invalidAmount ? "required-error" : "required-hidden"}` },
+              'Please fill our ReCAPTCHA'
+            ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_google_recaptcha___default.a, {
+              id: 'captcha-conatiner',
               className: 'captcha-div',
               ref: 'recaptcha',
               sitekey: '6LdZNTYUAAAAAM6j_lU3lRi9Dco561ldipwsOTtI',
               onChange: value => {
-                console.log("Captcha has changed to " + value);Bloomerang.captchaResponse(value);
+                console.log("Captcha has changed to " + value);
+                Bloomerang.captchaResponse(value);
+                this.setState({
+                  captcha: value != null || value != undefined || value != ""
+                });
               }
             })
           ),
@@ -38801,7 +38815,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.errorCallback.bind(this)) },
-            this.state.type == "credit" ? "Enter Payment Info" : `Donate ${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount) + Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* calcImpact */])(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
+            this.state.type == "credit" ? "Enter Payment Info" : `Donate ${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount)) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
       )
@@ -38874,7 +38888,7 @@ function collectPayment(state, onError) {
     Bloomerang.Api.OnError = Bloomerang.Widget.Donation.OnError;
 
     SpreedlyExpress.setDisplayOptions({
-      "amount": state.increaseImpact ? accounting.formatMoney(parseInt(state.amount) + Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* calcImpact */])(parseInt(state.amount))) : accounting.formatMoney(state.amount),
+      "amount": state.increaseImpact && state.type.toLowerCase() == "credit" ? accounting.formatMoney(parseInt(state.amount) + Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* calcImpact */])(parseInt(state.amount))) : accounting.formatMoney(state.amount),
       "full_name": "Joseph Stewart",
       "submit_label": "Donate",
       "name_label": "Your Name",
@@ -38922,7 +38936,7 @@ function configureBloomerang(state) {
   console.log("Configuring bloomerang donation");
 
   let amount = parseInt(state.amount);
-  if (state.increaseImpact) {
+  if (state.increaseImpact && state.type.toLowerCase == "credit") {
     amount += Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* calcImpact */])(amount);
   }
 
@@ -38939,15 +38953,55 @@ function configureBloomerang(state) {
   }
 }
 
-function validateResponses(state) {
+function isValidDate(date) {
+  if (date == undefined || date == null || date == "") return false;
+
+  date = date.replace(/[^0-9]/g, '');
+
+  if (date.length != 8) return false;
+
+  if (Number.isNaN(parseInt(date))) return false;
+
+  return true;
+}
+
+function validateResponses(state, onError) {
   let amount = parseInt(state.amount);
   let errors = [];
 
   if (amount <= 0) {
-    errors.push("INVALID_AMOUNT");
+    errors.invalidAmount = true;
   }
 
-  if (errors.length > 0) {
+  if (state.recurring && !isValidDate(date)) {
+    erros.invalidDate = true;
+  }
+
+  if (state.firstName == "") {
+    errors.invalidFirstName = true;
+  }
+
+  if (state.lastName == "") {
+    errors.invalidLastName = true;
+  }
+
+  if (!/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b/g.test(state.email)) {
+    errors.invalidEmail = true;
+  }
+
+  if (state.phone == "") {
+    errors.invalidPhone = true;
+  }
+
+  if (state.address == "") {
+    errors.invalidAddress = true;
+  }
+
+  if (!state.captcha) {
+    errors.invalidCaptcha = true;
+  }
+
+  if (Object.keys(errors).length > 0) {
     onError(errors);
     return false;
   }

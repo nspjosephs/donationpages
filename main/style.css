@@ -190,6 +190,7 @@ html,body {
   min-width:25%;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   text-transform:none !important;
+  padding:4px !important;
 }
 .form select:focus {
   outline:none;

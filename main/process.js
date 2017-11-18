@@ -18,7 +18,7 @@ function collectPayment(state,onError) {
     Bloomerang.Api.OnError = Bloomerang.Widget.Donation.OnError;
 
     SpreedlyExpress.setDisplayOptions({
-      "amount":state.increaseImpact ? accounting.formatMoney(parseInt(state.amount)+calcImpact(parseInt(state.amount))) : accounting.formatMoney(state.amount),
+      "amount":state.increaseImpact && state.type.toLowerCase() == "credit" ? accounting.formatMoney(parseInt(state.amount)+calcImpact(parseInt(state.amount))) : accounting.formatMoney(state.amount),
       "full_name":"Joseph Stewart",
       "submit_label":"Donate",
       "name_label":"Your Name",
@@ -67,7 +67,7 @@ function configureBloomerang(state) {
   console.log("Configuring bloomerang donation");
 
   let amount = parseInt(state.amount);
-  if (state.increaseImpact) {
+  if (state.increaseImpact && state.type.toLowerCase == "credit") {
     amount += calcImpact(amount);
   }
 
@@ -101,16 +101,58 @@ function configureBloomerang(state) {
   }
 }
 
-function validateResponses(state) {
+function isValidDate(date) {
+  if (date == undefined || date==null || date == "")
+    return false;
+
+  date = date.replace(/[^0-9]/g,'');
+
+  if (date.length != 8)
+    return false;
+
+  if (Number.isNaN(parseInt(date)))
+    return false;
+
+  return true;
+}
+
+function validateResponses(state, onError) {
   let amount = parseInt(state.amount);
   let errors = [];
 
   if (amount <= 0) {
-    errors.push("INVALID_AMOUNT");
+    errors.invalidAmount = true;
   }
 
+  if (state.recurring && !isValidDate(date)) {
+    erros.invalidDate = true;
+  }
 
-  if (errors.length > 0) {
+  if (state.firstName == "") {
+    errors.invalidFirstName = true;
+  }
+
+  if (state.lastName == "") {
+    errors.invalidLastName = true;
+  }
+
+  if (!/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b/g.test(state.email)) {
+    errors.invalidEmail = true;
+  }
+
+  if (state.phone == "") {
+    errors.invalidPhone = true;
+  }
+
+  if (state.address == "") {
+    errors.invalidAddress = true;
+  }
+
+  if (!state.captcha) {
+    errors.invalidCaptcha = true;
+  }
+
+  if (Object.keys(errors).length > 0) {
     onError(errors);
     return false;
   }

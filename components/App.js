@@ -29,7 +29,8 @@ export default class App extends React.Component {
       comments: "",
       increaseImpact:false,
       routingNumber: "",
-      accountNumber: ""
+      accountNumber: "",
+      captcha: false,
     }
   }
 
@@ -37,8 +38,10 @@ export default class App extends React.Component {
    * PROCESSING METHODS *
    **********************/
 
-  errorCallback(code) {
-    console.log("Error processing: " + code);
+  errorCallback(errorObj) {
+    console.log("Form is invalid");
+    console.log(errorObj);
+    this.setState(errorObj)
   }
 
   /******************
@@ -107,7 +110,7 @@ export default class App extends React.Component {
 
   onPhoneChange(event) {
     this.setState({
-      phone:event.target.value.replace(/[^0-9]/g,'')
+      phone:event.target.value
     })
   }
 
@@ -191,7 +194,7 @@ export default class App extends React.Component {
                 <div>
                   <div className="form-section">
                     <h2>Donation</h2>
-                    <label htmlFor="amount">Amount (USD)</label>
+                    <label className={`required ${this.state.invalidAmount ? "required-error" : ""}`} htmlFor="amount">Amount (USD)</label>
                     <input type="number" id="amount" placeholder="e.g. 10.00" value={this.state.amount != null ? this.state.amount : null} onChange={this.onAmountChange.bind(this)}/>
                     <div className="section radio-container">
                       <input type="checkbox" id="recurring" defaultChecked={this.state.recurring} onChange={this.onRecurringChange.bind(this)}/>
@@ -207,7 +210,7 @@ export default class App extends React.Component {
                               <option value="quarterly">Quarterly</option>
                               <option value="yearly">Yearly</option>
                             </select>
-                            <label htmlFor="start-date">Start Date</label>
+                            <label className={`required ${this.state.invalidDate ? "required-error" : ""}`} htmlFor="start-date">Start Date</label>
                             <input type="date" id="datepicker" value={this.state.startDate} onChange={this.onStartDateChange.bind(this)}/>
                           </div>
                         :
@@ -222,16 +225,16 @@ export default class App extends React.Component {
                 <div>
                   <div className="form-section">
                     <h2>Contact Information</h2>
-                    <label htmlFor="first-name">First Name</label>
+                    <label className={`required ${this.state.invalidFirstName ? "required-error" : ""}`} htmlFor="first-name">First Name</label>
                     <input type="text" value={this.state.firstName} id="first-name" placeholder="e.g. Simeon" onChange={this.onFirstNameChange.bind(this)}/>
 
-                    <label htmlFor="last-name">Last Name</label>
+                    <label className={`required ${this.state.invalidLastName ? "required-error" : ""}`} htmlFor="last-name">Last Name</label>
                     <input value={this.state.lastName} type="text" id="last-name" placeholder="e.g. Peter" onChange={this.onLastNameChange.bind(this)}/>
 
-                    <label htmlFor="email">Email</label>
+                    <label className={`required ${this.state.invalidEmail ? "required-error" : ""}`} htmlFor="email">{!this.state.invalidEmail ? <span>Email</span> : <span>Please Enter a Valid Email</span>}</label>
                     <input value={this.state.email} type="text" id="email" placeholder="e.g. you@site.com" onChange={this.onEmailChange.bind(this)}/>
 
-                    <label htmlFor="phone">Phone</label>
+                    <label className={`required ${this.state.invalidAmount ? "required-error" : ""}`} htmlFor="phone">Phone</label>
                     <input value={this.state.phone} type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
                   </div>
 
@@ -250,7 +253,7 @@ export default class App extends React.Component {
                       <option>UK</option>
                     </select>
 
-                    <label htmlFor="address">Address</label>
+                    <label className={`required ${this.state.invalidAmount ? "required-error" : ""}`} htmlFor="address">Address</label>
                     <textarea value={this.state.address} placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
 
                     <label htmlFor="city">City</label>
@@ -311,16 +314,24 @@ export default class App extends React.Component {
                   </div>
 
                   <div className="form-section">
+                    <label className={`required ${this.state.invalidAmount ? "required-error" : "required-hidden"}`}>Please fill our ReCAPTCHA</label>
                     <ReCAPTCHA
+                      id="captcha-conatiner"
                       className="captcha-div"
                       ref="recaptcha"
                       sitekey="6LdZNTYUAAAAAM6j_lU3lRi9Dco561ldipwsOTtI"
-                      onChange={(value) => {console.log("Captcha has changed to " + value); Bloomerang.captchaResponse(value)}}
+                      onChange={(value) => {
+                          console.log("Captcha has changed to " + value);
+                          Bloomerang.captchaResponse(value);
+                          this.setState({
+                            captcha:value!=null || value!=undefined || value!=""
+                          })
+                      }}
                     />
                   </div>
 
                   <button onClick={this.previousPage.bind(this)}>Back</button>
-                  <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate ${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount)+calcImpact(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
+                  <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate ${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount)) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
                 </div>
             }
           </div>
