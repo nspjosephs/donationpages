@@ -1,12 +1,12 @@
 import moment from "moment";
-import {calcImpact} from './bloom';
+import {calcImpact, getParameterByName} from './bloom';
 
 function collectPayment(state,onError) {
 
   console.log("---- Collecting Payment For State ----");
   console.log(state);
   console.log("--------------------------------------");
-
+  let name=getParameterByName("name");
   if (validateResponses(state, onError)) {
     console.log("Collecting donation...");
 
@@ -18,11 +18,11 @@ function collectPayment(state,onError) {
     Bloomerang.Api.OnError = Bloomerang.Widget.Donation.OnError;
 
     SpreedlyExpress.setDisplayOptions({
-      "amount":accounting.formatMoney(state.amount),
+      "amount":state.increaseImpact ? accounting.formatMoney(parseInt(state.amount)+calcImpact(parseInt(state.amount))) : accounting.formatMoney(state.amount),
       "full_name":"Joseph Stewart",
       "submit_label":"Donate",
       "name_label":"Your Name",
-      "sidebar_bottom_description":"Support Hannah McLaughlin"
+      "sidebar_bottom_description":`Support ${(name==undefined || name==null || name=="") ? "the National School Project" : name}`
     })
 
     SpreedlyExpress.setPaymentMethodParams({

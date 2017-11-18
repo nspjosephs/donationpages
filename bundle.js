@@ -38789,7 +38789,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.errorCallback.bind(this)) },
-            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.increaseImpact ? accounting.formatMoney(this.state.amount + Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* calcImpact */])(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
+            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount) + Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* calcImpact */])(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
       )
@@ -38850,7 +38850,7 @@ function collectPayment(state, onError) {
   console.log("---- Collecting Payment For State ----");
   console.log(state);
   console.log("--------------------------------------");
-
+  let name = Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["b" /* getParameterByName */])("name");
   if (validateResponses(state, onError)) {
     console.log("Collecting donation...");
 
@@ -38862,11 +38862,11 @@ function collectPayment(state, onError) {
     Bloomerang.Api.OnError = Bloomerang.Widget.Donation.OnError;
 
     SpreedlyExpress.setDisplayOptions({
-      "amount": accounting.formatMoney(state.amount),
+      "amount": state.increaseImpact ? accounting.formatMoney(parseInt(state.amount) + Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* calcImpact */])(parseInt(state.amount))) : accounting.formatMoney(state.amount),
       "full_name": "Joseph Stewart",
       "submit_label": "Donate",
       "name_label": "Your Name",
-      "sidebar_bottom_description": "Support Hannah McLaughlin"
+      "sidebar_bottom_description": `Support ${name == undefined || name == null || name == "" ? "the National School Project" : name}`
     });
 
     SpreedlyExpress.setPaymentMethodParams({
