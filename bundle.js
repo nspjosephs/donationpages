@@ -38620,7 +38620,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.email, type: 'text', id: 'email', placeholder: 'e.g. you@site.com', onChange: this.onEmailChange.bind(this) }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { className: `required ${this.state.invalidAmount ? "required-error" : ""}`, htmlFor: 'phone' },
+              { className: `required ${this.state.invalidPhone ? "required-error" : ""}`, htmlFor: 'phone' },
               'Phone'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.phone, type: 'text', id: 'phone', placeholder: 'e.g. (123) 456-7890', onChange: this.onPhoneChange.bind(this) })
@@ -38799,8 +38799,8 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             { className: 'form-section' },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { className: `required ${this.state.invalidAmount ? "required-error" : "required-hidden"}` },
-              'Please fill our ReCAPTCHA'
+              { className: `required ${this.state.invalidCaptcha ? "required-error" : "required-hidden"}` },
+              'Please fill the ReCAPTCHA'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_google_recaptcha___default.a, {
               id: 'captcha-conatiner',

@@ -243,7 +243,7 @@ export default class App extends React.Component {
                     <label className={`required ${this.state.invalidEmail ? "required-error" : ""}`} htmlFor="email">{!this.state.invalidEmail ? <span>Email</span> : <span>Please Enter a Valid Email</span>}</label>
                     <input value={this.state.email} type="text" id="email" placeholder="e.g. you@site.com" onChange={this.onEmailChange.bind(this)}/>
 
-                    <label className={`required ${this.state.invalidAmount ? "required-error" : ""}`} htmlFor="phone">Phone</label>
+                    <label className={`required ${this.state.invalidPhone ? "required-error" : ""}`} htmlFor="phone">Phone</label>
                     <input value={this.state.phone} type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
                   </div>
 
@@ -323,7 +323,7 @@ export default class App extends React.Component {
                   </div>
 
                   <div className="form-section">
-                    <label className={`required ${this.state.invalidAmount ? "required-error" : "required-hidden"}`}>Please fill our ReCAPTCHA</label>
+                    <label className={`required ${this.state.invalidCaptcha ? "required-error" : "required-hidden"}`}>Please fill the ReCAPTCHA</label>
                     <ReCAPTCHA
                       id="captcha-conatiner"
                       className="captcha-div"
