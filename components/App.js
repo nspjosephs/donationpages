@@ -182,32 +182,34 @@ export default class App extends React.Component {
 
             {
               this.state.page == 0 ?
-                <div className="form-section">
-                  <h2>Donation</h2>
-                  <label htmlFor="amount">Amount (USD)</label>
-                  <input type="number" id="amount" placeholder="e.g. 10.00" value={this.state.amount != null ? this.state.amount : null} onChange={this.onAmountChange.bind(this)}/>
-                  <div className="section radio-container">
-                    <input type="checkbox" id="recurring" defaultChecked={this.state.recurring} onChange={this.onRecurringChange.bind(this)}/>
-                    <label htmlFor="recurring">Make this a recurring donation</label>
-                    <br/>
+                <div>
+                  <div className="form-section">
+                    <h2>Donation</h2>
+                    <label htmlFor="amount">Amount (USD)</label>
+                    <input type="number" id="amount" placeholder="e.g. 10.00" value={this.state.amount != null ? this.state.amount : null} onChange={this.onAmountChange.bind(this)}/>
+                    <div className="section radio-container">
+                      <input type="checkbox" id="recurring" defaultChecked={this.state.recurring} onChange={this.onRecurringChange.bind(this)}/>
+                      <label htmlFor="recurring">Make this a recurring donation</label>
+                      <br/>
 
-                    {this.state.recurring ?
-                        <div id="recurring-div">
-                          <label htmlFor="frequency">Frequency</label>
-                          <select value={this.state.frequency} className="donation-select" id="frequency" onChange={this.onFrequencyChange.bind(this)}>
-                            <option value="weekly">Weekly</option>
-                            <option value="monthly">Monthly</option>
-                            <option value="quarterly">Quarterly</option>
-                            <option value="yearly">Yearly</option>
-                          </select>
-                          <label htmlFor="start-date">Start Date</label>
-                          <input type="date" id="datepicker" value={this.state.startDate} onChange={this.onStartDateChange.bind(this)}/>
-                        </div>
-                      :
-                        ""
-                    }
+                      {this.state.recurring ?
+                          <div id="recurring-div">
+                            <label htmlFor="frequency">Frequency</label>
+                            <select value={this.state.frequency} className="donation-select" id="frequency" onChange={this.onFrequencyChange.bind(this)}>
+                              <option value="weekly">Weekly</option>
+                              <option value="monthly">Monthly</option>
+                              <option value="quarterly">Quarterly</option>
+                              <option value="yearly">Yearly</option>
+                            </select>
+                            <label htmlFor="start-date">Start Date</label>
+                            <input type="date" id="datepicker" value={this.state.startDate} onChange={this.onStartDateChange.bind(this)}/>
+                          </div>
+                        :
+                          ""
+                      }
+                    </div>
+                    <br/>
                   </div>
-                  <br/>
                   <button id="next" onClick={this.nextPage.bind(this)}>Next</button>
                 </div>
               : this.state.page == 1 ?
@@ -227,8 +229,8 @@ export default class App extends React.Component {
                     <input value={this.state.phone} type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
                   </div>
 
-                  <button onClick={this.nextPage.bind(this)}>Next</button>
                   <button onClick={this.previousPage.bind(this)}>Back</button>
+                  <button onClick={this.nextPage.bind(this)}>Next</button>
 
                 </div>
               : this.state.page == 2 ?
@@ -256,10 +258,10 @@ export default class App extends React.Component {
 
                     <label htmlFor="zip">Zip Code</label>
                     <input value={this.state.zip} type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
-
-                    <button onClick={this.nextPage.bind(this)}>Next</button>
-                    <button onClick={this.previousPage.bind(this)}>Back</button>
                   </div>
+
+                  <button onClick={this.previousPage.bind(this)}>Back</button>
+                  <button onClick={this.nextPage.bind(this)}>Next</button>
                 </div>
               :
                 <div>
@@ -306,10 +308,8 @@ export default class App extends React.Component {
                     />
                   </div>
 
-                  <span>
-                    <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
-                    <button onClick={this.previousPage.bind(this)}>Back</button>
-                  </span>
+                  <button onClick={this.previousPage.bind(this)}>Back</button>
+                  <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
                 </div>
             }
           </div>

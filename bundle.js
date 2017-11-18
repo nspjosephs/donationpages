@@ -38375,69 +38375,73 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         { className: 'form notform' },
         this.state.page == 0 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          { className: 'form-section' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h2',
-            null,
-            'Donation'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'label',
-            { htmlFor: 'amount' },
-            'Amount (USD)'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'number', id: 'amount', placeholder: 'e.g. 10.00', value: this.state.amount != null ? this.state.amount : null, onChange: this.onAmountChange.bind(this) }),
+          null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
-            { className: 'section radio-container' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', id: 'recurring', defaultChecked: this.state.recurring, onChange: this.onRecurringChange.bind(this) }),
+            { className: 'form-section' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'h2',
+              null,
+              'Donation'
+            ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
-              { htmlFor: 'recurring' },
-              'Make this a recurring donation'
+              { htmlFor: 'amount' },
+              'Amount (USD)'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-            this.state.recurring ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'number', id: 'amount', placeholder: 'e.g. 10.00', value: this.state.amount != null ? this.state.amount : null, onChange: this.onAmountChange.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
-              { id: 'recurring-div' },
+              { className: 'section radio-container' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', id: 'recurring', defaultChecked: this.state.recurring, onChange: this.onRecurringChange.bind(this) }),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'label',
-                { htmlFor: 'frequency' },
-                'Frequency'
+                { htmlFor: 'recurring' },
+                'Make this a recurring donation'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'select',
-                { value: this.state.frequency, className: 'donation-select', id: 'frequency', onChange: this.onFrequencyChange.bind(this) },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+              this.state.recurring ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'div',
+                { id: 'recurring-div' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'option',
-                  { value: 'weekly' },
-                  'Weekly'
+                  'label',
+                  { htmlFor: 'frequency' },
+                  'Frequency'
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'option',
-                  { value: 'monthly' },
-                  'Monthly'
+                  'select',
+                  { value: this.state.frequency, className: 'donation-select', id: 'frequency', onChange: this.onFrequencyChange.bind(this) },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'option',
+                    { value: 'weekly' },
+                    'Weekly'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'option',
+                    { value: 'monthly' },
+                    'Monthly'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'option',
+                    { value: 'quarterly' },
+                    'Quarterly'
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'option',
+                    { value: 'yearly' },
+                    'Yearly'
+                  )
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'option',
-                  { value: 'quarterly' },
-                  'Quarterly'
+                  'label',
+                  { htmlFor: 'start-date' },
+                  'Start Date'
                 ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'option',
-                  { value: 'yearly' },
-                  'Yearly'
-                )
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'label',
-                { htmlFor: 'start-date' },
-                'Start Date'
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'date', id: 'datepicker', value: this.state.startDate, onChange: this.onStartDateChange.bind(this) })
-            ) : ""
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'date', id: 'datepicker', value: this.state.startDate, onChange: this.onStartDateChange.bind(this) })
+              ) : ""
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
           ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { id: 'next', onClick: this.nextPage.bind(this) },
@@ -38481,13 +38485,13 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { onClick: this.nextPage.bind(this) },
-            'Next'
+            { onClick: this.previousPage.bind(this) },
+            'Back'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { onClick: this.previousPage.bind(this) },
-            'Back'
+            { onClick: this.nextPage.bind(this) },
+            'Next'
           )
         ) : this.state.page == 2 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
@@ -38560,17 +38564,17 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               { htmlFor: 'zip' },
               'Zip Code'
             ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.zip, type: 'number', id: 'zip', placeholder: 'e.g. 90210', onChange: this.onZipChange.bind(this) }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'button',
-              { onClick: this.nextPage.bind(this) },
-              'Next'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'button',
-              { onClick: this.previousPage.bind(this) },
-              'Back'
-            )
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.zip, type: 'number', id: 'zip', placeholder: 'e.g. 90210', onChange: this.onZipChange.bind(this) })
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { onClick: this.previousPage.bind(this) },
+            'Back'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { onClick: this.nextPage.bind(this) },
+            'Next'
           )
         ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
@@ -38645,18 +38649,14 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             })
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'span',
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'button',
-              { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(this.state, this.errorCallback.bind(this)) },
-              this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'button',
-              { onClick: this.previousPage.bind(this) },
-              'Back'
-            )
+            'button',
+            { onClick: this.previousPage.bind(this) },
+            'Back'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'button',
+            { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(this.state, this.errorCallback.bind(this)) },
+            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
       )
