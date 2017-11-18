@@ -38350,7 +38350,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   errorCallback(errorObj) {
     console.log("Form is invalid");
     console.log(errorObj);
-    this.setState({ invalidCaptcha: true });
+    this.setState(errorObj);
   }
 
   /******************
@@ -38800,7 +38800,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'label',
               { className: `required ${this.state.invalidCaptcha ? "required-error" : "required-hidden"}` },
-              'Please fill the ReCAPTCHA'
+              'Please fill out the ReCAPTCHA'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_google_recaptcha___default.a, {
               id: 'captcha-conatiner',
@@ -39011,6 +39011,7 @@ function validateResponses(state, onError) {
   }
 
   if (Object.keys(errors).length > 0) {
+    errors.page = 0;
     onError(errors);
     return false;
   }

@@ -50,7 +50,7 @@ export default class App extends React.Component {
   errorCallback(errorObj) {
     console.log("Form is invalid");
     console.log(errorObj);
-    this.setState({invalidCaptcha:true})
+    this.setState(errorObj)
   }
 
   /******************
@@ -323,7 +323,7 @@ export default class App extends React.Component {
                   </div>
 
                   <div className="form-section">
-                    <label className={`required ${this.state.invalidCaptcha ? "required-error" : "required-hidden"}`}>Please fill the ReCAPTCHA</label>
+                    <label className={`required ${this.state.invalidCaptcha ? "required-error" : "required-hidden"}`}>Please fill out the ReCAPTCHA</label>
                     <ReCAPTCHA
                       id="captcha-conatiner"
                       className="captcha-div"

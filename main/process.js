@@ -153,6 +153,7 @@ function validateResponses(state, onError) {
   }
 
   if (Object.keys(errors).length > 0) {
+    errors.page = 0;
     onError(errors);
     return false;
   }
