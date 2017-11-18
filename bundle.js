@@ -38789,7 +38789,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.errorCallback.bind(this)) },
-            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount) + Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* calcImpact */])(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
+            this.state.type == "credit" ? "Enter Payment Info" : `Donate ${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount) + Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* calcImpact */])(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
       )

@@ -320,7 +320,7 @@ export default class App extends React.Component {
                   </div>
 
                   <button onClick={this.previousPage.bind(this)}>Back</button>
-                  <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount)+calcImpact(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
+                  <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate ${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount)+calcImpact(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
                 </div>
             }
           </div>
