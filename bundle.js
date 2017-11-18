@@ -6311,6 +6311,11 @@ var run = () => {
 };
 
 function calcImpact(amount) {
+  if (Bloomerang.transactionFee == undefined) {
+    console.log("Transaction cost constants are not set, setting them now...");
+    Bloomerang.transactionFee = .2;
+    Bloomerang.transactionFeeRate = .025;
+  }
   console.log("---- Calculating True Impact ----");
   console.log("Amount: " + amount);
   let feeRate = Bloomerang.transactionFeeRate;
