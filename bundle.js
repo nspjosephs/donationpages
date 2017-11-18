@@ -6235,7 +6235,7 @@ module.exports = getActiveElement;
 //This script sets up Bloomerang
 var run = () => {
 
-  if (Bloomerang == null) {
+  if (Bloomerang == null || Bloomerang == undefined || Bloomerang == {}) {
     console.log("Bloomerang is NULL, setting timeout then trying again...");
     setTimeout(run, 1000);
     return false;
