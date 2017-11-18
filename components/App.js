@@ -50,7 +50,7 @@ export default class App extends React.Component {
   errorCallback(errorObj) {
     console.log("Form is invalid");
     console.log(errorObj);
-    this.setState(errorObj)
+    this.setState({invalidCaptcha:true})
   }
 
   /******************

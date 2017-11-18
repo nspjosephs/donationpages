@@ -38350,7 +38350,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   errorCallback(errorObj) {
     console.log("Form is invalid");
     console.log(errorObj);
-    this.setState(errorObj);
+    this.setState({ invalidCaptcha: true });
   }
 
   /******************
