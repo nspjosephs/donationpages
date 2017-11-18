@@ -44,7 +44,7 @@ var run = () => {
     /* === LOADING AND INITIALIZING SPREEDLY === */
     if (!Bloomerang.SpreedlyScriptLoaded) {
       console.log("Spreedly Script is not loaded, loading now...");
-      Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js',
+      window.Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js',
       () => {return SpreedlyExpress != null && SpreedlyExpress != undefined},
       () => {
         console.log("SpreedlyExpress is loaded, initializing now...");
@@ -59,12 +59,12 @@ var run = () => {
     }
 
     /* === SETTING TRANSACTION FEE CONSTANTS === */
-    Bloomerang.transactionFee = 0.2;
-    Bloomerang.transactionFeeRate = 0.025;
+    window.Bloomerang.transactionFee = 0.2;
+    window.Bloomerang.transactionFeeRate = 0.025;
     console.log("Bloomerang transaction fee constants set");
 
     /* === SETTING FORM CONTROL VARIABLE TO PREVENT ACCIDENTAL MULTIPLE SUBMISSIONS === */
-    Bloomerang.formSubmitted = false;
+    window.Bloomerang.formSubmitted = false;
     console.log("Bloomerang form submitted set");
 
     /* === TELL BLOOMERANG WE'RE USING RECAPTCHA === */

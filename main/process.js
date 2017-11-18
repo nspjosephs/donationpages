@@ -62,19 +62,6 @@ function collectPayment(state,onError) {
   }
 }
 
-function calcImpact(amount) {
-  console.log("---- Calculating True Impact ----");
-  console.log("Amount: " + amount);
-  let feeRate = Bloomerang.transactionFeeRate;
-  console.log("Fee rate: " + feeRate);
-  let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
-  console.log("New total: " + newTotal)
-  let impactAmount = Number((newTotal - amount).toFixed(2));
-  console.log("Impact amount: " + impactAmount);
-  console.log("---------------------------------");
-  return impactAmount;
-}
-
 function configureBloomerang(state) {
   console.log("Configuring bloomerang donation");
 

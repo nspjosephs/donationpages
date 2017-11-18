@@ -38357,6 +38357,20 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     });
   }
 
+  calcImpact() {
+    console.log("---- Calculating True Impact ----");
+    let amount = parseInt(this.state.amount);
+    console.log("Amount: " + amount);
+    let feeRate = Bloomerang.transactionFeeRate;
+    console.log("Fee rate: " + feeRate);
+    let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
+    console.log("New total: " + newTotal);
+    let impactAmount = Number((newTotal - amount).toFixed(2));
+    console.log("Impact amount: " + impactAmount);
+    console.log("---------------------------------");
+    return impactAmount;
+  }
+
   render() {
     var name = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* getParameterByName */])("name");
     if (initialized) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -38643,7 +38657,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
                 'label',
                 { htmlFor: 'increase-impact' },
                 'Offset these fees by adding ',
-                accounting.formatMoney(Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* calcImpact */])(parseInt(this.state.amount))),
+                accounting.formatMoney(this.calcImpact()),
                 ' to my donation'
               )
             )
@@ -38677,8 +38691,8 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["b" /* submit */])(this.state, this.errorCallback.bind(this)) },
-            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.increaseImpact ? accounting.formatMoney(this.state.amount + Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* calcImpact */])(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
+            { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["default"])(this.state, this.errorCallback.bind(this)) },
+            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.increaseImpact ? accounting.formatMoney(this.state.amount + this.calcImpact()) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
       )
@@ -38775,7 +38789,7 @@ var run = () => {
     /* === LOADING AND INITIALIZING SPREEDLY === */
     if (!Bloomerang.SpreedlyScriptLoaded) {
       console.log("Spreedly Script is not loaded, loading now...");
-      Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js', () => {
+      window.Bloomerang.Util.load('https://core.spreedly.com/iframe/express-2.min.js', () => {
         return SpreedlyExpress != null && SpreedlyExpress != undefined;
       }, () => {
         console.log("SpreedlyExpress is loaded, initializing now...");
@@ -38790,12 +38804,12 @@ var run = () => {
     }
 
     /* === SETTING TRANSACTION FEE CONSTANTS === */
-    Bloomerang.transactionFee = 0.2;
-    Bloomerang.transactionFeeRate = 0.025;
+    window.Bloomerang.transactionFee = 0.2;
+    window.Bloomerang.transactionFeeRate = 0.025;
     console.log("Bloomerang transaction fee constants set");
 
     /* === SETTING FORM CONTROL VARIABLE TO PREVENT ACCIDENTAL MULTIPLE SUBMISSIONS === */
-    Bloomerang.formSubmitted = false;
+    window.Bloomerang.formSubmitted = false;
     console.log("Bloomerang form submitted set");
 
     /* === TELL BLOOMERANG WE'RE USING RECAPTCHA === */
@@ -38824,8 +38838,8 @@ var getParameterByName = (name, url) => {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return submit; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return calcImpact; });
+/* unused harmony export submit */
+/* unused harmony export calcImpact */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 
@@ -38889,19 +38903,6 @@ function collectPayment(state, onError) {
   } else {
     console.log("Responses not validated...");
   }
-}
-
-function calcImpact(amount) {
-  console.log("---- Calculating True Impact ----");
-  console.log("Amount: " + amount);
-  let feeRate = Bloomerang.transactionFeeRate;
-  console.log("Fee rate: " + feeRate);
-  let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
-  console.log("New total: " + newTotal);
-  let impactAmount = Number((newTotal - amount).toFixed(2));
-  console.log("Impact amount: " + impactAmount);
-  console.log("---------------------------------");
-  return impactAmount;
 }
 
 function configureBloomerang(state) {
