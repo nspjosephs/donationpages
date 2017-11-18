@@ -185,7 +185,7 @@ export default class App extends React.Component {
                 <div className="form-section">
                   <h2>Donation</h2>
                   <label htmlFor="amount">Amount (USD)</label>
-                  <input type="number" id="amount" placeholder="e.g. 10.00" defaultValue={this.state.amount != null ? this.state.amount : null} onChange={this.onAmountChange.bind(this)}/>
+                  <input type="number" id="amount" placeholder="e.g. 10.00" value={this.state.amount != null ? this.state.amount : null} onChange={this.onAmountChange.bind(this)}/>
                   <div className="section radio-container">
                     <input type="checkbox" id="recurring" defaultChecked={this.state.recurring} onChange={this.onRecurringChange.bind(this)}/>
                     <label htmlFor="recurring">Make this a recurring donation</label>
@@ -194,14 +194,14 @@ export default class App extends React.Component {
                     {this.state.recurring ?
                         <div id="recurring-div">
                           <label htmlFor="frequency">Frequency</label>
-                          <select defaultValue={this.state.frequency} className="donation-select" id="frequency" onChange={this.onFrequencyChange.bind(this)}>
+                          <select value={this.state.frequency} className="donation-select" id="frequency" onChange={this.onFrequencyChange.bind(this)}>
                             <option value="weekly">Weekly</option>
                             <option value="monthly">Monthly</option>
                             <option value="quarterly">Quarterly</option>
                             <option value="yearly">Yearly</option>
                           </select>
                           <label htmlFor="start-date">Start Date</label>
-                          <input type="date" id="datepicker" defaultValue={this.state.startDate} onChange={this.onStartDateChange.bind(this)}/>
+                          <input type="date" id="datepicker" value={this.state.startDate} onChange={this.onStartDateChange.bind(this)}/>
                         </div>
                       :
                         ""
@@ -215,16 +215,16 @@ export default class App extends React.Component {
                   <div className="form-section">
                     <h2>Contact Information</h2>
                     <label htmlFor="first-name">First Name</label>
-                    <input type="text" defaultValue={this.state.firstName} id="first-name" placeholder="e.g. Simeon" onChange={this.onFirstNameChange.bind(this)}/>
+                    <input type="text" value={this.state.firstName} id="first-name" placeholder="e.g. Simeon" onChange={this.onFirstNameChange.bind(this)}/>
 
                     <label htmlFor="last-name">Last Name</label>
-                    <input defaultValue={this.state.lastName} type="text" id="last-name" placeholder="e.g. Peter" onChange={this.onLastNameChange.bind(this)}/>
+                    <input value={this.state.lastName} type="text" id="last-name" placeholder="e.g. Peter" onChange={this.onLastNameChange.bind(this)}/>
 
                     <label htmlFor="email">Email</label>
-                    <input defaultValue={this.state.email} type="text" id="email" placeholder="e.g. you@site.com" onChange={this.onEmailChange.bind(this)}/>
+                    <input value={this.state.email} type="text" id="email" placeholder="e.g. you@site.com" onChange={this.onEmailChange.bind(this)}/>
 
                     <label htmlFor="phone">Phone</label>
-                    <input defaultValue={this.state.phone} type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
+                    <input value={this.state.phone} type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
                   </div>
 
                   <button onClick={this.nextPage.bind(this)}>Next</button>
@@ -236,26 +236,26 @@ export default class App extends React.Component {
                   <div className="form-section">
                     <h2>Billing Address</h2>
                     <label htmlFor="country">Country</label>
-                    <select defaultValue={this.state.country} onChange={this.onCountryChange.bind(this)}>
+                    <select value={this.state.country} onChange={this.onCountryChange.bind(this)}>
                       <option>CA</option>
-                      <option defaultValue>US</option>
+                      <option value>US</option>
                       <option>UK</option>
                     </select>
 
                     <label htmlFor="address">Address</label>
-                    <textarea defaultValue={this.state.address} placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
+                    <textarea value={this.state.address} placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
 
                     <label htmlFor="city">City</label>
-                    <input defaultValue={this.state.city} type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
+                    <input value={this.state.city} type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
 
                     <label htmlFor="state">State</label>
-                    <select defaultValue={this.state.state} id="state" onChange={this.onStateChange.bind(this)}>
+                    <select value={this.state.state} id="state" onChange={this.onStateChange.bind(this)}>
                       <option>CA</option>
                       <option>NV</option>
                     </select>
 
                     <label htmlFor="zip">Zip Code</label>
-                    <input defaultValue={this.state.zip} type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
+                    <input value={this.state.zip} type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
 
                     <button onClick={this.nextPage.bind(this)}>Next</button>
                     <button onClick={this.previousPage.bind(this)}>Back</button>
@@ -282,10 +282,10 @@ export default class App extends React.Component {
                       this.state.type !="credit" ?
                         <div id = "bank-info">
                           <label htmlFor="routing">Routing Number</label>
-                          <input defaultValue={this.state.routingNumber} type="text" id="routing" placeholder="e.g. 123456789" onChange={this.onRoutingChange.bind(this)}/>
+                          <input value={this.state.routingNumber} type="text" id="routing" placeholder="e.g. 123456789" onChange={this.onRoutingChange.bind(this)}/>
 
                           <label htmlFor="account">Account Number</label>
-                          <input defaultValue={this.state.accountNumber} type="text" id="account" placeholder="e.g. 456789123456" onChange={this.onAccountChange.bind(this)}/>
+                          <input value={this.state.accountNumber} type="text" id="account" placeholder="e.g. 456789123456" onChange={this.onAccountChange.bind(this)}/>
                         </div>
                       :
                         ""
@@ -294,7 +294,7 @@ export default class App extends React.Component {
 
                   <div className="form-section">
                     <h2>Comments and Prayer Requests</h2>
-                    <textarea defaultValue={this.state.comments} onChange={this.onCommentsChange.bind(this)}></textarea>
+                    <textarea value={this.state.comments} onChange={this.onCommentsChange.bind(this)}></textarea>
                   </div>
 
                   <div className="form-section">
