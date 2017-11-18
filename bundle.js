@@ -38976,7 +38976,7 @@ function isValidDate(date) {
 
 function validateResponses(state, onError) {
   let amount = parseInt(state.amount);
-  let errors = [];
+  let errors = {};
 
   if (amount <= 0) {
     errors.invalidAmount = true;
