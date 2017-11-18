@@ -6,7 +6,7 @@ function collectPayment(state,onError) {
   console.log(state);
   console.log("--------------------------------------");
 
-  if (validateResponses(state)) {
+  if (validateResponses(state, onError)) {
     console.log("Collecting donation...");
 
     Bloomerang.Widget.Donation.OnSubmit = () => configureBloomerang(state);
@@ -62,8 +62,26 @@ function collectPayment(state,onError) {
   }
 }
 
+function calcImpact(amount) {
+  console.log("---- Calculating True Impact ----");
+  console.log("Amount: " + amount);
+  let feeRate = Bloomerang.transactionFeeRate;
+  console.log("Fee rate: " + feeRate);
+  let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
+  console.log("New total: " + newTotal)
+  let impactAmount = Number((newTotal - amount).toFixed(2));
+  console.log("Impact amount: " + impactAmount);
+  console.log("---------------------------------");
+  return impactAmount;
+}
+
 function configureBloomerang(state) {
   console.log("Configuring bloomerang donation");
+
+  let amount = parseInt(state.amount);
+  if (state.increaseImpact) {
+    amount += calcImpact(amount);
+  }
 
   Bloomerang.Account.individual()
     .firstName(state.firstName)
@@ -82,7 +100,7 @@ function configureBloomerang(state) {
     /* DONATION IS RECURRING */
     console.log("Donation is reucurring");
     Bloomerang.RecurringDonation
-      .amount(state.amount)
+      .amount(amount)
       .frequency(state.frequency)
       .note(state.comments)
       .startDate(moment(state.date).format("YYYY-MM-DD"));
@@ -90,23 +108,28 @@ function configureBloomerang(state) {
     /* DONATION IS SINGLE TIME */
     console.log("Donation is non recurring");
     Bloomerang.Donation
-      .amount(state.amount)
+      .amount(amount)
       .note(state.comments)
   }
 }
 
 function validateResponses(state) {
   let amount = parseInt(state.amount);
+  let errors = [];
 
   if (amount <= 0) {
-    onError("INVALID_AMOUNT");
-    return false;
+    errors.push("INVALID_AMOUNT");
   }
 
+
+  if (errors.length > 0) {
+    onError(errors);
+    return false;
+  }
   return true;
 }
 
-export default function submit(state) {
+function submit(state, onError) {
   console.log("calling submit");
   if (Bloomerang.isDebugging || SpreedlyExpress.DEBUGGING) {
       console.log("SpreedlyExpress is debugging, returning false...");
@@ -123,8 +146,13 @@ export default function submit(state) {
   }
   if (!window.Bloomerang.formSubmitted) {
     window.Bloomerang.formSubmitted = true;
-    collectPayment(state);
+    collectPayment(state, onError);
   } else {
     console.log("Woah there cowboy, your form is being processed");
   }
+}
+
+export {
+  submit,
+  calcImpact
 }

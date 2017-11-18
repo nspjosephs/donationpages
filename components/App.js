@@ -1,6 +1,6 @@
 import React from 'react';
 import {run,getParameterByName} from '../main/bloom';
-import submit from '../main/process';
+import {submit,calcImpact} from '../main/process';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 var initialized = run();
@@ -173,20 +173,6 @@ export default class App extends React.Component {
     })
   }
 
-  calcImpact() {
-    console.log("---- Calculating True Impact ----");
-    let amount = parseInt(this.state.amount);
-    console.log("Amount: " + amount);
-    let feeRate = Bloomerang.transactionFeeRate;
-    console.log("Fee rate: " + feeRate);
-    let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
-    console.log("New total: " + newTotal)
-    let impactAmount = Number((newTotal - amount).toFixed(2));
-    console.log("Impact amount: " + impactAmount);
-    console.log("---------------------------------");
-    return accounting.formatMoney(impactAmount);
-  }
-
   render() {
     var name = getParameterByName("name");
     if (initialized) return (
@@ -314,7 +300,7 @@ export default class App extends React.Component {
                           <p>Note: A small portion of donations submitted through credit cards go to paying processing fees</p>
 
                           <input type="checkbox" id="increase-impact" defaultChecked={this.state.increaseImpact} onChange={this.onImpactChange.bind(this)}/>
-                          <label htmlFor="increase-impact">Offset these fees by adding {this.calcImpact()} to my donation</label>
+                          <label htmlFor="increase-impact">Offset these fees by adding {accounting.formatMoney(calcImpact(parseInt(this.state.amount)))} to my donation</label>
                         </div>
                     }
                   </div>
@@ -334,7 +320,7 @@ export default class App extends React.Component {
                   </div>
 
                   <button onClick={this.previousPage.bind(this)}>Back</button>
-                  <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
+                  <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.increaseImpact ? accounting.formatMoney(this.state.amount+calcImpact(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
                 </div>
             }
           </div>

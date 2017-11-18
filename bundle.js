@@ -38357,20 +38357,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     });
   }
 
-  calcImpact() {
-    console.log("---- Calculating True Impact ----");
-    let amount = parseInt(this.state.amount);
-    console.log("Amount: " + amount);
-    let feeRate = Bloomerang.transactionFeeRate;
-    console.log("Fee rate: " + feeRate);
-    let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
-    console.log("New total: " + newTotal);
-    let impactAmount = Number((newTotal - amount).toFixed(2));
-    console.log("Impact amount: " + impactAmount);
-    console.log("---------------------------------");
-    return accounting.formatMoney(impactAmount);
-  }
-
   render() {
     var name = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* getParameterByName */])("name");
     if (initialized) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -38657,7 +38643,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
                 'label',
                 { htmlFor: 'increase-impact' },
                 'Offset these fees by adding ',
-                this.calcImpact(),
+                accounting.formatMoney(Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* calcImpact */])(parseInt(this.state.amount))),
                 ' to my donation'
               )
             )
@@ -38691,8 +38677,8 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(this.state, this.errorCallback.bind(this)) },
-            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
+            { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["b" /* submit */])(this.state, this.errorCallback.bind(this)) },
+            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.increaseImpact ? accounting.formatMoney(this.state.amount + Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* calcImpact */])(parseInt(this.state.amount))) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
       )
@@ -38836,7 +38822,8 @@ var getParameterByName = (name, url) => {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = submit;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return submit; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return calcImpact; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 
@@ -38847,7 +38834,7 @@ function collectPayment(state, onError) {
   console.log(state);
   console.log("--------------------------------------");
 
-  if (validateResponses(state)) {
+  if (validateResponses(state, onError)) {
     console.log("Collecting donation...");
 
     Bloomerang.Widget.Donation.OnSubmit = () => configureBloomerang(state);
@@ -38902,34 +38889,56 @@ function collectPayment(state, onError) {
   }
 }
 
+function calcImpact(amount) {
+  console.log("---- Calculating True Impact ----");
+  console.log("Amount: " + amount);
+  let feeRate = Bloomerang.transactionFeeRate;
+  console.log("Fee rate: " + feeRate);
+  let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
+  console.log("New total: " + newTotal);
+  let impactAmount = Number((newTotal - amount).toFixed(2));
+  console.log("Impact amount: " + impactAmount);
+  console.log("---------------------------------");
+  return impactAmount;
+}
+
 function configureBloomerang(state) {
   console.log("Configuring bloomerang donation");
+
+  let amount = parseInt(state.amount);
+  if (state.increaseImpact) {
+    amount += calcImpact(amount);
+  }
 
   Bloomerang.Account.individual().firstName(state.firstName).lastName(state.lastName).homePhone(state.phone).homeEmail(state.email).homeAddress(state.address, state.city, state.state, state.zip, state.country);
 
   if (state.recurring) {
     /* DONATION IS RECURRING */
     console.log("Donation is reucurring");
-    Bloomerang.RecurringDonation.amount(state.amount).frequency(state.frequency).note(state.comments).startDate(__WEBPACK_IMPORTED_MODULE_0_moment___default()(state.date).format("YYYY-MM-DD"));
+    Bloomerang.RecurringDonation.amount(amount).frequency(state.frequency).note(state.comments).startDate(__WEBPACK_IMPORTED_MODULE_0_moment___default()(state.date).format("YYYY-MM-DD"));
   } else {
     /* DONATION IS SINGLE TIME */
     console.log("Donation is non recurring");
-    Bloomerang.Donation.amount(state.amount).note(state.comments);
+    Bloomerang.Donation.amount(amount).note(state.comments);
   }
 }
 
 function validateResponses(state) {
   let amount = parseInt(state.amount);
+  let errors = [];
 
   if (amount <= 0) {
-    onError("INVALID_AMOUNT");
-    return false;
+    errors.push("INVALID_AMOUNT");
   }
 
+  if (errors.length > 0) {
+    onError(errors);
+    return false;
+  }
   return true;
 }
 
-function submit(state) {
+function submit(state, onError) {
   console.log("calling submit");
   if (Bloomerang.isDebugging || SpreedlyExpress.DEBUGGING) {
     console.log("SpreedlyExpress is debugging, returning false...");
@@ -38946,11 +38955,13 @@ function submit(state) {
   }
   if (!window.Bloomerang.formSubmitted) {
     window.Bloomerang.formSubmitted = true;
-    collectPayment(state);
+    collectPayment(state, onError);
   } else {
     console.log("Woah there cowboy, your form is being processed");
   }
 }
+
+
 
 /***/ }),
 /* 214 */
