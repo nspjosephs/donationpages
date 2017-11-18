@@ -174,7 +174,11 @@ export default class App extends React.Component {
   }
 
   calcImpact() {
-    return accounting.formatMoney(Bloomerang.transactionFee + Bloomerang.transactionFeeRate*this.state.amount)
+    let amount = this.state.amount;
+    let feeRate = Bloomerang.transactionFeeRate;
+    let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
+    let impactAmount = Number((newTotal - amount).toFixed(2));
+    return accounting.formatMoney(impactAmount);
   }
 
   render() {
