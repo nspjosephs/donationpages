@@ -38351,6 +38351,16 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     });
   }
 
+  onImpactChange(event) {
+    this.setState({
+      increaseImpact: event.target.checked
+    });
+  }
+
+  calcImpact() {
+    return accounting.formatMoney(Bloomerang.transactionFee + Bloomerang.transactionFeeRate * this.state.amount);
+  }
+
   render() {
     var name = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["a" /* getParameterByName */])("name");
     if (initialized) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -38624,7 +38634,23 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
                 'Account Number'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.accountNumber, type: 'text', id: 'account', placeholder: 'e.g. 456789123456', onChange: this.onAccountChange.bind(this) })
-            ) : ""
+            ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'p',
+                null,
+                'Note: A small portion of donations submitted through credit cards go to paying processing fees'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', id: 'increase-impact', defaultChecked: this.state.increaseImpact, onChange: this.onImpactChange.bind(this) }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'label',
+                { htmlFor: 'increase-impact' },
+                'Offset these fees by adding ',
+                this.calcImpact(),
+                ' to my donation'
+              )
+            )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
@@ -38656,7 +38682,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
             { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* default */])(this.state, this.errorCallback.bind(this)) },
-            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
+            this.state.type == "credit" ? "Enter Payment Info" : `Donate $${accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
       )

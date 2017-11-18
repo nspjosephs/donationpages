@@ -167,6 +167,16 @@ export default class App extends React.Component {
     })
   }
 
+  onImpactChange(event) {
+    this.setState({
+      increaseImpact: event.target.checked
+    })
+  }
+
+  calcImpact() {
+    return accounting.formatMoney(Bloomerang.transactionFee + Bloomerang.transactionFeeRate*this.state.amount)
+  }
+
   render() {
     var name = getParameterByName("name");
     if (initialized) return (
@@ -290,7 +300,12 @@ export default class App extends React.Component {
                           <input value={this.state.accountNumber} type="text" id="account" placeholder="e.g. 456789123456" onChange={this.onAccountChange.bind(this)}/>
                         </div>
                       :
-                        ""
+                        <div>
+                          <p>Note: A small portion of donations submitted through credit cards go to paying processing fees</p>
+
+                          <input type="checkbox" id="increase-impact" defaultChecked={this.state.increaseImpact} onChange={this.onImpactChange.bind(this)}/>
+                          <label htmlFor="increase-impact">Offset these fees by adding {this.calcImpact()} to my donation</label>
+                        </div>
                     }
                   </div>
 
@@ -309,7 +324,7 @@ export default class App extends React.Component {
                   </div>
 
                   <button onClick={this.previousPage.bind(this)}>Back</button>
-                  <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${this.state.amount} ${this.state.recurring ? `per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
+                  <button id="donate-button" onClick={() => submit(this.state,this.errorCallback.bind(this))}>{this.state.type=="credit" ? "Enter Payment Info" : `Donate $${accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0,this.state.frequency.length-2)}` : ""}`}</button>
                 </div>
             }
           </div>
