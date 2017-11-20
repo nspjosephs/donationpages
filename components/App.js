@@ -3,6 +3,7 @@ import {run,getParameterByName,calcImpact} from '../main/bloom';
 import {submit} from '../main/process';
 import ReCAPTCHA from 'react-google-recaptcha';
 
+import Confirm from './Confirm.js';
 import CountryCodes from './CountryCodes';
 import StateCodes from './StateCodes';
 
