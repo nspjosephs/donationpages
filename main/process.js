@@ -125,7 +125,7 @@ function validateResponses(state, onError) {
   }
 
   if (state.recurring && !isValidDate(state.date)) {
-    erros.invalidDate = true;
+    errors.invalidDate = true;
   }
 
   if (state.firstName == "") {
