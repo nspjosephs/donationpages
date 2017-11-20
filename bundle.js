@@ -38521,7 +38521,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           { className: 'form-modal' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'h1',
-            { className: 'donation-header' },
+            { className: 'form-modal-title' },
             'Are you sure?'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

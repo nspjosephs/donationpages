@@ -216,7 +216,7 @@ export default class App extends React.Component {
         <div>
           <div className={`form-modal-container ${!this.state.modalShowing ? "hidden" : ""}`}>
             <div className="form-modal">
-              <h1 className="donation-header">Are you sure?</h1>
+              <h1 className="form-modal-title">Are you sure?</h1>
               <button onClick={() => {this.confirmModal(); this.hideModal()}}>Yes</button>
               <button onClick={() => {this.hideModal();}} className="negative">No</button>
             </div>
