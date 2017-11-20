@@ -38994,7 +38994,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         ref: ref => this.confirmModal = ref,
         onYes: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.errorCallback.bind(this)),
         onNo: () => console.log("Modal closed"),
-        message: `${accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ''}`
+        message: `${accounting == undefined ? accounting.formatMoney(this.state.amount) : ''}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ''}`
       })
     );else if (Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["b" /* getParameterByName */])("dID") != null) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',

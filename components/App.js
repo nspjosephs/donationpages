@@ -364,7 +364,11 @@ export default class App extends React.Component {
             ref={ref=>this.confirmModal = ref}
             onYes = {() => submit(this.state,this.errorCallback.bind(this))}
             onNo = {() => console.log("Modal closed")}
-            message = {`${accounting.formatMoney(this.state.amount)}${
+            message = {`${
+              accounting == undefined
+                ? accounting.formatMoney(this.state.amount)
+                : ''
+            }${
               this.state.recurring
                 ? ` per ${this.state.frequency.substring(0,this.state.frequency.length-2)}`
                 : ''
