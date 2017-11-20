@@ -1,22 +1,22 @@
 import moment from "moment";
 import {calcImpact, getParameterByName} from './bloom';
 
-function collectPayment(state,onError) {
+function collectPayment(state,onInvalid, onSuccess, onFail) {
 
   console.log("---- Collecting Payment For State ----");
   console.log(state);
   console.log("--------------------------------------");
   let name=getParameterByName("name");
-  if (validateResponses(state, onError)) {
+  if (validateResponses(state, onInvalid)) {
     console.log("Collecting donation...");
     window.Bloomerang.formSubmitted = true;
 
     Bloomerang.Widget.Donation.OnSubmit = () => configureBloomerang(state);
     Bloomerang.Api.OnSubmit = Bloomerang.Widget.Donation.OnSubmit;
-    Bloomerang.Widget.Donation.OnSuccess = () => console.log("Donation was successfull!");
+    Bloomerang.Widget.Donation.OnSuccess = () => onSuccess();
     Bloomerang.Api.OnSuccess = Bloomerang.Widget.Donation.OnSuccess;
-    Bloomerang.Widget.Donation.OnError = (error) => console.log(error);
-    Bloomerang.Api.OnError = Bloomerang.Widget.Donation.OnError;
+    Bloomerang.Widget.Donation.onInvalid = (error) => onFail(error);
+    Bloomerang.Api.onInvalid = Bloomerang.Widget.Donation.onInvalid;
 
     SpreedlyExpress.setDisplayOptions({
       "amount":state.increaseImpact && state.type.toLowerCase() == "credit" ? accounting.formatMoney(parseInt(state.amount)+calcImpact(parseInt(state.amount))) : accounting.formatMoney(state.amount),
@@ -117,7 +117,7 @@ function isValidDate(date) {
   return true;
 }
 
-function validateResponses(state, onError) {
+function validateResponses(state, onInvalid) {
   let amount = parseInt(state.amount);
   let errors = {};
 
@@ -155,13 +155,13 @@ function validateResponses(state, onError) {
 
   if (Object.keys(errors).length > 0) {
     errors.page = 0;
-    onError(errors);
+    onInvalid(errors);
     return false;
   }
   return true;
 }
 
-function submit(state, onError) {
+function submit(state, onInvalid, onSuccess, onFail) {
   console.log("calling submit");
   if (Bloomerang.isDebugging || SpreedlyExpress.DEBUGGING) {
       console.log("SpreedlyExpress is debugging, returning false...");
@@ -177,7 +177,7 @@ function submit(state, onError) {
     Bloomerang.SpreedlyScriptInitialized = true;
   }
   if (!window.Bloomerang.formSubmitted) {
-    collectPayment(state, onError);
+    collectPayment(state, onInvalid, onSuccess, onFail);
   } else {
     console.log("Woah there cowboy, your form is being processed");
   }

@@ -66,6 +66,7 @@ html,body {
   padding-right:20px;
   transition: background-color .3s;
   user-select:none;
+  color:black;
 }
 .form-modal .negative {
   border: solid 3px #8D0801;

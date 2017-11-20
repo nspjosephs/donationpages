@@ -38318,6 +38318,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     this.state = {
       page: 0,
       modalShowing: false,
+      donationFail: false,
 
       amount: "",
       recurring: false,
@@ -38354,14 +38355,25 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
    * PROCESSING METHODS *
    **********************/
 
-  errorCallback(errorObj) {
+  invalidCallback(errorObj) {
     console.log("Form is invalid");
     console.log(errorObj);
     this.setState(errorObj);
   }
 
+  onDonationSuccess() {
+    window.location.href = "http://nationalschoolproject.com/hidden/thanks";
+  }
+
+  onDonationFail(error) {
+    console.log(error);
+    this.setState({
+      donationFail: true
+    });
+  }
+
   confirmModal() {
-    Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.errorCallback.bind(this));
+    Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.invalidCallback.bind(this), onDonationSuccess(), onDonationFail(error));
   }
 
   /******************
@@ -38834,7 +38846,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { id: 'donate-button', onClick: this.state.type == 'credit' ? () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.errorCallback.bind(this)) : () => this.showModal() },
+            { id: 'donate-button', onClick: this.state.type == 'credit' ? () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.invalidCallback.bind(this), onDonationSuccess(), onDonationFail(error)) : () => this.showModal() },
             this.state.type == "credit" ? "Enter Payment Info" : `Donate ${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount)) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
@@ -38891,22 +38903,22 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
 
 
-function collectPayment(state, onError) {
+function collectPayment(state, onInvalid, onSuccess, onFail) {
 
   console.log("---- Collecting Payment For State ----");
   console.log(state);
   console.log("--------------------------------------");
   let name = Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["b" /* getParameterByName */])("name");
-  if (validateResponses(state, onError)) {
+  if (validateResponses(state, onInvalid)) {
     console.log("Collecting donation...");
     window.Bloomerang.formSubmitted = true;
 
     Bloomerang.Widget.Donation.OnSubmit = () => configureBloomerang(state);
     Bloomerang.Api.OnSubmit = Bloomerang.Widget.Donation.OnSubmit;
-    Bloomerang.Widget.Donation.OnSuccess = () => console.log("Donation was successfull!");
+    Bloomerang.Widget.Donation.OnSuccess = () => onSuccess();
     Bloomerang.Api.OnSuccess = Bloomerang.Widget.Donation.OnSuccess;
-    Bloomerang.Widget.Donation.OnError = error => console.log(error);
-    Bloomerang.Api.OnError = Bloomerang.Widget.Donation.OnError;
+    Bloomerang.Widget.Donation.onInvalid = error => onFail(error);
+    Bloomerang.Api.onInvalid = Bloomerang.Widget.Donation.onInvalid;
 
     SpreedlyExpress.setDisplayOptions({
       "amount": state.increaseImpact && state.type.toLowerCase() == "credit" ? accounting.formatMoney(parseInt(state.amount) + Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* calcImpact */])(parseInt(state.amount))) : accounting.formatMoney(state.amount),
@@ -38986,7 +38998,7 @@ function isValidDate(date) {
   return true;
 }
 
-function validateResponses(state, onError) {
+function validateResponses(state, onInvalid) {
   let amount = parseInt(state.amount);
   let errors = {};
 
@@ -39024,13 +39036,13 @@ function validateResponses(state, onError) {
 
   if (Object.keys(errors).length > 0) {
     errors.page = 0;
-    onError(errors);
+    onInvalid(errors);
     return false;
   }
   return true;
 }
 
-function submit(state, onError) {
+function submit(state, onInvalid, onSuccess, onFail) {
   console.log("calling submit");
   if (Bloomerang.isDebugging || SpreedlyExpress.DEBUGGING) {
     console.log("SpreedlyExpress is debugging, returning false...");
@@ -39046,7 +39058,7 @@ function submit(state, onError) {
     Bloomerang.SpreedlyScriptInitialized = true;
   }
   if (!window.Bloomerang.formSubmitted) {
-    collectPayment(state, onError);
+    collectPayment(state, onInvalid, onSuccess, onFail);
   } else {
     console.log("Woah there cowboy, your form is being processed");
   }

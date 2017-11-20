@@ -16,6 +16,7 @@ export default class App extends React.Component {
     this.state = {
       page:0,
       modalShowing:false,
+      donationFail:false,
 
       amount:"",
       recurring:false,
@@ -52,14 +53,25 @@ export default class App extends React.Component {
    * PROCESSING METHODS *
    **********************/
 
-  errorCallback(errorObj) {
+  invalidCallback(errorObj) {
     console.log("Form is invalid");
     console.log(errorObj);
     this.setState(errorObj)
   }
 
+  onDonationSuccess() {
+    window.location.href = "http://nationalschoolproject.com/hidden/thanks";
+  }
+
+  onDonationFail(error) {
+    console.log(error);
+    this.setState({
+      donationFail:true
+    })
+  }
+
   confirmModal() {
-    submit(this.state,this.errorCallback.bind(this));
+    submit(this.state,this.invalidCallback.bind(this), onDonationSuccess(), onDonationFail(error));
   }
 
   /******************
@@ -368,7 +380,7 @@ export default class App extends React.Component {
                   <button onClick={this.previousPage.bind(this)}>Back</button>
                   <button id="donate-button" onClick={
                     this.state.type=='credit'
-                      ? () => submit(this.state,this.errorCallback.bind(this))
+                      ? () => submit(this.state,this.invalidCallback.bind(this), onDonationSuccess(), onDonationFail(error))
                       : () => this.showModal()
                   }>
                     {
