@@ -3,7 +3,6 @@ import {run,getParameterByName,calcImpact} from '../main/bloom';
 import {submit} from '../main/process';
 import ReCAPTCHA from 'react-google-recaptcha';
 
-import Confirm from './Confirm.js';
 import CountryCodes from './CountryCodes';
 import StateCodes from './StateCodes';
 
@@ -16,6 +15,8 @@ export default class App extends React.Component {
 
     this.state = {
       page:0,
+      modalShowing:false,
+
       amount:"",
       recurring:false,
       frequency:"monthly",
@@ -57,9 +58,29 @@ export default class App extends React.Component {
     this.setState(errorObj)
   }
 
+  confirmModal() {
+    submit(this.state,this.errorCallback.bind(this));
+  }
+
   /******************
    * EVENT HANDLERS *
    ******************/
+
+  showModal() {
+    this.setState(
+      {
+        modalShowing:true
+      }
+    )
+  }
+
+  hideModal() {
+    this.setState(
+      {
+        modalShowing:false
+      }
+    )
+  }
 
   nextPage() {
     if (this.state.page < pageMax) {
@@ -193,6 +214,14 @@ export default class App extends React.Component {
     var name = getParameterByName("name");
     if (initialized) return (
         <div>
+          <div className={`form-modal-container ${this.state.modalShowing ? "hidden" : ""}`}>
+            <div className="form-modal">
+              <h1 className="donation-header">Are you sure?</h1>
+              <button onClick={() => {this.confirmModal(); this.hideModal()}}>Yes</button>
+              <button onClick={() => {this.hideModal();}} className="negative">No</button>
+            </div>
+          </div>
+
           {
             name == "" || name == null ?
                 <h1 className="donation-header">Donate to the National School Project</h1>
@@ -340,7 +369,7 @@ export default class App extends React.Component {
                   <button id="donate-button" onClick={
                     this.state.type=='credit'
                       ? () => submit(this.state,this.errorCallback.bind(this))
-                      : () => this.confirmModal.show()
+                      : () => this.showModal()
                   }>
                     {
                       this.state.type=="credit"
@@ -359,21 +388,6 @@ export default class App extends React.Component {
                 </div>
             }
           </div>
-
-          <Confirm
-            ref={ref=>this.confirmModal = ref}
-            onYes = {() => submit(this.state,this.errorCallback.bind(this))}
-            onNo = {() => console.log("Modal closed")}
-            message = {`${
-              accounting == undefined
-                ? accounting.formatMoney(this.state.amount)
-                : ''
-            }${
-              this.state.recurring
-                ? ` per ${this.state.frequency.substring(0,this.state.frequency.length-2)}`
-                : ''
-            }`}
-          />
         </div>
       )
     else if (getParameterByName("dID") != null)

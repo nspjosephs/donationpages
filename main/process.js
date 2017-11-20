@@ -9,6 +9,7 @@ function collectPayment(state,onError) {
   let name=getParameterByName("name");
   if (validateResponses(state, onError)) {
     console.log("Collecting donation...");
+    window.Bloomerang.formSubmitted = true;
 
     Bloomerang.Widget.Donation.OnSubmit = () => configureBloomerang(state);
     Bloomerang.Api.OnSubmit = Bloomerang.Widget.Donation.OnSubmit;
@@ -176,7 +177,6 @@ function submit(state, onError) {
     Bloomerang.SpreedlyScriptInitialized = true;
   }
   if (!window.Bloomerang.formSubmitted) {
-    window.Bloomerang.formSubmitted = true;
     collectPayment(state, onError);
   } else {
     console.log("Woah there cowboy, your form is being processed");

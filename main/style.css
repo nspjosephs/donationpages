@@ -23,6 +23,72 @@ html,body {
   margin:auto;
 }
 
+.form-modal-container {
+  top:0;
+  left:0;
+  position:fixed;
+  display:block;
+  width:100%;
+  height:100%;
+  z-index:100;
+}
+
+.form-modal-container.hidden {
+  display:none;
+}
+
+.form-modal {
+  background:#828CAE;
+  width:45%;
+  margin:auto;
+  right:0;
+  left:0;
+  top:20px;
+  border-radius:20px;
+  position:fixed;
+  z-index:100;
+  padding:10px;
+  text-align:center;
+}
+
+.form-modal button {
+  display:inline-block;
+  font-family:Roboto;
+  font-size:25px;
+  border-radius:12px;
+  background:none;
+  border:solid 3px #0A3200;
+  cursor:pointer;
+  margin-left:10px;
+  margin-right:10px;
+  padding:5px;
+  padding-left:20px;
+  padding-right:20px;
+  transition: background-color .3s;
+  user-select:none;
+}
+.form-modal .negative {
+  border: solid 3px #8D0801;
+}
+
+.form-modal button:focus {
+  outline:none;
+}
+
+.form-modal button:hover {
+  background-color:#296E26;
+}
+.form-modal .negative:hover {
+  background-color:#AD4F4A;
+}
+
+.form-modal button:active {
+  background-color:#225B20;
+}
+.form-modal .negative:active {
+  background-color:#A43C36;
+}
+
 .form {
   width:100%;
   padding:20px;
