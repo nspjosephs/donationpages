@@ -71,7 +71,7 @@ export default class App extends React.Component {
   }
 
   confirmModal() {
-    submit(this.state,this.invalidCallback.bind(this), onDonationSuccess(), onDonationFail(error));
+    submit(this.state,this.invalidCallback.bind(this), () => this.onDonationSuccess(), () => this.onDonationFail(error));
   }
 
   /******************
@@ -380,7 +380,7 @@ export default class App extends React.Component {
                   <button onClick={this.previousPage.bind(this)}>Back</button>
                   <button id="donate-button" onClick={
                     this.state.type=='credit'
-                      ? () => submit(this.state,this.invalidCallback.bind(this), onDonationSuccess(), onDonationFail(error))
+                      ? () => submit(this.state,this.invalidCallback.bind(this), () => this.onDonationSuccess(), () => this.onDonationFail(error))
                       : () => this.showModal()
                   }>
                     {
