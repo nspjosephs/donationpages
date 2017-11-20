@@ -38511,7 +38511,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { className: 'form notform' },
+        { className: 'form' },
         this.state.page == 0 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           null,
@@ -38789,11 +38789,17 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { id: 'donate-button', onClick: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.errorCallback.bind(this)) },
+            { id: 'donate-button', onClick: this.state.type == 'credit' ? () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.errorCallback.bind(this)) : this.confirmModal.show() },
             this.state.type == "credit" ? "Enter Payment Info" : `Donate ${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount)) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )
-      )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Confirm, {
+        ref: ref => this.confirmModal = ref,
+        onYes: () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.errorCallback.bind(this)),
+        onNo: () => console.log("Modal closed"),
+        message: `${accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ''}`
+      })
     );else if (Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["b" /* getParameterByName */])("dID") != null) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,

@@ -235,6 +235,7 @@ html,body {
   background-color: rgba(255,255,255,.95);
 }
 
+.form-button,
 .form button {
   display:inline-block;
   margin-right:5px;
@@ -256,9 +257,11 @@ html,body {
   -moz-user-select:none;
   -webkit-user-select:none;
 }
+.form-button:focus,
 .form button:focus {
   outline:none;
 }
+.form-button:active,
 .form button:active {
   box-shadow: 0 4px 0 #98660A;
   transform: translateY(3px);
