@@ -38515,7 +38515,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       null,
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { className: `form-modal-container ${this.state.modalShowing ? "hidden" : ""}` },
+        { className: `form-modal-container ${!this.state.modalShowing ? "hidden" : ""}` },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'form-modal' },
