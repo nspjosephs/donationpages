@@ -340,7 +340,7 @@ export default class App extends React.Component {
                   <button id="donate-button" onClick={
                     this.state.type=='credit'
                       ? () => submit(this.state,this.errorCallback.bind(this))
-                      : this.confirmModal.show()
+                      : () => this.confirmModal.show()
                   }>
                     {
                       this.state.type=="credit"
