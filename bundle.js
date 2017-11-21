@@ -39006,7 +39006,7 @@ function validateResponses(state, onInvalid) {
     errors.invalidAmount = true;
   }
 
-  if (state.recurring && !isValidDate(state.date)) {
+  if (state.recurring && !isValidDate(state.startDate)) {
     errors.invalidDate = true;
   }
 
