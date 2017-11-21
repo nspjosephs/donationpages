@@ -20,7 +20,7 @@ export default class App extends React.Component {
 
       amount:"",
       recurring:false,
-      frequency:"monthly",
+      frequency:"Monthly",
       startDate: "yyyy-mm-dd",
       firstName: "",
       lastName: "",
@@ -125,7 +125,7 @@ export default class App extends React.Component {
   onFrequencyChange(event) {
     console.log("frequency change: " + event.target.value.toLowerCase());
     this.setState({
-      frequency:event.target.value.toLowerCase()
+      frequency:event.target.value
     })
   }
 
@@ -224,7 +224,12 @@ export default class App extends React.Component {
 
   render() {
     var name = getParameterByName("name");
-    if (initialized) return (
+    if (this.state.donationFail) return (
+      <div>
+        <h2 className="donation-header">We{"'"}re sorry but there was a problem processing your donation and your account was not charged. Feel free to try again by going <a href="http://www.nationalschoolproject.com/give">here</a> or calling us at  562-943-9787</h2>
+      </div>
+    )
+    else if (initialized) return (
         <div>
           <div className={`form-modal-container ${!this.state.modalShowing ? "hidden" : ""}`}>
             <div className="form-modal">
@@ -259,10 +264,10 @@ export default class App extends React.Component {
                           <div id="recurring-div">
                             <label htmlFor="frequency">Frequency</label>
                             <select value={this.state.frequency} className="donation-select" id="frequency" onChange={this.onFrequencyChange.bind(this)}>
-                              <option value="weekly">Weekly</option>
-                              <option value="monthly">Monthly</option>
-                              <option value="quarterly">Quarterly</option>
-                              <option value="yearly">Yearly</option>
+                              <option value="Weekly">Weekly</option>
+                              <option value="Monthly">Monthly</option>
+                              <option value="Quarterly">Quarterly</option>
+                              <option value="Yearly">Yearly</option>
                             </select>
                             <label className={`required ${this.state.invalidDate ? "required-error" : ""}`} htmlFor="start-date">Start Date</label>
                             <input type="date" id="datepicker" value={this.state.startDate} onChange={this.onStartDateChange.bind(this)}/>

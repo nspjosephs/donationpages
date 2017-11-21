@@ -38322,7 +38322,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
       amount: "",
       recurring: false,
-      frequency: "monthly",
+      frequency: "Monthly",
       startDate: "yyyy-mm-dd",
       firstName: "",
       lastName: "",
@@ -38423,7 +38423,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   onFrequencyChange(event) {
     console.log("frequency change: " + event.target.value.toLowerCase());
     this.setState({
-      frequency: event.target.value.toLowerCase()
+      frequency: event.target.value
     });
   }
 
@@ -38522,7 +38522,23 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
   render() {
     var name = Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["b" /* getParameterByName */])("name");
-    if (initialized) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+    if (this.state.donationFail) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'h2',
+        { className: 'donation-header' },
+        'We',
+        "'",
+        're sorry but there was a problem processing your donation and your account was not charged. Feel free to try again by going ',
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'a',
+          { href: 'http://www.nationalschoolproject.com/give' },
+          'here'
+        ),
+        ' or calling us at  562-943-9787'
+      )
+    );else if (initialized) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -38609,22 +38625,22 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
                   { value: this.state.frequency, className: 'donation-select', id: 'frequency', onChange: this.onFrequencyChange.bind(this) },
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'option',
-                    { value: 'weekly' },
+                    { value: 'Weekly' },
                     'Weekly'
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'option',
-                    { value: 'monthly' },
+                    { value: 'Monthly' },
                     'Monthly'
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'option',
-                    { value: 'quarterly' },
+                    { value: 'Quarterly' },
                     'Quarterly'
                   ),
                   __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'option',
-                    { value: 'yearly' },
+                    { value: 'Yearly' },
                     'Yearly'
                   )
                 ),
