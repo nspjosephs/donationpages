@@ -310,7 +310,7 @@ export default class App extends React.Component {
 
                     <label className={`required ${this.state.invalidAddress ? "required-error" : ""}`} htmlFor="address">Address</label>
                     <textarea value={this.state.address} placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
-
+                    
                     <label htmlFor="city">City</label>
                     <input value={this.state.city} type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
 

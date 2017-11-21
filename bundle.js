@@ -42644,6 +42644,74 @@ class StateCodes extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component
         { value: "WY" },
         "Wyoming"
       )
+    );else if (this.props.country == "CA") return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      "select",
+      { id: "state" },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "AB" },
+        "Alberta"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "BC" },
+        "British Columbia"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "MB" },
+        "Manitoba"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "NB" },
+        "New Brunswick"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "NL" },
+        "Newfoundland and Labrador"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "NT" },
+        "Northwest Territories"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "NS" },
+        "Nova Scotia"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "NU" },
+        "Nunavut"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "ON" },
+        "Ontario"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "PE" },
+        "Prince Edward Island"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "QC" },
+        "Quebec"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "SK" },
+        "Saskatchewan"
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        "option",
+        { value: "YT" },
+        "Yukon Territory"
+      )
     );else return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       "select",
       { id: "state" },
