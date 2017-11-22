@@ -38347,6 +38347,8 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       invalidEmail: false,
       invalidPhone: false,
       invalidAddress: false,
+      invalidCity: false,
+      invalidZip: false,
       invalidCaptcha: false
     };
   }
@@ -38728,24 +38730,44 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               'Address'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { value: this.state.address, placeholder: 'e.g. 777 Demascus Rd.', onChange: this.onAddressChange.bind(this) }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              { htmlFor: 'city' },
-              'City'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.city, type: 'text', id: 'city', placeholder: 'e.g. Los Angeles', onChange: this.onCityChange.bind(this) }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              { htmlFor: 'state' },
-              'State'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__StateCodes__["a" /* default */], { country: this.state.country, value: this.state.state, id: 'state', onChange: this.onStateChange.bind(this) }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'label',
-              { htmlFor: 'zip' },
-              'Zip Code'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.zip, type: 'number', id: 'zip', placeholder: 'e.g. 90210', onChange: this.onZipChange.bind(this) })
+            this.country == "CA" || this.country == "US" ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'label',
+                { className: `required ${this.state.invalidCity ? "required-error" : ""}`, htmlFor: 'city' },
+                'City'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.city, type: 'text', id: 'city', placeholder: 'e.g. Los Angeles', onChange: this.onCityChange.bind(this) }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'label',
+                { htmlFor: 'state' },
+                this.state.country == "CA" ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'span',
+                  null,
+                  'Province'
+                ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'span',
+                  null,
+                  'State'
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__StateCodes__["a" /* default */], { country: this.state.country, value: this.state.state, id: 'state', onChange: this.onStateChange.bind(this) }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'label',
+                { className: `required ${this.state.invalidZip ? "required-error" : ""}`, htmlFor: 'zip' },
+                this.state.country == "CA" ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'span',
+                  null,
+                  'Postal Code'
+                ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  'span',
+                  null,
+                  'Zip Code'
+                )
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.zip, type: 'number', id: 'zip', placeholder: 'e.g. 90210', onChange: this.onZipChange.bind(this) })
+            ) : ""
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
@@ -39048,6 +39070,15 @@ function validateResponses(state, onInvalid) {
 
   if (!state.captcha) {
     errors.invalidCaptcha = true;
+  }
+
+  if (state.country == "US" || state.country == "CA") {
+    if (state.zip == "") {
+      errors.invalidZip = true;
+    }
+    if (state.city == "") {
+      errors.invalidCity = true;
+    }
   }
 
   if (Object.keys(errors).length > 0) {

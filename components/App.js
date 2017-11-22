@@ -45,6 +45,8 @@ export default class App extends React.Component {
       invalidEmail:false,
       invalidPhone:false,
       invalidAddress:false,
+      invalidCity: false,
+      invalidZip: false,
       invalidCaptcha:false
     }
   }
@@ -310,15 +312,22 @@ export default class App extends React.Component {
 
                     <label className={`required ${this.state.invalidAddress ? "required-error" : ""}`} htmlFor="address">Address</label>
                     <textarea value={this.state.address} placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
-                    
-                    <label htmlFor="city">City</label>
-                    <input value={this.state.city} type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
 
-                    <label htmlFor="state">State</label>
-                    <StateCodes country={this.state.country} value={this.state.state} id="state" onChange={this.onStateChange.bind(this)}/>
+                    {
+                      this.country == "CA" || this.country == "US" ?
+                        <div>
+                          <label className={`required ${this.state.invalidCity ? "required-error" : ""}`} htmlFor="city">City</label>
+                          <input value={this.state.city} type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
 
-                    <label htmlFor="zip">Zip Code</label>
-                    <input value={this.state.zip} type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
+                          <label htmlFor="state">{this.state.country == "CA" ? <span>Province</span> : <span>State</span>}</label>
+                          <StateCodes country={this.state.country} value={this.state.state} id="state" onChange={this.onStateChange.bind(this)}/>
+
+                          <label className={`required ${this.state.invalidZip ? "required-error" : ""}`} htmlFor="zip">{this.state.country == "CA" ? <span>Postal Code</span> : <span>Zip Code</span>}</label>
+                          <input value={this.state.zip} type="number" id="zip" placeholder="e.g. 90210" onChange={this.onZipChange.bind(this)}/>
+                        </div>
+                      :
+                        ""
+                    }
                   </div>
 
                   <button onClick={this.previousPage.bind(this)}>Back</button>

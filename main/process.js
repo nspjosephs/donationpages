@@ -153,6 +153,15 @@ function validateResponses(state, onInvalid) {
     errors.invalidCaptcha = true;
   }
 
+  if (state.country == "US" || state.country == "CA") {
+    if (state.zip == "") {
+      errors.invalidZip = true;
+    }
+    if (state.city == "") {
+      errors.invalidCity = true;
+    }
+  }
+
   if (Object.keys(errors).length > 0) {
     errors.page = 0;
     onInvalid(errors);
