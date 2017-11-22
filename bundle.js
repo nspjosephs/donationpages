@@ -38730,7 +38730,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               'Address'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { value: this.state.address, placeholder: 'e.g. 777 Demascus Rd.', onChange: this.onAddressChange.bind(this) }),
-            this.country == "CA" || this.country == "US" ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            this.state.country == "CA" || this.state.country == "US" ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
               null,
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

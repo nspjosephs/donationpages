@@ -314,7 +314,7 @@ export default class App extends React.Component {
                     <textarea value={this.state.address} placeholder="e.g. 777 Demascus Rd." onChange={this.onAddressChange.bind(this)}></textarea>
 
                     {
-                      this.country == "CA" || this.country == "US" ?
+                      this.state.country == "CA" || this.state.country == "US" ?
                         <div>
                           <label className={`required ${this.state.invalidCity ? "required-error" : ""}`} htmlFor="city">City</label>
                           <input value={this.state.city} type="text" id="city" placeholder="e.g. Los Angeles" onChange={this.onCityChange.bind(this)}/>
