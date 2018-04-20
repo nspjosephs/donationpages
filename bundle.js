@@ -38890,7 +38890,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'label',
                 { htmlFor: 'increase-impact' },
-                'Offset these fees by adding ',
+                'Offset bank fees by adding ',
                 "$",
                 '0.20 to my donation'
               )
@@ -38954,6 +38954,44 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
             { className: 'sites-button', id: 'donate-button', onClick: this.state.type == 'credit' ? () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.invalidCallback.bind(this), () => this.onDonationSuccess(), () => this.onDonationFail(error)) : () => this.showModal() },
             this.state.type == "credit" ? "Enter Payment Info" : `Donate ${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount)) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
+        )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'inline-block info-box container-child' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            null,
+            'Questions?'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            null,
+            'Contact us at ',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'a',
+              { href: 'mailto:kenny@nationalschoolproject.com' },
+              'kenny@nationalschoolproject.com'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            null,
+            'National School Project',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+            '16175 Whittier Blvd.',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+            'Whittier, CA 90603',
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'inline-block' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: 'https://crm.bloomerang.co/Content/Images/SecureDonationBanner.png' })
         )
       )
     );else if (Object(__WEBPACK_IMPORTED_MODULE_1__main_bloom__["b" /* getParameterByName */])("dID") != null) return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(

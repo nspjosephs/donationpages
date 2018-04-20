@@ -86,7 +86,7 @@ html,body {
   background-color:#A43C36;
 }
 
-.form {
+.form, .info-box {
   width:100%;
   padding:20px;
   background-color:#E2E2E2;
@@ -95,6 +95,25 @@ html,body {
   margin-bottom:30px;
   color:#2E2E2E;
   text-align:center;
+}
+
+.info-box {
+  width: calc(100% - 500px);
+  margin-bottom:0;
+  margin-right: 10px;
+  font-family:"Roboto";
+}
+
+.container-parent {
+  text-align:center;
+}
+
+.container-child {
+  text-align: left;
+}
+
+.green {
+  background-color:green;
 }
 
 .form-section + .form-section {
@@ -320,6 +339,11 @@ html,body {
   margin-top:40px !important;
   margin-left:10px !important;
   margin-right:10px !important;
+}
+
+.inline-block {
+  display: inline-block;
+  vertical-align: top;
 }
 
 @media screen and (max-width: 900px) {

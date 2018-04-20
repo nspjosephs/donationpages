@@ -435,7 +435,7 @@ export default class App extends React.Component {
                           <input value={this.state.accountNumber} type="text" id="account" placeholder="e.g. 456789123456" onChange={this.onAccountChange.bind(this)}/>
 
                           <input type="checkbox" id="increase-impact" defaultChecked={this.state.increaseImpactBank} onChange={this.onImpactChangeBank.bind(this)}/>
-                          <label htmlFor="increase-impact">Offset these fees by adding {"$"}0.20 to my donation</label>
+                          <label htmlFor="increase-impact">Offset bank fees by adding {"$"}0.20 to my donation</label>
                         </div>
                       :
                         <div>
@@ -491,6 +491,22 @@ export default class App extends React.Component {
                   </button>
                 </div>
             }
+          </div>
+
+          <div>
+            <div className="inline-block info-box container-child">
+              <p>Questions?</p>
+              <p>Contact us at <a href="mailto:kenny@nationalschoolproject.com">kenny@nationalschoolproject.com</a></p>
+              <p>
+                National School Project<br/>
+                16175 Whittier Blvd.<br/>
+                Whittier, CA 90603<br/>
+              </p>
+            </div>
+
+            <div className="inline-block">
+              <img src="https://crm.bloomerang.co/Content/Images/SecureDonationBanner.png"/>
+            </div>
           </div>
         </div>
       )
