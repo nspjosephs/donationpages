@@ -101,7 +101,6 @@ html,body {
   width: calc(100% - 500px);
   margin-bottom:0;
   margin-right: 10px;
-  font-family:"Roboto";
 }
 
 .container-parent {
@@ -154,6 +153,7 @@ html,body {
   width:100%;
 }
 
+.info-box,
 .form label {
   font-family:"Roboto", sans-serif !important;
   font-size:11pt !important;
