@@ -6312,19 +6312,12 @@ var run = () => {
 
 function calcImpact(amount) {
   if (Bloomerang.transactionFee == undefined) {
-    console.log("Transaction cost constants are not set, setting them now...");
     Bloomerang.transactionFee = .2;
     Bloomerang.transactionFeeRate = .025;
   }
-  console.log("---- Calculating True Impact ----");
-  console.log("- Amount: " + amount);
   let feeRate = Bloomerang.transactionFeeRate;
-  console.log("- Fee rate: " + feeRate);
   let newTotal = (amount + Bloomerang.transactionFee) / (1 - feeRate);
-  console.log("- New total: " + newTotal);
   let impactAmount = Number((newTotal - amount).toFixed(2));
-  console.log("- Impact amount: " + impactAmount);
-  console.log("---------------------------------");
   return impactAmount;
 }
 
@@ -38336,6 +38329,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
       type: "credit",
       comments: "",
       increaseImpact: false,
+      increaseImpactBank: false,
       routingNumber: "",
       accountNumber: "",
       captcha: false,
@@ -38578,6 +38572,12 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   onImpactChange(event) {
     this.setState({
       increaseImpact: event.target.checked
+    });
+  }
+
+  onImpactChangeBank(event) {
+    this.setState({
+      increaseImpactBank: event.target.checked
     });
   }
 
@@ -38885,7 +38885,15 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
                 { htmlFor: 'account' },
                 'Account Number'
               ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.accountNumber, type: 'text', id: 'account', placeholder: 'e.g. 456789123456', onChange: this.onAccountChange.bind(this) })
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { value: this.state.accountNumber, type: 'text', id: 'account', placeholder: 'e.g. 456789123456', onChange: this.onAccountChange.bind(this) }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'checkbox', id: 'increase-impact', defaultChecked: this.state.increaseImpactBank, onChange: this.onImpactChangeBank.bind(this) }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                'label',
+                { htmlFor: 'increase-impact' },
+                'Offset these fees by adding ',
+                "$",
+                '0.20 to my donation'
+              )
             ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               'div',
               null,
@@ -39024,11 +39032,11 @@ function collectPayment(state, onInvalid, onSuccess, onFail) {
 
     SpreedlyExpress.setPaymentMethodParams({
       "email": state.email,
-      "phone_number": "7025404883",
-      "address1": "2657 Windmill Pkwy",
-      "city": "Henderson",
-      "state": "NV",
-      "zip": "89074"
+      "phone_number": state.phone,
+      "address1": state.address,
+      "city": state.city,
+      "state": state.state,
+      "zip": state.zip
     });
 
     if (state.type.toLowerCase() == "credit") {
@@ -39072,11 +39080,11 @@ function configureBloomerang(state) {
   if (state.recurring) {
     /* DONATION IS RECURRING */
     console.log("Donation is reucurring");
-    Bloomerang.RecurringDonation.amount(amount).frequency(state.frequency).note(state.comments).startDate(__WEBPACK_IMPORTED_MODULE_0_moment___default()(state.date).format("YYYY-MM-DD"));
+    Bloomerang.RecurringDonation.amount(amount + (state.increaseImpactBank ? .2 : 0)).frequency(state.frequency).note(state.comments).startDate(__WEBPACK_IMPORTED_MODULE_0_moment___default()(state.date).format("YYYY-MM-DD"));
   } else {
     /* DONATION IS SINGLE TIME */
     console.log("Donation is non recurring");
-    Bloomerang.Donation.amount(amount).note(state.comments);
+    Bloomerang.Donation.amount(amount + (state.increaseImpactBank ? .2 : 0)).note(state.comments);
   }
 }
 

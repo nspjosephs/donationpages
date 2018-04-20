@@ -25,11 +25,11 @@ function collectPayment(state,onInvalid, onSuccess, onFail) {
 
     SpreedlyExpress.setPaymentMethodParams({
       "email":state.email,
-      "phone_number":"7025404883",
-      "address1":"2657 Windmill Pkwy",
-      "city":"Henderson",
-      "state":"NV",
-      "zip":"89074"
+      "phone_number":state.phone,
+      "address1":state.address,
+      "city":state.city,
+      "state":state.state,
+      "zip":state.zip
     })
 
     if (state.type.toLowerCase() == "credit") {
@@ -86,7 +86,7 @@ function configureBloomerang(state) {
     /* DONATION IS RECURRING */
     console.log("Donation is reucurring");
     Bloomerang.RecurringDonation
-      .amount(amount)
+      .amount(amount + (state.increaseImpactBank ? .2 : 0))
       .frequency(state.frequency)
       .note(state.comments)
       .startDate(moment(state.date).format("YYYY-MM-DD"));
@@ -94,7 +94,7 @@ function configureBloomerang(state) {
     /* DONATION IS SINGLE TIME */
     console.log("Donation is non recurring");
     Bloomerang.Donation
-      .amount(amount)
+      .amount(amount + (state.increaseImpactBank ? .2 : 0))
       .note(state.comments)
   }
 }

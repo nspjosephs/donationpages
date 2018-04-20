@@ -34,6 +34,7 @@ export default class App extends React.Component {
       type: "credit",
       comments: "",
       increaseImpact:false,
+      increaseImpactBank: false,
       routingNumber: "",
       accountNumber: "",
       captcha: false,
@@ -292,6 +293,12 @@ export default class App extends React.Component {
     })
   }
 
+  onImpactChangeBank(event) {
+    this.setState({
+      increaseImpactBank: event.target.checked
+    })
+  }
+
   render() {
     var name = getParameterByName("name");
     if (this.state.donationFail) return (
@@ -426,6 +433,9 @@ export default class App extends React.Component {
 
                           <label htmlFor="account">Account Number</label>
                           <input value={this.state.accountNumber} type="text" id="account" placeholder="e.g. 456789123456" onChange={this.onAccountChange.bind(this)}/>
+
+                          <input type="checkbox" id="increase-impact" defaultChecked={this.state.increaseImpactBank} onChange={this.onImpactChangeBank.bind(this)}/>
+                          <label htmlFor="increase-impact">Offset these fees by adding {"$"}0.20 to my donation</label>
                         </div>
                       :
                         <div>
