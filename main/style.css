@@ -14,10 +14,6 @@ html,body {
   height:100%;
 }
 
-.undl  {
-  text-decoration:underline;
-}
-
 .captcha-div, .captcha-div div {
   width:auto;
   margin:auto;

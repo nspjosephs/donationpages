@@ -38699,12 +38699,12 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { style: 'sites-button', onClick: this.previousPage.bind(this) },
+            { className: 'sites-button', onClick: this.previousPage.bind(this) },
             'Back'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { style: 'sites-button', onClick: this.nextPage.bind(this) },
+            { className: 'sites-button', onClick: this.nextPage.bind(this) },
             'Next'
           )
         ) : this.state.page == 2 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -38771,12 +38771,12 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { style: 'sites-button', onClick: this.previousPage.bind(this) },
+            { className: 'sites-button', onClick: this.previousPage.bind(this) },
             'Back'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { style: 'sites-button', onClick: this.nextPage.bind(this) },
+            { className: 'sites-button', onClick: this.nextPage.bind(this) },
             'Next'
           )
         ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -38879,12 +38879,12 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { style: 'sites-button', onClick: this.previousPage.bind(this) },
+            { className: 'sites-button', onClick: this.previousPage.bind(this) },
             'Back'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'button',
-            { style: 'sites-button', id: 'donate-button', onClick: this.state.type == 'credit' ? () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.invalidCallback.bind(this), () => this.onDonationSuccess(), () => this.onDonationFail(error)) : () => this.showModal() },
+            { className: 'sites-button', id: 'donate-button', onClick: this.state.type == 'credit' ? () => Object(__WEBPACK_IMPORTED_MODULE_2__main_process__["a" /* submit */])(this.state, this.invalidCallback.bind(this), () => this.onDonationSuccess(), () => this.onDonationFail(error)) : () => this.showModal() },
             this.state.type == "credit" ? "Enter Payment Info" : `Donate ${this.state.increaseImpact ? accounting.formatMoney(parseInt(this.state.amount)) : accounting.formatMoney(this.state.amount)}${this.state.recurring ? ` per ${this.state.frequency.substring(0, this.state.frequency.length - 2)}` : ""}`
           )
         )

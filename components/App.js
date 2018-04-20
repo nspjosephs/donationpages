@@ -299,8 +299,8 @@ export default class App extends React.Component {
                     <input value={this.state.phone} type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
                   </div>
 
-                  <button style="sites-button" onClick={this.previousPage.bind(this)}>Back</button>
-                  <button style="sites-button" onClick={this.nextPage.bind(this)}>Next</button>
+                  <button className="sites-button" onClick={this.previousPage.bind(this)}>Back</button>
+                  <button className="sites-button" onClick={this.nextPage.bind(this)}>Next</button>
 
                 </div>
               : this.state.page == 2 ?
@@ -330,8 +330,8 @@ export default class App extends React.Component {
                     }
                   </div>
 
-                  <button style="sites-button" onClick={this.previousPage.bind(this)}>Back</button>
-                  <button style="sites-button" onClick={this.nextPage.bind(this)}>Next</button>
+                  <button className="sites-button" onClick={this.previousPage.bind(this)}>Back</button>
+                  <button className="sites-button" onClick={this.nextPage.bind(this)}>Next</button>
                 </div>
               :
                 <div>
@@ -391,8 +391,8 @@ export default class App extends React.Component {
                     />
                   </div>
 
-                  <button style="sites-button" onClick={this.previousPage.bind(this)}>Back</button>
-                  <button style="sites-button" id="donate-button" onClick={
+                  <button className="sites-button" onClick={this.previousPage.bind(this)}>Back</button>
+                  <button className="sites-button" id="donate-button" onClick={
                     this.state.type=='credit'
                       ? () => submit(this.state,this.invalidCallback.bind(this), () => this.onDonationSuccess(), () => this.onDonationFail(error))
                       : () => this.showModal()
