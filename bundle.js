@@ -38358,8 +38358,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
    **********************/
 
   invalidCallback(errorObj) {
-    console.log("Form is invalid");
-    console.log(errorObj);
     this.setState(errorObj);
   }
 
@@ -38368,7 +38366,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 
   onDonationFail(error) {
-    console.log(error);
     this.setState({
       donationFail: true
     });
@@ -38394,7 +38391,69 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
     });
   }
 
+  isValidDate(date) {
+    if (date == undefined || date == null || date == "") return false;
+
+    date = date.replace(/[^0-9]/g, '');
+
+    if (date.length != 8) return false;
+
+    if (Number.isNaN(parseInt(date))) return false;
+
+    return true;
+  }
+
   nextPage() {
+    let errors = {};
+    if (this.state.page == 0) {
+
+      let amount = parseInt(this.state.amount);
+
+      if (amount <= 0 || Number.isNaN(amount)) {
+        errors.invalidAmount = true;
+      }
+
+      if (this.state.recurring && !this.isValidDate(state.startDate)) {
+        errors.invalidDate = true;
+      }
+    } else if (this.state.page == 1) {
+
+      if (this.state.firstName == "") {
+        errors.invalidFirstName = true;
+      }
+
+      if (this.state.lastName == "") {
+        errors.invalidLastName = true;
+      }
+
+      if (!/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b/g.test(this.state.email)) {
+        errors.invalidEmail = true;
+      }
+
+      if (this.state.phone == "") {
+        errors.invalidPhone = true;
+      }
+    } else if (this.state.page == 2) {
+
+      if (this.state.address == "") {
+        errors.invalidAddress = true;
+      }
+
+      if (state.country == "US" || state.country == "CA") {
+        if (state.zip == "") {
+          errors.invalidZip = true;
+        }
+        if (state.city == "") {
+          errors.invalidCity = true;
+        }
+      }
+    }
+
+    if (Object.keys(errors).length > 0) {
+      this.setState(errors);
+      return;
+    }
+
     if (this.state.page < pageMax) {
       this.setState({
         page: this.state.page + 1
@@ -38943,9 +39002,6 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
 function collectPayment(state, onInvalid, onSuccess, onFail) {
 
-  console.log("---- Collecting Payment For State ----");
-  console.log(state);
-  console.log("--------------------------------------");
   let name = Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["b" /* getParameterByName */])("name");
   if (validateResponses(state, onInvalid)) {
     console.log("Collecting donation...");
@@ -38960,7 +39016,7 @@ function collectPayment(state, onInvalid, onSuccess, onFail) {
 
     SpreedlyExpress.setDisplayOptions({
       "amount": state.increaseImpact && state.type.toLowerCase() == "credit" ? accounting.formatMoney(parseInt(state.amount) + Object(__WEBPACK_IMPORTED_MODULE_1__bloom__["a" /* calcImpact */])(parseInt(state.amount))) : accounting.formatMoney(state.amount),
-      "full_name": "Joseph Stewart",
+      "full_name": state.fullName + " " + state.lastName,
       "submit_label": "Donate",
       "name_label": "Your Name",
       "sidebar_bottom_description": `Support ${name == undefined || name == null || name == "" ? "the National School Project" : name}`

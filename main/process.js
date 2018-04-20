@@ -3,9 +3,6 @@ import {calcImpact, getParameterByName} from './bloom';
 
 function collectPayment(state,onInvalid, onSuccess, onFail) {
 
-  console.log("---- Collecting Payment For State ----");
-  console.log(state);
-  console.log("--------------------------------------");
   let name=getParameterByName("name");
   if (validateResponses(state, onInvalid)) {
     console.log("Collecting donation...");
@@ -20,7 +17,7 @@ function collectPayment(state,onInvalid, onSuccess, onFail) {
 
     SpreedlyExpress.setDisplayOptions({
       "amount":state.increaseImpact && state.type.toLowerCase() == "credit" ? accounting.formatMoney(parseInt(state.amount)+calcImpact(parseInt(state.amount))) : accounting.formatMoney(state.amount),
-      "full_name":"Joseph Stewart",
+      "full_name":(state.fullName + " " + state.lastName),
       "submit_label":"Donate",
       "name_label":"Your Name",
       "sidebar_bottom_description":`Support ${(name==undefined || name==null || name=="") ? "the National School Project" : name}`

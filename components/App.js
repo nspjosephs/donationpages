@@ -56,8 +56,6 @@ export default class App extends React.Component {
    **********************/
 
   invalidCallback(errorObj) {
-    console.log("Form is invalid");
-    console.log(errorObj);
     this.setState(errorObj)
   }
 
@@ -66,7 +64,6 @@ export default class App extends React.Component {
   }
 
   onDonationFail(error) {
-    console.log(error);
     this.setState({
       donationFail:true
     })
@@ -96,7 +93,78 @@ export default class App extends React.Component {
     )
   }
 
+  isValidDate(date) {
+    if (date == undefined || date==null || date == "")
+      return false;
+
+    date = date.replace(/[^0-9]/g,'');
+
+    if (date.length != 8)
+      return false;
+
+    if (Number.isNaN(parseInt(date)))
+      return false;
+
+    return true;
+  }
+
   nextPage() {
+    let errors = {}
+    if (this.state.page == 0) {
+
+      let amount = parseInt(this.state.amount);
+
+      if (amount <= 0 || Number.isNaN(amount)) {
+        errors.invalidAmount = true;
+      }
+
+      if (this.state.recurring && !this.isValidDate(state.startDate)) {
+        errors.invalidDate = true;
+      }
+
+    }
+    else if (this.state.page == 1) {
+
+      if (this.state.firstName == "") {
+        errors.invalidFirstName = true;
+      }
+
+      if (this.state.lastName == "") {
+        errors.invalidLastName = true;
+      }
+
+      if (!/\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,4}\b/g.test(this.state.email)) {
+        errors.invalidEmail = true;
+      }
+
+      if (this.state.phone == "") {
+        errors.invalidPhone = true;
+      }
+
+    }
+    else if (this.state.page == 2) {
+
+
+      if (this.state.address == "") {
+        errors.invalidAddress = true;
+      }
+
+      if (state.country == "US" || state.country == "CA") {
+        if (state.zip == "") {
+          errors.invalidZip = true;
+        }
+        if (state.city == "") {
+          errors.invalidCity = true;
+        }
+      }
+
+    }
+
+    if (Object.keys(errors).length > 0) {
+      this.setState(errors);
+      return;
+    }
+
     if (this.state.page < pageMax) {
       this.setState({
         page:this.state.page+1

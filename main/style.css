@@ -103,10 +103,9 @@ html,body {
 
 .form-modal-title,
 .form h1, .form h2, .donation-header {
-  font-family: 'Martel Sans', serif !important;
   text-align:center;
   margin-top:0;
-  margin-bottom:0;
+  margin-bottom:10px;
   text-transform:none;
   font-size:24pt;
 }
@@ -115,6 +114,7 @@ html,body {
   color:white;
   font-family: 'Roboto';
   padding:10px;
+  font-weight:400;
 }
 
 .form p {
@@ -127,7 +127,7 @@ html,body {
 
 .donation-header {
   color:white;
-  font-size: 36pt;
+  font-size: 32pt;
 }
 
 .form .section {
@@ -311,6 +311,8 @@ html,body {
 .form button {
   font-size:.5em !important;
   margin-top:40px !important;
+  margin-left:10px !important;
+  margin-right:10px !important;
 }
 
 @media screen and (max-width: 900px) {
