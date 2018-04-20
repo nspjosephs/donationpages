@@ -38413,7 +38413,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         errors.invalidAmount = true;
       }
 
-      if (this.state.recurring && !this.isValidDate(state.startDate)) {
+      if (this.state.recurring && !this.isValidDate(this.state.startDate)) {
         errors.invalidDate = true;
       }
     } else if (this.state.page == 1) {

@@ -235,7 +235,7 @@ html,body {
   padding-right:20px;
   font-family: "Roboto Condensed", sans-serif !important;
   font-size:14pt !important;
-  transition: border-color .3s;
+  transition: border-color .3s, color .3s;
   user-select:none;
   -moz-user-select:none;
   -webkit-user-select:none;
@@ -253,11 +253,18 @@ html,body {
 }
 
 .form input[type="checkbox"] + label {
-  text-decoration:underline;
+  border-color: #ABB3CA;
+  color:#999999;
+}
+
+.form input[type="checkbox"] + label:hover {
+  border-color: #EEA00F;
+  color:#2E2E2E;
 }
 
 .form input[type="checkbox"]:checked + label {
   background-color:rgba(251,237,211,.5);
+  color: #2E2E2E;
 }
 
 .form select {

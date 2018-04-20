@@ -118,7 +118,7 @@ export default class App extends React.Component {
         errors.invalidAmount = true;
       }
 
-      if (this.state.recurring && !this.isValidDate(state.startDate)) {
+      if (this.state.recurring && !this.isValidDate(this.state.startDate)) {
         errors.invalidDate = true;
       }
 
