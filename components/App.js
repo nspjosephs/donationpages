@@ -236,8 +236,8 @@ export default class App extends React.Component {
           <div className={`form-modal-container ${!this.state.modalShowing ? "hidden" : ""}`}>
             <div className="form-modal">
               <h1 className="form-modal-title">Are you sure?</h1>
-              <button onClick={() => {this.confirmModal(); this.hideModal()}}>Yes</button>
-              <button onClick={() => {this.hideModal();}} className="negative">No</button>
+              <button className="sites-button" onClick={() => {this.confirmModal(); this.hideModal()}}>Yes</button>
+              <button className="sites-button" onClick={() => {this.hideModal();}} className="negative">No</button>
             </div>
           </div>
 
@@ -280,7 +280,7 @@ export default class App extends React.Component {
                     </div>
                     <br/>
                   </div>
-                  <button id="next" onClick={this.nextPage.bind(this)}>Next</button>
+                  <button className="sites-button" id="next" onClick={this.nextPage.bind(this)}>Next</button>
                 </div>
               : this.state.page == 1 ?
                 <div>
@@ -299,8 +299,8 @@ export default class App extends React.Component {
                     <input value={this.state.phone} type="text" id="phone" placeholder="e.g. (123) 456-7890" onChange={this.onPhoneChange.bind(this)}/>
                   </div>
 
-                  <button onClick={this.previousPage.bind(this)}>Back</button>
-                  <button onClick={this.nextPage.bind(this)}>Next</button>
+                  <button style="sites-button" onClick={this.previousPage.bind(this)}>Back</button>
+                  <button style="sites-button" onClick={this.nextPage.bind(this)}>Next</button>
 
                 </div>
               : this.state.page == 2 ?
@@ -330,8 +330,8 @@ export default class App extends React.Component {
                     }
                   </div>
 
-                  <button onClick={this.previousPage.bind(this)}>Back</button>
-                  <button onClick={this.nextPage.bind(this)}>Next</button>
+                  <button style="sites-button" onClick={this.previousPage.bind(this)}>Back</button>
+                  <button style="sites-button" onClick={this.nextPage.bind(this)}>Next</button>
                 </div>
               :
                 <div>
@@ -391,8 +391,8 @@ export default class App extends React.Component {
                     />
                   </div>
 
-                  <button onClick={this.previousPage.bind(this)}>Back</button>
-                  <button id="donate-button" onClick={
+                  <button style="sites-button" onClick={this.previousPage.bind(this)}>Back</button>
+                  <button style="sites-button" id="donate-button" onClick={
                     this.state.type=='credit'
                       ? () => submit(this.state,this.invalidCallback.bind(this), () => this.onDonationSuccess(), () => this.onDonationFail(error))
                       : () => this.showModal()
