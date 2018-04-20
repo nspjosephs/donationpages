@@ -103,12 +103,16 @@ html,body {
   margin-right: 10px;
 }
 
+.info-box p {
+  margin-bottom: 10px !important;
+}
+
 .container-parent {
   text-align:center;
 }
 
 .container-child {
-  text-align: left;
+  text-align: left !important;
 }
 
 .green {
@@ -346,9 +350,19 @@ html,body {
   vertical-align: top;
 }
 
+.title {
+  font-weight: bold;
+  font-size: 16pt !important;
+}
+
 @media screen and (max-width: 900px) {
     .form{
       width:100%;
+    }
+
+    .info-box {
+      width: 100%;
+      margin-bottom: 30px;
     }
 
     .form input[type="number"],

@@ -495,7 +495,7 @@ export default class App extends React.Component {
 
           <div>
             <div className="inline-block info-box container-child">
-              <p>Questions?</p>
+              <p className="title">Questions?</p>
               <p>Contact us at <a href="mailto:kenny@nationalschoolproject.com">kenny@nationalschoolproject.com</a></p>
               <p>
                 National School Project<br/>

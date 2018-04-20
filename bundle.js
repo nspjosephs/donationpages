@@ -38964,7 +38964,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           { className: 'inline-block info-box container-child' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'p',
-            null,
+            { className: 'title' },
             'Questions?'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
