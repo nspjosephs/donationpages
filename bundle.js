@@ -38439,11 +38439,11 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         errors.invalidAddress = true;
       }
 
-      if (state.country == "US" || state.country == "CA") {
-        if (state.zip == "") {
+      if (this.state.country == "US" || this.state.country == "CA") {
+        if (this.state.zip == "") {
           errors.invalidZip = true;
         }
-        if (state.city == "") {
+        if (this.state.city == "") {
           errors.invalidCity = true;
         }
       }

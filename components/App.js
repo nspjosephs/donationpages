@@ -149,11 +149,11 @@ export default class App extends React.Component {
         errors.invalidAddress = true;
       }
 
-      if (state.country == "US" || state.country == "CA") {
-        if (state.zip == "") {
+      if (this.state.country == "US" || this.state.country == "CA") {
+        if (this.state.zip == "") {
           errors.invalidZip = true;
         }
-        if (state.city == "") {
+        if (this.state.city == "") {
           errors.invalidCity = true;
         }
       }
